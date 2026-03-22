@@ -39,3 +39,9 @@ variable "force_destroy" {
   type        = bool
   default     = false
 }
+
+variable "cloudfront_price_class" {
+  description = "CloudFront price class for the CDN distribution."
+  type        = string
+  default     = "PriceClass_100"
+}
