@@ -1,3 +1,28 @@
+const themeToggle = document.getElementById("themeToggle");
+const themeToggleLabel = document.querySelector(".theme-toggle-label");
+const savedTheme = localStorage.getItem("theme");
+const preferredTheme = window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark";
+const activeTheme = savedTheme || preferredTheme;
+
+document.body.setAttribute("data-theme", activeTheme);
+
+const syncThemeToggle = (theme) => {
+    const isLight = theme === "light";
+
+    themeToggle.setAttribute("aria-pressed", String(isLight));
+    themeToggleLabel.textContent = isLight ? "Dark" : "Light";
+};
+
+syncThemeToggle(activeTheme);
+
+themeToggle.addEventListener("click", () => {
+    const nextTheme = document.body.getAttribute("data-theme") === "light" ? "dark" : "light";
+
+    document.body.setAttribute("data-theme", nextTheme);
+    localStorage.setItem("theme", nextTheme);
+    syncThemeToggle(nextTheme);
+});
+
 // ==============================
 // SMOOTH SCROLL (with offset fix)
 // ==============================

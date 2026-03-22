@@ -331,7 +331,7 @@ Navigate to:
 
 - Bucket Name:
 ```bash
-philip-devops-portfolio
+philipdev-portfolio-website
 ```
 
 * Region:
@@ -402,7 +402,7 @@ To allow public read access:
       "Effect": "Allow",
       "Principal": "*",
       "Action": "s3:GetObject",
-      "Resource": "arn:aws:s3:::philip-devops-portfolio/*"
+      "Resource": "arn:aws:s3:::philipdev-portfolio-website/*"
     }
   ]
 }
@@ -419,7 +419,7 @@ After enabling static hosting:
 Retrieve the endpoint URL:
 
 ```bash
-http://philip-devops-portfolio.s3-website-us-east-1.amazonaws.com/
+http://philipdev-portfolio-website.s3-website-us-east-1.amazonaws.com/
 ```
 
 ### 🎉 Result
@@ -475,6 +475,405 @@ While S3 static hosting is effective, it has limitations:
 * No custom domain without additional services
 * Limited caching control
 
-👉 These are addressed in **Task 3 (CloudFront + Terraform)** for a production-grade setup.
+## ⚡ Task 3: Terraform (Infrastructure as Code)
 
+### 🎯 Goal
 
+Automate everything that was previously configured manually in AWS.
+
+In this task, Terraform is introduced to make the deployment process:
+
+- Repeatable
+- Version-controlled
+- Faster to provision
+- Easier to maintain across environments
+
+### 📌 Objective
+
+The objective of this task is to replace the manual AWS setup from Task 2 with **Infrastructure as Code (IaC)** using Terraform.
+
+Using Terraform, the static hosting infrastructure can be defined in code and provisioned consistently whenever needed.
+
+### ✅ What Terraform Automates
+
+Terraform is used to:
+
+- Create the S3 bucket
+- Configure static website hosting
+- Set the bucket policy for public read access
+- Make the deployment reproducible
+
+### 🧠 Overview
+
+Rather than creating resources manually in the AWS Console, Terraform allows the infrastructure to be described declaratively in `.tf` files.
+
+This improves reliability because:
+
+- the infrastructure is documented as code
+- the same setup can be recreated at any time
+- changes can be reviewed before deployment
+- the process becomes easier to scale and maintain
+
+### 🏗️ Architecture (Task 3)
+
+```bash
+Terraform → AWS S3 → Static Website Hosting → End Users
+```
+
+### 🔍 Architecture Explanation
+
+- **Terraform**
+  - Defines and provisions AWS infrastructure from code
+
+- **AWS S3**
+  - Stores and serves the portfolio website files
+
+- **Static Website Hosting**
+  - Exposes the bucket as a public website endpoint
+
+- **End Users**
+  - Access the deployed portfolio through the S3 website URL
+
+### 📁 Suggested Terraform Structure
+
+```bash
+terraform/
+├── main.tf
+├── variables.tf
+└── outputs.tf
+```
+
+### 🧱 Example Terraform Configuration
+
+#### 🔹 `main.tf`
+
+```hcl
+provider "aws" {
+  region = var.aws_region
+}
+
+resource "aws_s3_bucket" "portfolio" {
+  bucket = var.bucket_name
+}
+
+resource "aws_s3_bucket_website_configuration" "portfolio_website" {
+  bucket = aws_s3_bucket.portfolio.id
+
+  index_document {
+    suffix = "index.html"
+  }
+}
+
+resource "aws_s3_bucket_public_access_block" "portfolio_public_access" {
+  bucket = aws_s3_bucket.portfolio.id
+
+  block_public_acls       = false
+  block_public_policy     = false
+  ignore_public_acls      = false
+  restrict_public_buckets = false
+}
+
+data "aws_iam_policy_document" "portfolio_policy" {
+  statement {
+    sid    = "PublicReadAccess"
+    effect = "Allow"
+
+    principals {
+      type        = "*"
+      identifiers = ["*"]
+    }
+
+    actions = ["s3:GetObject"]
+
+    resources = [
+      "${aws_s3_bucket.portfolio.arn}/*"
+    ]
+  }
+}
+
+resource "aws_s3_bucket_policy" "portfolio_bucket_policy" {
+  bucket = aws_s3_bucket.portfolio.id
+  policy = data.aws_iam_policy_document.portfolio_policy.json
+
+  depends_on = [aws_s3_bucket_public_access_block.portfolio_public_access]
+}
+```
+
+#### 🔹 `variables.tf`
+
+```hcl
+variable "aws_region" {
+  description = "AWS region for deployment"
+  type        = string
+  default     = "us-east-1"
+}
+
+variable "bucket_name" {
+  description = "Unique S3 bucket name for the portfolio website"
+  type        = string
+  default     = "philipdev-portfolio-website"
+}
+```
+
+#### 🔹 `outputs.tf`
+
+```hcl
+output "website_url" {
+  description = "S3 static website endpoint"
+  value       = aws_s3_bucket_website_configuration.portfolio_website.website_endpoint
+}
+```
+
+### 🚀 Terraform Workflow
+
+From the `terraform/` directory:
+
+```bash
+terraform init
+terraform plan
+terraform apply
+```
+
+After the infrastructure is created, Terraform will return the S3 website endpoint as an output.
+
+### 🎉 Result
+
+At the end of this task:
+
+* ✅ The S3 bucket is created from code
+* ✅ Static hosting is configured automatically
+* ✅ Public access policy is applied through Terraform
+* ✅ The infrastructure can be recreated whenever needed
+
+### 🧠 Key Concepts Demonstrated
+
+* Infrastructure as Code using Terraform
+* AWS resource provisioning through code
+* Static website hosting configuration
+* Declarative infrastructure management
+* Reproducible cloud deployments
+
+### 💡 Why This Task Matters
+
+This step marks the transition from **manual cloud configuration** to **automated infrastructure provisioning**.
+
+It demonstrates the ability to:
+
+* manage infrastructure professionally
+* reduce configuration drift
+* improve repeatability and consistency
+* prepare the project for CI/CD-driven deployments
+
+### 🔄 Improvement Over Task 2
+
+Compared to the manual deployment in Task 2, Terraform provides:
+
+* faster environment setup
+* cleaner infrastructure tracking
+* easier updates and rollback planning
+* better collaboration through version-controlled infrastructure files
+
+## ⚡ Task 4: CI/CD with GitHub Actions
+
+### 🎯 Goal
+
+Automate deployment on every code push.
+
+The deployment flow now becomes:
+
+```bash
+GitHub → GitHub Actions → AWS S3
+```
+
+This removes the need to upload website files manually through the AWS Console.
+
+### 📌 Objective
+
+The objective of this task is to build a CI/CD pipeline using GitHub Actions that automatically deploys the portfolio website to the S3 bucket whenever changes are pushed to the repository.
+
+### ✅ What This Task Automates
+
+With GitHub Actions, the project now:
+
+- Detects code pushes to the main branch
+- Runs a deployment workflow automatically
+- Uploads the latest website files to AWS S3
+- Replaces manual file uploads completely
+
+### 🧠 Overview
+
+This task introduces continuous deployment for the frontend application.
+
+Instead of:
+
+* editing code locally
+* manually uploading files to S3
+* repeating the same steps every time
+
+The workflow now handles deployment automatically after each push to `main`.
+
+### 🏗️ Architecture (Task 4)
+
+```bash
+Developer → GitHub Repository → GitHub Actions Workflow → AWS S3 → Live Portfolio Website
+```
+
+### 🔍 Architecture Explanation
+
+- **Developer**
+  - Updates the website code locally and pushes changes to GitHub
+
+- **GitHub Repository**
+  - Stores source code and triggers the workflow on push
+
+- **GitHub Actions**
+  - Runs the deployment pipeline automatically
+
+- **AWS S3**
+  - Receives the latest static files and serves the updated website
+
+- **Live Portfolio Website**
+  - Reflects the newest deployed version
+
+### 📁 Workflow File
+
+The workflow is stored at:
+
+```bash
+.github/workflows/deploy.yml
+```
+
+### 🧾 GitHub Actions Workflow
+
+```yaml
+name: Deploy Portfolio to S3
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v5
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
+          mask-aws-account-id: true
+
+      - name: Deploy website files to S3
+        run: |
+          aws s3 sync . s3://${{ secrets.S3_BUCKET_NAME }} \
+            --delete \
+            --exclude ".git/*" \
+            --exclude ".github/*" \
+            --exclude "terraform/*" \
+            --exclude "README.md"
+```
+
+### 🔐 Required GitHub Repository Secrets
+
+To make the workflow work, add these secrets in:
+
+```bash
+GitHub Repository → Settings → Secrets and variables → Actions
+```
+
+Required secrets:
+
+- `AWS_ACCESS_KEY_ID`
+- `AWS_SECRET_ACCESS_KEY`
+- `AWS_REGION`
+- `S3_BUCKET_NAME`
+
+Example values:
+
+```bash
+AWS_REGION=us-east-1
+S3_BUCKET_NAME=philipdev-portfolio-website
+```
+
+### 🔑 Minimum AWS Permissions
+
+The IAM user or role used by GitHub Actions should have permissions to:
+
+- list the target bucket
+- upload objects
+- update existing objects
+- delete removed objects
+
+S3 permissions scope:
+
+```json
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "s3:ListBucket"
+      ],
+      "Resource": "arn:aws:s3:::philipdev-portfolio-website"
+    },
+    {
+      "Effect": "Allow",
+      "Action": [
+        "s3:GetObject",
+        "s3:PutObject",
+        "s3:DeleteObject"
+      ],
+      "Resource": "arn:aws:s3:::philipdev-portfolio-website/*"
+    }
+  ]
+}
+```
+
+### 🚀 Deployment Process
+
+Once the secrets are configured:
+
+1. Update the portfolio locally
+2. Commit the changes
+3. Push to the `main` branch
+4. GitHub Actions runs automatically
+5. Files are synced to the S3 bucket
+6. The live website updates automatically
+
+### 🎉 Result
+
+At the end of this task:
+
+* ✅ Deployment is automated on every push to `main`
+* ✅ Website files are uploaded to S3 automatically
+* ✅ Manual uploads are no longer needed
+* ✅ The portfolio deployment process becomes faster and more professional
+
+### 🧠 Key Concepts Demonstrated
+
+* CI/CD with GitHub Actions
+* Automated deployment to AWS S3
+* Git-based deployment workflows
+* Secret management in GitHub
+* Continuous delivery for static websites
+
+### 🔥 Why This Is Big
+
+This is a major improvement because the project now behaves like a real deployment pipeline.
+
+Instead of manually pushing files to AWS every time, the repository itself becomes the source of truth for deployment.
+
+That means:
+
+* less manual work
+* fewer deployment mistakes
+* faster updates
+* better DevOps workflow maturity

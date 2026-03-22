@@ -11,12 +11,20 @@
 <header>
     <nav>
         <h2>Philip.dev</h2>
-        <ul>
-            <li><a href="#about">About</a></li>
-            <li><a href="#skills">Skills</a></li>
-            <li><a href="#projects">Projects</a></li>
-            <li><a href="#contact">Contact</a></li>
-        </ul>
+        <div class="nav-right">
+            <ul>
+                <li><a href="#about">About</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <button id="themeToggle" class="theme-toggle" type="button" aria-label="Switch color theme" aria-pressed="false">
+                <span class="theme-toggle-track">
+                    <span class="theme-toggle-thumb"></span>
+                </span>
+                <span class="theme-toggle-label">Light</span>
+            </button>
+        </div>
     </nav>
 </header>
 
@@ -26,8 +34,10 @@
         <img src="assets/profile.jpg" alt="Philip">
     </div>
 
+    <p class="hero-tagline">DevOps Engineer • AWS • Kubernetes • CI/CD</p>
     <h1>DevOps Engineer Building Scalable Cloud Infrastructure</h1>
-    <p>I design and automate secure, production-ready systems using AWS, Kubernetes, and CI/CD pipelines reducing deployment time and improving system reliability.</p>
+    <p class="hero-subtext">I design and automate cloud infrastructure using AWS, Kubernetes, and CI/CD pipelines.
+Helping teams deploy faster, scale reliably, and reduce downtime.</p>
 
     <div class="hero-buttons">
         <a href="#projects" class="btn">🚀 View My Work</a>
