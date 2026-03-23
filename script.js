@@ -73,7 +73,7 @@ const observer = new IntersectionObserver((entries, observer) => {
     threshold: 0.15
 });
 
-document.querySelectorAll("section, .project-card, .next-step-card").forEach(el => {
+document.querySelectorAll("section:not(#projects), .next-step-card").forEach(el => {
     el.classList.add("hidden");
     observer.observe(el);
 });
