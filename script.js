@@ -1,5 +1,6 @@
 const themeToggle = document.getElementById("themeToggle");
 const themeToggleLabel = document.querySelector(".theme-toggle-label");
+const themeColorMeta = document.querySelector('meta[name="theme-color"]');
 const savedTheme = localStorage.getItem("theme");
 const preferredTheme = window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark";
 const activeTheme = savedTheme || preferredTheme;
@@ -11,6 +12,10 @@ const syncThemeToggle = (theme) => {
 
     themeToggle.setAttribute("aria-pressed", String(isLight));
     themeToggleLabel.textContent = isLight ? "Dark" : "Light";
+
+    if (themeColorMeta) {
+        themeColorMeta.setAttribute("content", isLight ? "#f5f7fb" : "#0d1117");
+    }
 };
 
 syncThemeToggle(activeTheme);
@@ -68,7 +73,7 @@ const observer = new IntersectionObserver((entries, observer) => {
     threshold: 0.15
 });
 
-document.querySelectorAll("section, .project-card").forEach(el => {
+document.querySelectorAll("section, .project-card, .next-step-card").forEach(el => {
     el.classList.add("hidden");
     observer.observe(el);
 });
@@ -113,6 +118,7 @@ images.forEach(img => {
     img.addEventListener("click", () => {
         modal.style.display = "flex";
         modalImg.src = img.src;
+        modalImg.alt = img.alt;
     });
 });
 
@@ -132,3 +138,9 @@ modal.onclick = (e) => {
 modalImg.onclick = () => {
     modal.style.display = "none";
 };
+
+document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") {
+        modal.style.display = "none";
+    }
+});
