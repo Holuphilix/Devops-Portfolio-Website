@@ -83,6 +83,8 @@ This project was built to achieve the following:
 
 - Fully responsive and modern UI design
 - Project-focused layout showcasing DevOps work
+- Dedicated **Resume & Experience** section with downloadable PDF resume
+- Project metadata highlighting **Built**, **Updated**, and **Status** details
 - Automated deployment pipeline (CI/CD)
 - Infrastructure fully managed with Terraform
 - Secure delivery via CloudFront (HTTPS)
@@ -120,7 +122,7 @@ Devops-Portfolio-Website/
 ├── style.css                  # Styling, responsiveness, and themes
 ├── script.js                  # Interactivity, theme toggle, and modal logic
 ├── README.md                  # Project documentation
-├── assets/                    # Images and project visuals
+├── assets/                    # Images, project visuals, and downloadable resume PDF
 ├── .github/
 │   └── workflows/
 │       └── deploy.yml         # CI/CD deployment workflow
@@ -185,7 +187,7 @@ The portfolio is structured into clearly defined sections to improve **usability
 
 #### 1. Navigation Bar
 
-- Sticky navigation for easy access across sections
+- Sticky navigation for easy access across sections, including the Resume link
 - Smooth scrolling between sections
 
 #### 2. Hero Section
@@ -196,7 +198,7 @@ Introduces the engineer with a strong value proposition:
 
 Includes:
 - Profile image
-- Call-to-action buttons (Projects & Contact)
+- Call-to-action buttons (Projects, GitHub, and LinkedIn)
 
 #### 3. About Section
 
@@ -231,11 +233,22 @@ The most important section of the portfolio, showcasing **real-world DevOps proj
 
 Each project includes:
 - Architecture or deployment visuals
+- Recruiter-friendly metadata such as **Built**, **Updated**, and **Status**
 - Technology stack
 - Key results and impact
 - Direct link to source code (View Code)
+- Live site link where applicable
 
-#### 6. Contact Section
+#### 6. Resume & Experience Section
+
+Provides a dedicated recruiter-facing CTA:
+
+- Downloadable PDF resume
+- Browser-view option for quick review
+- Resume details such as file format, page count, and update month
+- Recruiter-oriented call-to-action linking to the contact section
+
+#### 7. Contact Section
 
 Provides direct communication channels:
 
@@ -257,8 +270,10 @@ Encourages collaboration and job opportunities.
 ### ⚙️ Functionality Implemented
 
 - Smooth scrolling navigation
+- Resume download and browser-view CTA
 - Scroll-based animations (Intersection Observer)
 - Active navigation highlighting
+- Theme toggle with saved user preference
 - Image preview modal for project visuals
 - Page fade-in effect for improved user experience
 - Responsive layout using CSS Grid and Flexbox
@@ -276,6 +291,8 @@ Then open your browser and visit:
 ```bash
 http://localhost:8000
 ```
+
+If updates do not appear immediately in the browser, perform a hard refresh to clear cached static assets.
 
 #### 🏠 Homepage
 ![Homepage](./assets/local_website.png)
