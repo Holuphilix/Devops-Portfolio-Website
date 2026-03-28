@@ -24,9 +24,11 @@ Terraform → AWS S3 + CloudFront
 
 ## 🌐 Live Endpoints
 
-The project currently has two working public endpoints:
+The project currently has working public endpoints across the custom domain, CDN, and S3 origin layers:
 
-- **Primary HTTPS URL:** `https://d22hq7kuctu23g.cloudfront.net`
+- **Primary Custom Domain:** `https://philipoludolamu.com`
+- **Secondary Custom Domain:** `https://www.philipoludolamu.com`
+- **CloudFront HTTPS URL:** `https://d22hq7kuctu23g.cloudfront.net`
 - **Direct S3 Website URL:** `http://philipdev-portfolio-website.s3-website-us-east-1.amazonaws.com/`
 
 ## 🔍 Architecture Breakdown
@@ -75,7 +77,8 @@ This project was built to achieve the following:
 
 - AWS S3 (Static Website Hosting)
 - AWS CloudFront (CDN + HTTPS)
-- AWS Route 53 (Custom Domain - Optional)
+- AWS Certificate Manager (ACM)
+- Namecheap DNS (Custom Domain Routing)
 - Terraform (Infrastructure as Code)
 - GitHub Actions (CI/CD Automation)
 
@@ -85,6 +88,7 @@ This project was built to achieve the following:
 - Project-focused layout showcasing DevOps work
 - Dedicated **Resume & Experience** section with downloadable PDF resume
 - Project metadata highlighting **Built**, **Updated**, and **Status** details
+- Custom domain integration with **Namecheap + ACM + CloudFront**
 - Automated deployment pipeline (CI/CD)
 - Infrastructure fully managed with Terraform
 - Secure delivery via CloudFront (HTTPS)
@@ -1126,6 +1130,175 @@ After Task 5:
 
 - **Live website opened through the HTTPS CloudFront URL**
 ![Live website](./assets/live_website.png)
+
+## ⚡ Task 6: Custom Domain Integration with Namecheap + ACM + CloudFront
+
+### 🎯 Goal
+
+Replace the default CloudFront URL with a branded custom domain while keeping CloudFront as the HTTPS delivery layer.
+
+The delivery flow now becomes:
+
+```bash
+User → Namecheap DNS → CloudFront → AWS S3 Static Website
+```
+
+### 📌 Objective
+
+The objective of this task is to connect the purchased domain to the existing CloudFront distribution using:
+
+- Namecheap DNS for public routing
+- AWS Certificate Manager (ACM) for SSL/TLS certificates
+- Terraform for infrastructure changes
+- CloudFront aliases for the root and `www` domains
+
+### ✅ What This Task Adds
+
+With Task 6, the project now includes:
+
+- a branded primary domain: `https://philipoludolamu.com`
+- a working secondary `www` domain: `https://www.philipoludolamu.com`
+- an ACM-issued certificate in `us-east-1`
+- DNS validation through Namecheap CNAME records
+- CloudFront alternate domain names for root and `www`
+- Namecheap routing records pointing the domain to CloudFront
+
+### 🧠 Overview
+
+Task 6 builds directly on top of the CloudFront setup from Task 5.
+
+Instead of sharing the AWS-generated CloudFront URL, the portfolio is now delivered through a professional custom domain while still using CloudFront as the CDN and HTTPS layer.
+
+This introduces a more realistic production workflow because the setup now coordinates:
+
+- external DNS management in Namecheap
+- TLS certificate issuance in ACM
+- Terraform-managed infrastructure updates
+- CloudFront custom-domain routing
+
+### 🏗️ Architecture (Task 6)
+
+```bash
+User Browser → Namecheap DNS → CloudFront (Custom Domain + HTTPS) → AWS S3 Website Endpoint
+```
+
+### 🔍 Architecture Explanation
+
+- **Namecheap DNS**
+  - Hosts the ACM validation records and the routing records for `@` and `www`
+
+- **AWS Certificate Manager (ACM)**
+  - Issues and manages the public certificate for `philipoludolamu.com` and `www.philipoludolamu.com`
+
+- **CloudFront**
+  - Uses alternate domain names and the ACM certificate to serve the custom domain over HTTPS
+
+- **AWS S3 Website Endpoint**
+  - Remains the static website origin behind CloudFront
+
+- **End Users**
+  - Access the portfolio through a branded HTTPS domain instead of the default CloudFront hostname
+
+### 📁 Terraform Resources Added Or Updated
+
+Task 6 extends the Terraform configuration with:
+
+- `aws_acm_certificate`
+- `aws_acm_certificate_validation`
+- CloudFront alias and custom certificate configuration
+- new domain-related variables:
+  - `primary_domain_name`
+  - `alternate_domain_names`
+  - `enable_custom_domain`
+- new outputs for:
+  - `acm_certificate_arn`
+  - `acm_dns_validation_records`
+  - `custom_domain_names`
+  - `custom_domain_enabled`
+  - `namecheap_routing_records`
+
+### 🧱 Terraform Workflow
+
+The domain rollout follows a staged Terraform workflow:
+
+1. Request the ACM certificate with:
+   - `primary_domain_name`
+   - `alternate_domain_names`
+   - `enable_custom_domain = false`
+2. Apply Terraform to generate the DNS validation outputs
+3. Create the ACM validation CNAME records in Namecheap
+4. Wait for the certificate status to become `Issued`
+5. Set `enable_custom_domain = true`
+6. Apply Terraform again to attach the certificate and aliases to CloudFront
+7. Confirm the root and `www` routing records in Namecheap
+
+This staged approach avoids attaching an unvalidated certificate to CloudFront.
+
+### 🌐 Final Public Access
+
+After Task 6, the portfolio can be accessed through:
+
+```bash
+https://philipoludolamu.com
+https://www.philipoludolamu.com
+```
+
+The default CloudFront domain still exists as the underlying CDN endpoint, but the branded domain is now the public-facing URL.
+
+### 🎉 Result
+
+At the end of this task:
+
+* ✅ The portfolio is accessible through a branded custom domain
+* ✅ HTTPS works through an ACM-issued certificate
+* ✅ Both root and `www` domains are connected to CloudFront
+* ✅ Namecheap DNS is integrated into the deployment story
+* ✅ The project looks more production-ready and recruiter-friendly
+
+### 🧠 Key Concepts Demonstrated
+
+* ACM DNS validation
+* CloudFront alternate domain names
+* External DNS provider integration with Namecheap
+* Safe staged Terraform rollout for custom domains
+* Branded HTTPS delivery for static websites
+
+### 🔥 Why Task 6 Matters
+
+This is the step that transforms the portfolio from a technically working cloud project into a polished public-facing product.
+
+Before Task 6:
+
+* the site worked through the default CloudFront URL
+* HTTPS was available
+* but the public address was still AWS-branded
+
+After Task 6:
+
+* the site has a personal custom domain
+* the delivery path still uses CloudFront and HTTPS
+* DNS, certificates, CDN, and Terraform all work together
+* the project feels much closer to a real production deployment
+
+### 📸 Recommended Screenshots For Task 6
+
+- **Terraform apply output showing the custom-domain rollout**
+![Terraform apply output](./assets/terraform_apply_custom_domain.png)
+
+- **Namecheap ACM validation records**
+![Namecheap ACM validation records](./assets/namecheap_acm_validation_records.png)
+
+- **ACM certificate issued for root and `www` domains**
+![ACM certificate issued](./assets/ACM_certificate_issued.png)
+
+- **CloudFront distribution configured with alternate domain names and custom SSL**
+![CloudFront custom domain configuration](./assets/cloudfront_custom_domain_config.png)
+
+- **Namecheap routing records pointing the domain to CloudFront**
+![Namecheap routing records](./assets/Namecheap_routing_records.png)
+
+- **Live website loaded through the custom domain**
+![Live custom domain website](./assets/live_custom_domain_root.png)
 
 ## 👤 Author
 
