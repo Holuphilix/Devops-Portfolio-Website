@@ -1,0 +1,31 @@
+groups:
+  - name: node-exporter-alerts
+    rules:
+      - alert: NodeExporterDown
+        expr: up{job="node-exporter"} == 0
+        for: 1m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Node Exporter is down"
+          description: "Prometheus has not been able to scrape node-exporter for more than 1 minute."
+
+  - name: portfolio-website-alerts
+    rules:
+      - alert: PortfolioWebsiteDown
+        expr: probe_success{job="blackbox-portfolio"} == 0
+        for: 1m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Portfolio website is down"
+          description: "Blackbox Exporter could not reach https://philipoludolamu.com for more than 1 minute."
+
+      - alert: PortfolioWebsiteSlow
+        expr: probe_duration_seconds{job="blackbox-portfolio"} > 2
+        for: 1m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Portfolio website is slow"
+          description: "The portfolio website probe duration has been above 2 seconds for more than 1 minute."

@@ -1,0 +1,18 @@
+route:
+  receiver: slack-notifications
+  group_by: ['alertname']
+  group_wait: 10s
+  group_interval: 30s
+  repeat_interval: 1h
+
+receivers:
+  - name: slack-notifications
+    slack_configs:
+      - api_url_file: /etc/alertmanager/secrets/slack_webhook_url
+        channel: '#portfolio-website-alert'
+        send_resolved: true
+        title: '[{{ .Status | toUpper }}] {{ .CommonLabels.alertname }}'
+        text: |
+          *Status:* {{ .Status | toUpper }}
+          *Alert:* {{ .CommonAnnotations.summary }}
+          *Description:* {{ .CommonAnnotations.description }}
