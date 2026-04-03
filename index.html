@@ -100,19 +100,19 @@
 <section id="about">
     <h2>About Me</h2>
     <p class="section-lead">
-        I build systems that are easier to deploy, easier to maintain, and easier to trust in production.
+        I build cloud and delivery systems that help teams ship faster, reduce manual work, and operate with more confidence.
     </p>
     <p>
-        I build cloud infrastructure and delivery workflows that take applications from source code to stable deployment.
-        My hands-on work spans AWS, Terraform, Docker, Kubernetes, GitHub Actions, S3, and CloudFront, with an emphasis
-        on repeatability, security, and practical operations.
+        My hands-on work focuses on AWS, Terraform, Docker, Kubernetes, GitHub Actions, S3, and CloudFront. I enjoy
+        taking applications from source code to stable deployment by building repeatable infrastructure, cleaner release
+        workflows, and practical automation that removes unnecessary manual steps.
     </p>
 
     <p>
-        I enjoy replacing manual steps with version-controlled systems, whether that means provisioning infrastructure as
-        code, hardening CI/CD pipelines, or improving deployment consistency across environments. I am currently deepening
-        my monitoring and observability practice while seeking DevOps and cloud engineering opportunities where I can
-        contribute quickly and keep growing.
+        This portfolio reflects that approach. It combines frontend engineering, AWS hosting, Terraform, CI/CD,
+        CloudFront, custom domain delivery, and observability with Prometheus, Grafana, Alertmanager, Blackbox Exporter,
+        and Slack alerts. I am looking for DevOps and cloud engineering opportunities where I can contribute quickly,
+        keep learning, and help build reliable systems in production.
     </p>
 </section>
 
@@ -196,6 +196,19 @@
             </div>
         </div>
 
+        <div class="skill-card">
+            <div class="card-icon" aria-hidden="true">📡</div>
+            <h3>Monitoring & Observability</h3>
+            <div class="skills-container">
+                <span>Prometheus</span>
+                <span>Grafana</span>
+                <span>Alertmanager</span>
+                <span>Node Exporter</span>
+                <span>Blackbox Exporter</span>
+                <span>Slack Alerts</span>
+            </div>
+        </div>
+
         <!-- OS -->
         <div class="skill-card">
             <div class="card-icon" aria-hidden="true">💻</div>
@@ -222,9 +235,9 @@
         <img src="assets/profile1.jpg" class="project-img preview-img" alt="CI/CD Pipeline Screenshot">
 
         <div class="project-content">
-            <h3>Production-Ready Kubernetes CI/CD Platform</h3>
+            <h3>🚀 Production-Ready Kubernetes CI/CD Platform</h3>
             <p class="project-meta">
-                <span>Built March 2026</span>
+                <span>Last Updated · March 2026</span>
                 <span class="project-status">Completed</span>
             </p>
 
@@ -236,29 +249,68 @@
             </div>
 
             <p>
-                Built a Kubernetes delivery workflow that automated build, scan, and deployment stages to reduce manual release work
-                and improve consistency across environments.
+                Engineered a Kubernetes CI/CD platform with Docker, GitHub Actions, and Trivy to automate container build,
+                security scanning, and deployment workflows for safer, repeatable releases across environments.
             </p>
 
             <h4 class="impact">Key Results</h4>
             <ul>
-                <li>Reduced deployment time by roughly 70 percent through automation</li>
-                <li>Added automated image security scanning before deployment</li>
-                <li>Improved release consistency with version-controlled workflows</li>
+                <li>Automated build, scan, and deployment stages, reducing manual release effort by ~70%</li>
+                <li>Integrated Trivy image scanning to block vulnerable container images before cluster deployment</li>
+                <li>Standardized Kubernetes rollout steps in version-controlled workflows to improve release consistency and rollback readiness</li>
             </ul>
 
             <a href="https://github.com/Holuphilix/Local-DevOps-Production-Platform" target="_blank" rel="noopener noreferrer" class="btn secondary">View Code</a>
         </div>
     </div>
 
-    <!-- 2. ECS + TERRAFORM -->
+    <!-- 2. PORTFOLIO -->
+    <div class="project-card">
+        <img src="assets/grafana_full_monitoring_dashboard.png" class="project-img preview-img" alt="Production-Ready DevOps Portfolio Website monitoring dashboard">
+
+        <div class="project-content">
+            <h3>📡 Production-Ready DevOps Portfolio Website</h3>
+            <p class="project-meta">
+                <span>Last Updated · March 2026</span>
+                <span class="project-status project-status-live">Live</span>
+            </p>
+
+            <div class="tags">
+                <span>GitHub Actions</span>
+                <span>Terraform</span>
+                <span>CloudFront</span>
+                <span>Prometheus</span>
+                <span>Grafana</span>
+                <span>Slack Alerts</span>
+            </div>
+
+            <p>
+                Built a production-ready DevOps portfolio platform on AWS with Terraform, GitHub Actions, CloudFront, ACM,
+                and a custom domain, then added end-to-end monitoring and alerting with Prometheus, Grafana, Alertmanager,
+                Blackbox Exporter, and Slack.
+            </p>
+
+            <h4 class="impact">Key Results</h4>
+            <ul>
+                <li>Automated deployments from GitHub to AWS, reducing manual release effort by ~70% and improving delivery consistency</li>
+                <li>Provisioned HTTPS, CDN delivery, and domain routing as code with Terraform, CloudFront, ACM, and Namecheap</li>
+                <li>Implemented dashboards, website probes, and Slack alerting, enabling issue detection and notification in about 1 minute</li>
+                <li>Centralized delivery, observability, and documentation in one repository to improve visibility across uptime, latency, CPU, and memory metrics</li>
+            </ul>
+
+            <a href="https://philipoludolamu.com" target="_blank" rel="noopener noreferrer" class="btn">Live Site</a>
+            <a href="https://github.com/Holuphilix/Devops-Portfolio-Website" target="_blank" rel="noopener noreferrer" class="btn secondary">View Code</a>
+        </div>
+    </div>
+
+    <!-- 3. ECS + TERRAFORM -->
     <div class="project-card">
         <img src="assets/ecs-project.png" class="project-img preview-img" alt="AWS ECS Deployment">
 
         <div class="project-content">
-            <h3>Containerized Web App Deployment on AWS ECS with Terraform</h3>
+            <h3>☁️ Containerized Web App Deployment on AWS ECS with Terraform</h3>
             <p class="project-meta">
-                <span>Built March 2026</span>
+                <span>Last Updated · March 2026</span>
                 <span class="project-status">Completed</span>
             </p>
 
@@ -271,29 +323,29 @@
             </div>
 
             <p>
-                Provisioned AWS ECS infrastructure with Terraform and deployed containerized workloads through ECR and Fargate
-                to create a repeatable cloud delivery path.
+                Provisioned a repeatable AWS ECS deployment stack with Terraform, ECR, and Fargate to deliver containerized
+                workloads without managing servers and to simplify cloud application releases.
             </p>
 
             <h4 class="impact">Key Results</h4>
             <ul>
-                <li>Provisioned networking, registry, and compute with reusable Terraform modules</li>
-                <li>Built and pushed Docker images to Amazon ECR</li>
-                <li>Deployed scalable services on ECS Fargate without managing servers</li>
+                <li>Provisioned networking, registry, and compute as code, reducing environment setup time by ~60%</li>
+                <li>Published Docker images to Amazon ECR to standardize container packaging and deployment flow</li>
+                <li>Deployed services on ECS Fargate without managing servers, improving scaling simplicity and operational efficiency</li>
             </ul>
 
             <a href="https://github.com/Holuphilix/19-Terraform-ECS-WebApp" target="_blank" rel="noopener noreferrer" class="btn secondary">View Code</a>
         </div>
     </div>
 
-    <!-- 3. WORDPRESS ARCHITECTURE -->
+    <!-- 4. WORDPRESS ARCHITECTURE -->
     <div class="project-card">
         <img src="assets/wordpress-architecture.png" class="project-img preview-img" alt="WordPress Architecture">
 
         <div class="project-content">
-            <h3>Scalable WordPress Deployment on AWS with Terraform</h3>
+            <h3>🌐 Scalable WordPress Deployment on AWS with Terraform</h3>
             <p class="project-meta">
-                <span>Built March 2026</span>
+                <span>Last Updated · March 2026</span>
                 <span class="project-status">Completed</span>
             </p>
 
@@ -307,29 +359,29 @@
             </div>
 
             <p>
-                Designed a high-availability WordPress environment on AWS with Terraform, combining scalable compute,
-                shared storage, and secure networking for a production-style deployment.
+                Designed a production-style WordPress platform on AWS with Terraform, combining load balancing, auto scaling,
+                shared storage, and managed database services to support resilient, scalable application delivery.
             </p>
 
             <h4 class="impact">Key Results</h4>
             <ul>
-                <li>Delivered a highly available architecture with load balancing and auto scaling</li>
-                <li>Designed secure networking with public and private subnets</li>
-                <li>Used Amazon EFS for shared application storage across instances</li>
+                <li>Provisioned ALB, Auto Scaling, EFS, and RDS into one highly available architecture for stronger fault tolerance</li>
+                <li>Automated environment build with Terraform, reducing rebuild time by ~65% and improving repeatability</li>
+                <li>Segmented networking with public and private subnets to strengthen security and operational separation</li>
             </ul>
 
             <a href="https://github.com/Holuphilix/21-WordPress-Terraform-AWS" target="_blank" rel="noopener noreferrer" class="btn secondary">View Code</a>
         </div>
     </div>
 
-    <!-- 4. KUSTOMIZE -->
+    <!-- 5. KUSTOMIZE -->
     <div class="project-card">
         <img src="assets/github-actions-kustomize.png" class="project-img preview-img" alt="GitHub Actions Deployment">
 
         <div class="project-content">
-            <h3>Kubernetes Configuration Management with Kustomize & GitHub Actions</h3>
+            <h3>🧩 Kubernetes Configuration Management with Kustomize & GitHub Actions</h3>
             <p class="project-meta">
-                <span>Built March 2026</span>
+                <span>Last Updated · March 2026</span>
                 <span class="project-status">Completed</span>
             </p>
 
@@ -341,29 +393,29 @@
             </div>
 
             <p>
-                Managed multi-environment Kubernetes manifests with Kustomize overlays and automated rollouts through
-                GitHub Actions to support GitOps-style releases.
+                Managed Kubernetes manifests with Kustomize overlays and GitHub Actions to support environment-specific,
+                Git-driven deployments with cleaner configuration control and reduced drift across clusters.
             </p>
 
             <h4 class="impact">Key Results</h4>
             <ul>
-                <li>Automated Kubernetes deployments through a Git-based pipeline</li>
-                <li>Separated environments cleanly with Kustomize overlays</li>
-                <li>Handled configuration and secrets more consistently across releases</li>
+                <li>Automated manifest rollouts from GitHub, reducing manual deployment steps by ~60%</li>
+                <li>Separated dev, staging, and production configuration cleanly with Kustomize overlays</li>
+                <li>Improved release consistency and reduced configuration drift across environments</li>
             </ul>
 
             <a href="https://github.com/Holuphilix/29-Advanced-Kustomize-AWS" target="_blank" rel="noopener noreferrer" class="btn secondary">View Code</a>
         </div>
     </div>
 
-    <!-- 5. JENKINS + HELM -->
+    <!-- 6. JENKINS + HELM -->
     <div class="project-card">
         <img src="assets/jenkins-pipeline.png" class="project-img preview-img" alt="Jenkins CI/CD">
 
         <div class="project-content">
-            <h3>CI/CD Pipeline with Jenkins, Helm & Amazon EKS</h3>
+            <h3>🔁 CI/CD Pipeline with Jenkins, Helm & Amazon EKS</h3>
             <p class="project-meta">
-                <span>Built March 2026</span>
+                <span>Last Updated · March 2026</span>
                 <span class="project-status">Completed</span>
             </p>
 
@@ -375,54 +427,18 @@
             </div>
 
             <p>
-                Created a Jenkins-driven release workflow for applications deployed to Amazon EKS with Helm,
-                supported by Terraform-managed infrastructure.
+                Built a Jenkins-driven CI/CD workflow for applications deployed to Amazon EKS with Helm, combining
+                pipeline automation, packaged releases, and repeatable Kubernetes deployment workflows.
             </p>
 
             <h4 class="impact">Key Results</h4>
             <ul>
-                <li>Automated release steps with Jenkins and Helm charts</li>
-                <li>Integrated source control changes into a repeatable pipeline</li>
-                <li>Ran scalable workloads on Amazon EKS</li>
+                <li>Automated build and release stages with Jenkins and Helm, reducing deployment time by ~55%</li>
+                <li>Packaged Kubernetes releases as Helm charts to simplify upgrades, rollback workflows, and version control</li>
+                <li>Deployed workloads to Amazon EKS through a consistent, repeatable pipeline</li>
             </ul>
 
             <a href="https://github.com/Holuphilix/25-Helm-Jenkins-CI-CD" target="_blank" rel="noopener noreferrer" class="btn secondary">View Code</a>
-        </div>
-    </div>
-
-    <!-- 6. PORTFOLIO -->
-    <div class="project-card">
-        <img src="assets/portfolio-devops-website.png" class="project-img preview-img" alt="Portfolio Website">
-
-        <div class="project-content">
-            <h3>DevOps Portfolio Website</h3>
-            <p class="project-meta">
-                <span>Built March 2026</span>
-                <span>Updated March 2026</span>
-                <span class="project-status project-status-live">Live</span>
-            </p>
-
-            <div class="tags">
-                <span>GitHub Actions</span>
-                <span>Terraform</span>
-                <span>AWS S3</span>
-                <span>CloudFront</span>
-            </div>
-
-            <p>
-                Designed and deployed a recruiter-facing portfolio on AWS S3 and CloudFront with GitHub Actions and Terraform
-                to demonstrate a real DevOps delivery workflow.
-            </p>
-
-            <h4 class="impact">Key Results</h4>
-            <ul>
-                <li>Automated deployment from GitHub to AWS through CI/CD</li>
-                <li>Delivered the site globally through CloudFront with HTTPS</li>
-                <li>Combined documentation, infrastructure, and UI into one portfolio story</li>
-            </ul>
-
-            <a href="https://d22hq7kuctu23g.cloudfront.net" target="_blank" rel="noopener noreferrer" class="btn">Live Site</a>
-            <a href="https://github.com/Holuphilix/Devops-Portfolio-Website" target="_blank" rel="noopener noreferrer" class="btn secondary">View Code</a>
         </div>
     </div>
 
@@ -431,9 +447,9 @@
         <img src="assets/marketpeak.png" class="project-img preview-img" alt="E-commerce">
 
         <div class="project-content">
-            <h3>MarketPeak E-Commerce Deployment on AWS</h3>
+            <h3>🛒 MarketPeak E-Commerce Deployment on AWS</h3>
             <p class="project-meta">
-                <span>Built March 2026</span>
+                <span>Last Updated · March 2026</span>
                 <span class="project-status">Completed</span>
             </p>
 
@@ -444,14 +460,15 @@
             </div>
 
             <p>
-                Deployed an e-commerce application on AWS EC2 and managed the environment through Linux-based operational workflows.
+                Deployed an e-commerce application on AWS EC2 and managed the environment through Linux-based operational
+                workflows to support reliable application hosting and hands-on cloud administration.
             </p>
 
             <h4 class="impact">Key Results</h4>
             <ul>
-                <li>Provisioned and configured an EC2-hosted application environment</li>
-                <li>Managed deployment tasks through the Linux command line</li>
-                <li>Strengthened hands-on experience with application delivery on AWS</li>
+                <li>Provisioned and configured an EC2-hosted application environment for reliable web delivery</li>
+                <li>Executed Linux-based deployment and service management tasks, improving operational efficiency by ~40%</li>
+                <li>Strengthened troubleshooting and administration workflows for application hosting on AWS</li>
             </ul>
 
             <a href="https://github.com/Holuphilix/04-MarketPeak-Ecommerce" target="_blank" rel="noopener noreferrer" class="btn secondary">View Code</a>
@@ -463,9 +480,9 @@
         <img src="assets/app-running.png" class="project-img preview-img" alt="Docker Kubernetes">
 
         <div class="project-content">
-            <h3>Containerized Application Deployment with Docker & Kubernetes</h3>
+            <h3>📦 Containerized Application Deployment with Docker & Kubernetes</h3>
             <p class="project-meta">
-                <span>Built March 2026</span>
+                <span>Last Updated · March 2026</span>
                 <span class="project-status">Completed</span>
             </p>
 
@@ -476,19 +493,26 @@
             </div>
 
             <p>
-                Built and deployed a containerized application with Docker and Kubernetes to strengthen end-to-end understanding
-                of container packaging, orchestration, and local cluster workflows.
+                Containerized and deployed an application with Docker and Kubernetes to create an end-to-end workflow for
+                image packaging, orchestration, and service exposure in a local cluster.
             </p>
 
             <h4 class="impact">Key Results</h4>
             <ul>
-                <li>Built container images and ran workloads consistently with Docker</li>
-                <li>Deployed services to Kubernetes using Kind</li>
-                <li>Improved familiarity with container-based release workflows</li>
+                <li>Built reusable Docker images to standardize application packaging and runtime behavior</li>
+                <li>Deployed services to Kubernetes with Kind, reducing local environment setup overhead by ~50%</li>
+                <li>Validated container-based release workflows for local orchestration and testing</li>
             </ul>
 
             <a href="https://github.com/Holuphilix/06-Containerization-Project" target="_blank" rel="noopener noreferrer" class="btn secondary">View Code</a>
         </div>
+    </div>
+
+    <div class="projects-cta">
+        <p>
+            Looking for more hands-on DevOps, cloud, and automation projects? Explore additional work on my GitHub profile.
+        </p>
+        <a href="https://github.com/Holuphilix" target="_blank" rel="noopener noreferrer" class="btn secondary">View More on GitHub</a>
     </div>
 
 </section>
@@ -497,19 +521,19 @@
 <section>
     <h2>Currently Building</h2>
     <p class="section-lead">
-        I am expanding this portfolio with a monitoring-focused project to strengthen the observability side of my DevOps work.
+        I am continuing to improve this portfolio with stronger observability, cleaner dashboards, and more polished documentation.
     </p>
 
     <div class="next-step-card" data-icon="📡">
-        <h3>Monitoring & Observability Stack</h3>
+        <h3>Observability Expansion</h3>
         <p>
-            The next project is centered on operational visibility for containerized workloads using Prometheus, Grafana,
-            Alertmanager, Node Exporter, cAdvisor, and optionally Loki with Promtail for logs.
+            Monitoring is already part of this project now. The next improvement is to deepen the operational story with richer dashboards,
+            sharper alert rules, and clearer explanation of the flow from metrics collection to Slack notifications.
         </p>
         <ul>
-            <li>Collect host and container metrics</li>
-            <li>Build dashboards and alerting rules</li>
-            <li>Demonstrate incident visibility and troubleshooting workflows</li>
+            <li>Refine CPU, memory, uptime, and response-time visibility</li>
+            <li>Improve alert coverage for both host health and live website checks</li>
+            <li>Make the documentation more useful for learners studying observability</li>
         </ul>
     </div>
 </section>
@@ -555,17 +579,17 @@
         </div>
 
         <div class="resume-actions">
-            <a href="assets/Philip-Oludolamu-Resume.pdf" download class="btn">
+            <a href="assets/Philip-Oludolamu-Resume-ATS.pdf" download class="btn">
                 <span class="btn-icon" aria-hidden="true">PDF</span>
                 <span class="btn-text">Download ATS Resume</span>
             </a>
-            <a href="assets/Philip-Oludolamu-Resume.pdf" target="_blank" rel="noopener noreferrer" class="btn secondary">
+            <a href="assets/Philip-Oludolamu-Resume-ATS.pdf" target="_blank" rel="noopener noreferrer" class="btn secondary">
                 <span class="btn-icon" aria-hidden="true">↗</span>
                 <span class="btn-text">View in Browser</span>
             </a>
         </div>
 
-        <p class="resume-meta">PDF • 2 pages • 4.1 KB • Updated March 2026</p>
+        <p class="resume-meta">PDF • 1 page • 53 KB • Updated April 2026</p>
     </div>
 
     <p class="resume-recruiter-cta">

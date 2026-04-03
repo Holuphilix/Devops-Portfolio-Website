@@ -1,1310 +1,1003 @@
-# 🚀 DevOps Portfolio Website
+# 🚀 Production-Ready DevOps Portfolio Website
 
-## 📌 Project Overview
+This project is a **production-style DevOps portfolio** that demonstrates how a simple static website evolves into a fully automated, secure, and observable cloud system.
 
-This project is a **production-ready DevOps portfolio platform** designed to showcase real-world experience in cloud infrastructure, CI/CD automation, containerization, and Kubernetes.
+It showcases end-to-end DevOps practices including:
 
-Rather than a simple static website, this project demonstrates how frontend applications can be transformed into **fully automated, scalable, and cloud-native systems** using modern DevOps practices.
+- Infrastructure as Code (Terraform)
+- CI/CD automation (GitHub Actions)
+- Secure global delivery (AWS CloudFront + ACM)
+- Custom domain integration (Namecheap)
+- Monitoring and alerting (Prometheus, Grafana, Alertmanager, Blackbox Exporter)
+- Incident notifications (Slack integration)
 
-It reflects my ability to design, build, and deploy systems that are **reliable, reproducible, and production-focused**.
+👉 **Live Site:** https://philipoludolamu.com
 
-## 🧠 Architecture Overview
+![Production-Ready DevOps Portfolio Website homepage](assets/portfolio-devops-website.png)
 
-The project now follows a modern DevOps delivery flow:
+## 🎯 Why This Repository Exists
 
+This project serves two purposes at the same time:
+
+1. It is my live portfolio website at `https://philipoludolamu.com`.
+2. It is a documented DevOps case study that shows how a simple frontend can evolve into a secure, automated, observable workload.
+
+That second goal matters because many portfolio sites stop at "I built a webpage." This project goes further and shows:
+
+* cloud hosting
+* infrastructure as code
+* CI/CD automation
+* CDN delivery
+* HTTPS and DNS integration
+* monitoring and alerting
+* basic incident response workflow through Slack
+
+## 📘 What You Will Learn From This Project
+
+By working through this repository, a learner can see how to:
+
+* build a recruiter-friendly frontend with HTML, CSS, and JavaScript
+* host a static site on AWS S3
+* convert manual infrastructure to Terraform
+* automate deployment with GitHub Actions
+* place CloudFront in front of S3 for HTTPS and CDN delivery
+* connect a real custom domain using Namecheap and ACM
+* build a monitoring stack with Prometheus and Grafana
+* expose infrastructure metrics with Node Exporter
+* probe a real live website with Blackbox Exporter
+* route alerts with Alertmanager
+* send firing and resolved notifications to Slack
+
+## 📊 Project Snapshot
+
+| Area           | What this project demonstrates                                      |
+| -------------- | ------------------------------------------------------------------- |
+| Frontend       | Responsive personal portfolio with recruiter-focused sections       |
+| Hosting        | AWS S3 static website hosting                                       |
+| Delivery       | GitHub Actions deployment pipeline                                  |
+| Infrastructure | Terraform-managed AWS resources                                     |
+| Security       | HTTPS via CloudFront + ACM                                          |
+| DNS            | Namecheap custom domain routing                                     |
+| Observability  | Prometheus, Grafana, Alertmanager, Node Exporter, Blackbox Exporter |
+| Notifications  | Slack alerts for firing and resolved incidents                      |
+
+## 🌐 Live Access
+
+| Endpoint                                                                 | Purpose                      |
+| ------------------------------------------------------------------------ | ---------------------------- |
+| `https://philipoludolamu.com`                                            | Primary live portfolio URL   |
+| `https://www.philipoludolamu.com`                                        | Secondary live portfolio URL |
+| `https://d22hq7kuctu23g.cloudfront.net`                                  | CloudFront distribution URL  |
+| `http://philipdev-portfolio-website.s3-website-us-east-1.amazonaws.com/` | Direct S3 website endpoint   |
+
+## 🖥️ Local Observability Endpoints
+
+When the monitoring stack is running locally with Docker Compose, these endpoints are available:
+
+| Service           | URL                     |
+| ----------------- | ----------------------- |
+| Grafana           | `http://localhost:3001` |
+| Prometheus        | `http://localhost:9091` |
+| Alertmanager      | `http://localhost:9094` |
+| Node Exporter     | `http://localhost:9101` |
+| Blackbox Exporter | `http://localhost:9116` |
+
+## 🏗️ Architecture Overview
+
+### 🚚 Delivery Architecture
+
+```mermaid
+flowchart LR
+    A[Developer] --> B[GitHub Repository]
+    B --> C[GitHub Actions]
+    C --> D[AWS S3 Static Website Bucket]
+    E[Terraform] --> D
+    E --> F[AWS CloudFront]
+    E --> G[AWS ACM Certificate]
+    H[Namecheap DNS] --> F
+    D --> F
+    F --> I[philipoludolamu.com]
+    F --> J[www.philipoludolamu.com]
+    I --> K[End Users]
+    J --> K
 ```
-Developer → GitHub → GitHub Actions → AWS S3 → CloudFront → End Users
+
+### 📡 Monitoring and Alerting Architecture
+
+```mermaid
+flowchart LR
+    A[Node Exporter] --> B[Prometheus]
+    C[Blackbox Exporter] --> B
+    D[https://philipoludolamu.com] --> C
+    B --> E[Grafana]
+    B --> F[Alertmanager]
+    F --> G[Slack Channel]
 ```
 
-Infrastructure for the hosting layer is provisioned separately using Terraform:
+## 🧠 Architecture Explained
+This section illustrates both the delivery pipeline and the observability system used to operate the application in a production-style environment.
 
-```bash
-Terraform → AWS S3 + CloudFront
-```
+### 🚚 Delivery Path
 
-## 🌐 Live Endpoints
+* `GitHub` stores the application source, infrastructure files, and deployment workflow.
+* `GitHub Actions` publishes updated files to the S3 website bucket after pushes to `main`.
+* `Terraform` manages the AWS infrastructure required for delivery.
+* `S3` stores the static website files.
+* `CloudFront` sits in front of S3 to add global delivery, caching, and HTTPS.
+* `ACM` provides the certificate used by CloudFront.
+* `Namecheap` routes the custom domain to the CloudFront distribution.
 
-The project currently has working public endpoints across the custom domain, CDN, and S3 origin layers:
+### 📡 Monitoring Path
 
-- **Primary Custom Domain:** `https://philipoludolamu.com`
-- **Secondary Custom Domain:** `https://www.philipoludolamu.com`
-- **CloudFront HTTPS URL:** `https://d22hq7kuctu23g.cloudfront.net`
-- **Direct S3 Website URL:** `http://philipdev-portfolio-website.s3-website-us-east-1.amazonaws.com/`
+* `Node Exporter` exposes host metrics such as CPU and memory.
+* `Blackbox Exporter` probes the live portfolio URL and returns probe metrics.
+* `Prometheus` scrapes exporters, stores time-series data, and evaluates alert rules.
+* `Grafana` visualizes the metrics.
+* `Alertmanager` receives alerts from Prometheus and forwards them to Slack.
+* `Slack` serves the human-facing notification channel for incidents and recoveries.
 
-## 🔍 Architecture Breakdown
+## 🎯 Project Objectives
 
-- **Developer**
-  - Writes and updates application code locally
+* Build a professional personal portfolio and treat it like a real workload
+* Move from manual hosting to repeatable infrastructure as code
+* Automate deployment from source control to AWS
+* Secure public traffic with HTTPS and CloudFront
+* Attach a real custom domain through DNS and ACM
+* Add observability so the project can be operated, not only deployed
+* Demonstrate a monitoring and notification workflow that is easy to explain in interviews
 
-- **GitHub (Version Control)**
-  - Stores source code and manages versioning
+## 🛠️ Tools and Services
 
-- **GitHub Actions (CI/CD)**
-  - Automates build and deployment workflows on every push
+| Category       | Tools / Services                 | Why they are here                              |
+| -------------- | -------------------------------- | ---------------------------------------------- |
+| Frontend       | HTML, CSS, JavaScript            | Build the portfolio UI                         |
+| Cloud Platform | AWS S3, CloudFront, ACM          | Host, secure, and distribute the site          |
+| DNS            | Namecheap                        | Route the custom domain to CloudFront          |
+| IaC            | Terraform                        | Provision infrastructure consistently          |
+| CI/CD          | GitHub Actions                   | Automate website deployment                    |
+| Monitoring     | Prometheus, Grafana              | Collect and visualize metrics                  |
+| Exporters      | Node Exporter, Blackbox Exporter | Expose host metrics and probe the live website |
+| Alerting       | Alertmanager, Slack              | Route incidents to a communication channel     |
+| Runtime        | Docker Compose                   | Run the local observability stack              |
+| OS / Shell     | Linux, Bash                      | Local development and operations               |
 
-- **Terraform (Infrastructure as Code)**
-  - Provisions and manages AWS resources in a consistent and repeatable way
+## 📁 Repository Structure
 
-- **AWS S3 (Static Hosting)**
-  - Hosts the portfolio website as a static application
-
-- **AWS CloudFront (CDN + HTTPS)**
-  - Provides global content delivery with caching and HTTPS security
-
-- **End Users**
-  - Access the application through a fast and secure CDN-backed endpoint
-
-## 🎯 Key Objectives
-
-This project was built to achieve the following:
-
-- Design a **modern and recruiter-focused portfolio interface**
-- Implement **Infrastructure as Code using Terraform**
-- Build a **fully automated CI/CD pipeline**
-- Deploy a **secure and globally accessible web application**
-- Demonstrate **real-world DevOps workflows and architecture**
-- Showcase hands-on experience with **AWS cloud services**
-
-## 🛠️ Tech Stack
-
-### 🌐 Frontend
-
-- HTML5
-- CSS3
-- JavaScript
-
-### ☁️ Cloud & DevOps
-
-- AWS S3 (Static Website Hosting)
-- AWS CloudFront (CDN + HTTPS)
-- AWS Certificate Manager (ACM)
-- Namecheap DNS (Custom Domain Routing)
-- Terraform (Infrastructure as Code)
-- GitHub Actions (CI/CD Automation)
-
-## 🧩 Key Features
-
-- Fully responsive and modern UI design
-- Project-focused layout showcasing DevOps work
-- Dedicated **Resume & Experience** section with downloadable PDF resume
-- Project metadata highlighting **Built**, **Updated**, and **Status** details
-- Custom domain integration with **Namecheap + ACM + CloudFront**
-- Automated deployment pipeline (CI/CD)
-- Infrastructure fully managed with Terraform
-- Secure delivery via CloudFront (HTTPS)
-- Optimized for performance and scalability
-
-## 📦 Deliverables
-
-This project provides:
-
-- ✅ Production-ready portfolio website
-- ✅ Automated infrastructure provisioning (Terraform)
-- ✅ CI/CD pipeline for continuous deployment
-- ✅ AWS-hosted and CDN-distributed application
-- ✅ Secure HTTPS-enabled delivery
-- ✅ Comprehensive documentation
-
-## 🧰 Tools & Technologies
-
-| Category               | Tools / Services                    |
-|----------------------|------------------------------------|
-| Version Control      | Git, GitHub                        |
-| Cloud Platform       | AWS                                |
-| Infrastructure as Code | Terraform                        |
-| CI/CD                | GitHub Actions                     |
-| Containerization     | Docker *(used in related projects)*|
-| Operating System     | Linux                              |
-| Scripting            | Bash                               |
-| Development Tools    | VS Code                            |
-
-## 📁 Project Structure
-
-```bash
+```text
 Devops-Portfolio-Website/
-├── index.html                 # Website structure and content
-├── style.css                  # Styling, responsiveness, and themes
-├── script.js                  # Interactivity, theme toggle, and modal logic
-├── README.md                  # Project documentation
-├── assets/                    # Images, project visuals, and downloadable resume PDF
+├── index.html
+├── style.css
+├── script.js
+├── README.md
+├── .gitignore
+├── assets/
+│   ├── portfolio-devops-website.png
+│   ├── Philip-Oludolamu-Resume.pdf
+│   ├── ACM_certificate_issued.png
+│   ├── cloudfront_custom_domain_config.png
+│   ├── docker_compose_running.png
+│   ├── grafana_full_monitoring_dashboard.png
+│   ├── prometheus_probe_success.png
+│   ├── slack_alert_firing.png
+│   └── other screenshots used inline throughout this README
 ├── .github/
 │   └── workflows/
-│       └── deploy.yml         # CI/CD deployment workflow
-└── terraform/                 # Infrastructure as Code
-    ├── versions.tf
-    ├── main.tf
-    ├── variables.tf
-    ├── outputs.tf
-    ├── terraform.tfvars
-    └── .terraform.lock.hcl
+│       └── deploy.yml
+├── terraform/
+│   ├── versions.tf
+│   ├── main.tf
+│   ├── variables.tf
+│   ├── outputs.tf
+│   ├── terraform.tfvars
+│   └── .terraform.lock.hcl
+└── monitoring/
+    ├── docker-compose.yml
+    ├── prometheus/
+    │   ├── prometheus.yml
+    │   └── alerts.yml
+    ├── grafana/
+    │   ├── dashboards/
+    │   │   └── node-exporter-overview.json
+    │   └── provisioning/
+    │       ├── datasources/
+    │       │   └── prometheus.yml
+    │       └── dashboards/
+    │           └── default.yml
+    ├── alertmanager/
+    │   └── alertmanager.yml
+    ├── blackbox/
+    │   └── blackbox.yml
+    └── secrets/
+        └── slack_webhook_url   # local only, gitignored
 ```
 
-## ✅ Outcome
+> `monitoring/secrets/slack_webhook_url` is intentionally kept local and excluded from Git. The webhook is a secret and should never be committed.
 
-This project demonstrates my ability to:
+## ⚙️ Prerequisites
 
-- Design and deploy **cloud-native applications**
-- Automate infrastructure using **Terraform**
-- Build **CI/CD pipelines for continuous delivery**
-- Deliver scalable and secure applications using **AWS services**
+The following tools and services were used to build and operate this project:
 
-It serves as both a **technical portfolio** and a **real-world DevOps implementation**, reflecting industry best practices.
+- AWS account
+- Namecheap account (for custom domain configuration)
+- GitHub repository with Actions enabled
+- Terraform installed locally
+- Docker and Docker Compose installed locally
+- Slack workspace with an incoming webhook (for alert notifications)
 
-## ⚡ Task 1: Frontend Development – DevOps Portfolio Website
+## ⚡ Quick Start
 
-### 📌 Objective
+### ▶️ Run the Portfolio Locally
 
-The objective of this task is to design and develop a **modern, responsive, and recruiter-focused DevOps portfolio website** using core frontend technologies.
-
-This portfolio serves as the **presentation layer of a real-world DevOps portfolio**, showcasing hands-on projects in cloud infrastructure, CI/CD automation, containerization, and Kubernetes.
-
-It also acts as the **foundation for subsequent DevOps processes**, including cloud hosting, Infrastructure as Code (IaC), and CI/CD pipeline integration.
-
-### 🧱 Approach
-
-The frontend was developed using a **component-based and modular structure**, ensuring scalability, maintainability, and clean separation of concerns.
-
-The design focuses on:
-
-- Clean and professional UI (dark theme)
-- Clear project-first storytelling for recruiters
-- Structured layout highlighting real-world DevOps experience
-- Lightweight and fast-loading static assets
-- Consistency in design, spacing, and interaction
-
-### 📁 Project Structure
-
-The application follows a **minimal and production-style structure**:
-
-```
-devops-portfolio-website/
-│
-├── index.html        # Main structure and content
-├── style.css         # Styling, layout, and responsiveness
-├── script.js         # Interactivity and animations
-└── assets/           # Images, project screenshots, and icons
-```
-
-### 🧩 Application Design
-
-The portfolio is structured into clearly defined sections to improve **usability and recruiter navigation**:
-
-#### 1. Navigation Bar
-
-- Sticky navigation for easy access across sections, including the Resume link
-- Smooth scrolling between sections
-
-#### 2. Hero Section
-
-Introduces the engineer with a strong value proposition:
-
-> DevOps Engineer Building Scalable Cloud Infrastructure
-
-Includes:
-- Profile image
-- Call-to-action buttons (Projects, GitHub, and LinkedIn)
-
-#### 3. About Section
-
-Provides a concise overview of professional focus:
-
-- Cloud infrastructure design on AWS
-- CI/CD pipeline automation
-- Containerization and orchestration
-- Production-ready system design
-
-#### 4. Skills Section
-
-Displays technical competencies using a **card-based grid layout**, grouped into:
-
-- Cloud & Infrastructure (AWS, ECS, EKS, VPC, Load Balancer)
-- Containers & Orchestration (Docker, Kubernetes, Helm, Kustomize)
-- CI/CD & Automation (GitHub Actions, Jenkins)
-- Infrastructure as Code (Terraform)
-- DevSecOps (Trivy, Security Scanning)
-- Systems & Scripting (Linux, Bash)
-
-#### 5. Projects Section (Core Focus)
-
-The most important section of the portfolio, showcasing **real-world DevOps projects**:
-
-- Kubernetes CI/CD Platform with security scanning
-- AWS ECS deployment with Terraform, Docker, and ECR
-- Scalable WordPress architecture (ALB, ASG, RDS, EFS)
-- GitOps workflow using Kustomize and GitHub Actions
-- Jenkins + Helm CI/CD pipeline on EKS
-- Personal portfolio deployment on AWS
-
-Each project includes:
-- Architecture or deployment visuals
-- Recruiter-friendly metadata such as **Built**, **Updated**, and **Status**
-- Technology stack
-- Key results and impact
-- Direct link to source code (View Code)
-- Live site link where applicable
-
-#### 6. Resume & Experience Section
-
-Provides a dedicated recruiter-facing CTA:
-
-- Downloadable PDF resume
-- Browser-view option for quick review
-- Resume details such as file format, page count, and update month
-- Recruiter-oriented call-to-action linking to the contact section
-
-#### 7. Contact Section
-
-Provides direct communication channels:
-
-- Email
-- GitHub
-- LinkedIn
-
-Encourages collaboration and job opportunities.
-
-### 🎨 UI/UX Design Decisions
-
-- **Dark Theme**: Modern developer-focused aesthetic with improved readability
-- **Card-Based Layout**: Enhances clarity and separation of content
-- **Skills Grid System**: Improves visibility of technical expertise
-- **Consistent Design System**: Uniform spacing, colors, and typography
-- **Responsive Design**: Optimized for desktop, tablet, and mobile devices
-- **Interactive Elements**: Hover effects and smooth transitions
-
-### ⚙️ Functionality Implemented
-
-- Smooth scrolling navigation
-- Resume download and browser-view CTA
-- Scroll-based animations (Intersection Observer)
-- Active navigation highlighting
-- Theme toggle with saved user preference
-- Image preview modal for project visuals
-- Page fade-in effect for improved user experience
-- Responsive layout using CSS Grid and Flexbox
-
-### 🧪 Local Testing
-
-To run the application locally, use a simple HTTP server:
+Because the frontend is static, you can serve it with any simple local web server.
 
 ```bash
 python3 -m http.server 8000
 ```
 
-Then open your browser and visit:
+Then open:
 
-```bash
+```text
 http://localhost:8000
 ```
 
-If updates do not appear immediately in the browser, perform a hard refresh to clear cached static assets.
+### 📊 Run the Monitoring Stack Locally
 
-#### 🏠 Homepage
-![Homepage](./assets/local_website.png)
-
-### 🎯 Outcome
-
-A **fully functional, production-ready DevOps portfolio website** was developed, featuring a modern, responsive, and recruiter-friendly UI. The application is well-structured for seamless deployment on cloud platforms and prepared for DevOps integration, including Infrastructure as Code (IaC) and CI/CD pipelines.
-
-The portfolio effectively:
-
-* Showcases real-world DevOps projects
-* Clearly communicates technical expertise
-* Demonstrates both frontend development and system design skills
-* Serves as a deployable asset for cloud-based workflows
-
-### 🧠 Key Learnings
-
-* Structuring frontend applications for production environments
-* Designing recruiter-focused user interfaces
-* Preparing static applications for cloud deployment
-* Maintaining clean separation between structure, styling, and logic
-
-## ⚡ Task 2: Deploy Portfolio Website to AWS S3 (Static Hosting)
-
-### 📌 Objective
-
-The objective of this task is to deploy the portfolio website to **Amazon S3 using static website hosting**, making the application publicly accessible and transitioning it from a local environment to a **cloud-based deployment**.
-
-This represents the first step in delivering the application in a **real-world production environment**.
-
-### 🧠 Overview
-
-The application is deployed as a **static web application** using AWS S3, which enables direct hosting of HTML, CSS, and JavaScript files without requiring a backend server.
-
-This approach aligns with modern cloud practices due to:
-
-- High availability and durability
-- Cost efficiency (serverless hosting)
-- Scalability without infrastructure management
-- Simplicity and fast deployment
-
-### 🏗️ Architecture (Task 2)
-
-```
-User (Browser) → AWS S3 → Static Website (HTML, CSS, JS)
-```
-
-### 🔍 Architecture Explanation
-
-- Users access the application via a public S3 endpoint
-- AWS S3 serves static assets directly
-- The browser renders the UI without backend processing
-
-### 🧱 Implementation Steps
-
-#### 🔹 Step 1: Create S3 Bucket
-
-Navigate to:
-
-👉 AWS Console → S3 → **Create Bucket**
-
-**Configuration:**
-
-- Bucket Name:
-```bash
-philipdev-portfolio-website
-```
-
-* Region:
-  Select the nearest region (`us-east-1`)
-
-#### 🔹 Step 2: Configure Public Access
-
-By default, S3 blocks public access.
-
-To allow public hosting:
-
-* Disable:
+From the repository root:
 
 ```bash
-Block all public access
+cd monitoring
+docker compose up -d
 ```
 
-* Acknowledge the warning
+Then open:
 
-> ⚠️ Required for public static website hosting
+* Grafana: `http://localhost:3001`
+* Prometheus: `http://localhost:9091`
+* Alertmanager: `http://localhost:9094`
 
-#### 🔹 Step 3: Enable Static Website Hosting
+Current Grafana credentials from `monitoring/docker-compose.yml`:
 
-Navigate to:
+* username: `admin`
+* password: `*******`
 
-👉 **Bucket → Properties → Static Website Hosting**
+## 📖 How To Read The Rest Of This README
 
-Configure:
+This project is structured as a step-by-step journey from Task 1 to Task 7.
 
-* Enable: ✅
-* Index document:
+- Tasks 1 to 6 cover how the application was built, deployed, automated, secured, and connected to a custom domain.
+- Task 7 focuses on observability, showing how the system is monitored and operated in a production-style environment.
 
-```bash
-index.html
-```
+Each task section explains:
 
-Save changes.
+- why the task matters
+- what was implemented
+- how the components work together
+- where to find the relevant files
+- supporting screenshots as evidence
 
-#### 🔹 Step 4: Upload Application Files
+## 🛣️ Delivery Journey Summary
 
-Navigate to:
+| Task   | Focus                   | Outcome                                                     |
+| ------ | ----------------------- | ----------------------------------------------------------- |
+| Task 1 | Frontend engineering    | Built a recruiter-focused portfolio interface               |
+| Task 2 | AWS S3 static hosting   | Deployed the site as a public static website                |
+| Task 3 | Terraform               | Converted infrastructure into code (IaC)                    |
+| Task 4 | GitHub Actions CI/CD    | Automated deployments from GitHub to AWS                    |
+| Task 5 | CloudFront + HTTPS      | Enabled CDN delivery and secure HTTPS access                |
+| Task 6 | Custom domain           | Connected domain via Namecheap, ACM, and CloudFront         |
+| Task 7 | Monitoring and alerting | Implemented observability, dashboards, and Slack alerts     |
 
-👉 **Objects → Upload**
+## 🧩 Task 1: Frontend Engineering
 
-Upload the application files:
+### 🎯 Objective
 
-```bash
-index.html
-style.css
-script.js
-assets/
-```
-
-> Ensure all assets (images) are included to prevent broken UI components.
-
-#### 🔹 Step 5: Configure Bucket Policy
-
-To allow public read access:
-
-👉 **Permissions → Bucket Policy**
-
-```json
-{
-  "Version": "2012-10-17",
-  "Statement": [
-    {
-      "Sid": "PublicReadAccess",
-      "Effect": "Allow",
-      "Principal": "*",
-      "Action": "s3:GetObject",
-      "Resource": "arn:aws:s3:::philipdev-portfolio-website/*"
-    }
-  ]
-}
-```
-
-#### 🔹 Step 6: Access the Application
-
-After enabling static hosting:
-
-👉 Navigate to:
-
-**Properties → Static Website Hosting**
-
-Retrieve the endpoint URL:
-
-```bash
-http://philipdev-portfolio-website.s3-website-us-east-1.amazonaws.com/
-```
-
-### 🎉 Result
-
-The portfolio website is now:
-
-* 🌍 Publicly accessible via the internet
-* ☁️ Hosted on AWS S3
-* ⚡ Served as a static web application
-
-### 📸 Screenshots
-
-#### 🪣 S3 Bucket Created
-
-![S3 Bucket Created](./assets/S3_Bucket_Created.png)
-
-#### 🌐 Static Hosting Enabled
-
-![Static Hosting Enabled](./assets/Static_Hosting_Enabled.png)
-
-#### 🚀 Live Website
-
-![Live Website URL](./assets/Live_Website_URL.png)
-
-### 📸 Optional Extra Screenshots For Task 2
-
-- Bucket policy configuration
-- S3 Objects view showing uploaded files
-
-### 🎯 Outcome
-
-At the end of this task:
-
-* ✅ Website successfully deployed to AWS S3
-* ✅ Static hosting enabled
-* ✅ Public access configured
-* ✅ Application accessible via URL
-
-### 🧠 Key Concepts Demonstrated
-
-* Static website hosting using AWS S3
-* Public access configuration and bucket policies
-* Cloud-based deployment of frontend applications
-* Serverless hosting model
-
-### 💡 Best Practices Applied
-
-* Used globally unique bucket naming convention
-* Maintained clean project structure for deployment
-* Enabled only required public permissions
-* Followed a simple and scalable hosting approach
-
-### ⚠️ Limitations (Pre-Production Considerations)
-
-While S3 static hosting is effective, it has limitations:
-
-* No HTTPS by default
-* No custom domain without additional services
-* Limited caching control
-
-## ⚡ Task 3: Terraform (Infrastructure as Code)
-
-### 🎯 Goal
-
-Automate everything that was previously configured manually in AWS.
-
-In this task, Terraform is introduced to make the deployment process:
-
-- Repeatable
-- Version-controlled
-- Faster to provision
-- Easier to maintain across environments
-
-### 📌 Objective
-
-The objective of this task is to replace the manual AWS setup from Task 2 with **Infrastructure as Code (IaC)** using Terraform.
-
-Using Terraform, the static hosting infrastructure can be defined in code and provisioned consistently whenever needed.
-
-### ✅ What Terraform Automates
-
-Terraform is used to:
-
-- Create the S3 bucket
-- Configure static website hosting
-- Set the bucket policy for public read access
-- Make the deployment reproducible
-
-### 🧠 Overview
-
-Rather than creating resources manually in the AWS Console, Terraform allows the infrastructure to be described declaratively in `.tf` files.
-
-This improves reliability because:
-
-- the infrastructure is documented as code
-- the same setup can be recreated at any time
-- changes can be reviewed before deployment
-- the process becomes easier to scale and maintain
-
-### 🏗️ Architecture (Task 3)
-
-```bash
-Terraform → AWS S3 → Static Website Hosting → End Users
-```
-
-### 🔍 Architecture Explanation
-
-- **Terraform**
-  - Defines and provisions AWS infrastructure from code
-
-- **AWS S3**
-  - Stores and serves the portfolio website files
-
-- **Static Website Hosting**
-  - Exposes the bucket as a public website endpoint
-
-- **End Users**
-  - Access the deployed portfolio through the S3 website URL
-
-### 📁 Suggested Terraform Structure
-
-```bash
-terraform/
-├── main.tf
-├── variables.tf
-└── outputs.tf
-```
-
-### 🧱 Example Terraform Configuration
-
-#### 🔹 `main.tf`
-
-```hcl
-provider "aws" {
-  region = var.aws_region
-}
-
-resource "aws_s3_bucket" "portfolio" {
-  bucket = var.bucket_name
-}
-
-resource "aws_s3_bucket_website_configuration" "portfolio_website" {
-  bucket = aws_s3_bucket.portfolio.id
-
-  index_document {
-    suffix = "index.html"
-  }
-}
-
-resource "aws_s3_bucket_public_access_block" "portfolio_public_access" {
-  bucket = aws_s3_bucket.portfolio.id
-
-  block_public_acls       = false
-  block_public_policy     = false
-  ignore_public_acls      = false
-  restrict_public_buckets = false
-}
-
-data "aws_iam_policy_document" "portfolio_policy" {
-  statement {
-    sid    = "PublicReadAccess"
-    effect = "Allow"
-
-    principals {
-      type        = "*"
-      identifiers = ["*"]
-    }
-
-    actions = ["s3:GetObject"]
-
-    resources = [
-      "${aws_s3_bucket.portfolio.arn}/*"
-    ]
-  }
-}
-
-resource "aws_s3_bucket_policy" "portfolio_bucket_policy" {
-  bucket = aws_s3_bucket.portfolio.id
-  policy = data.aws_iam_policy_document.portfolio_policy.json
-
-  depends_on = [aws_s3_bucket_public_access_block.portfolio_public_access]
-}
-```
-
-#### 🔹 `variables.tf`
-
-```hcl
-variable "aws_region" {
-  description = "AWS region for deployment"
-  type        = string
-  default     = "us-east-1"
-}
-
-variable "bucket_name" {
-  description = "Unique S3 bucket name for the portfolio website"
-  type        = string
-  default     = "philipdev-portfolio-website"
-}
-```
-
-#### 🔹 `outputs.tf`
-
-```hcl
-output "website_url" {
-  description = "S3 static website endpoint"
-  value       = aws_s3_bucket_website_configuration.portfolio_website.website_endpoint
-}
-```
-
-### 🚀 Terraform Workflow
-
-From the `terraform/` directory:
-
-```bash
-terraform init
-terraform plan
-terraform apply
-```
-
-After the infrastructure is created, Terraform will return the S3 website endpoint as an output.
-
-### 🎉 Result
-
-At the end of this task:
-
-* ✅ The S3 bucket is created from code
-* ✅ Static hosting is configured automatically
-* ✅ Public access policy is applied through Terraform
-* ✅ The infrastructure can be recreated whenever needed
-
-### 🧠 Key Concepts Demonstrated
-
-* Infrastructure as Code using Terraform
-* AWS resource provisioning through code
-* Static website hosting configuration
-* Declarative infrastructure management
-* Reproducible cloud deployments
+Build a clean, recruiter-focused portfolio frontend that serves as the application layer for the rest of the DevOps workflow.
 
 ### 💡 Why This Task Matters
 
-This step marks the transition from **manual cloud configuration** to **automated infrastructure provisioning**.
+Without a real application layer, the project would be limited to infrastructure. Task 1 establishes a visible product surface that is later deployed, automated, secured, and monitored throughout the DevOps lifecycle.
 
-It demonstrates the ability to:
+### ⚙️ What Was Implemented
 
-* manage infrastructure professionally
-* reduce configuration drift
-* improve repeatability and consistency
-* prepare the project for CI/CD-driven deployments
+- Sticky navigation for quick section access
+- Hero section with a clear DevOps value proposition
+- About, Skills, Projects, Resume, and Contact sections
+- Theme toggle and refined UI interactions
+- Project cards designed to showcase real engineering work
 
-### 🔄 Improvement Over Task 2
+### 📂 Key Files
 
-Compared to the manual deployment in Task 2, Terraform provides:
+- `index.html`
+- `style.css`
+- `script.js`
 
-* faster environment setup
-* cleaner infrastructure tracking
-* easier updates and rollback planning
-* better collaboration through version-controlled infrastructure files
+### 🔍 How It Works
 
-## ⚡ Task 4: CI/CD with GitHub Actions
+The frontend is intentionally simple in technology but deliberate in design:
 
-### 🎯 Goal
+- `index.html` defines the structure and content
+- `style.css` manages layout, responsiveness, and theming
+- `script.js` handles interactivity and UI behavior
 
-Automate deployment on every code push.
+This simplicity becomes an advantage later, as static assets are easy to host on S3 and distribute through CloudFront.
 
-The deployment flow now becomes:
+### 📸 Evidence
+
+The application was fully functional locally before any cloud integration:
+
+![Local portfolio website during frontend development](assets/local_website.png)
+
+### 🧠 What A Learner Should Notice
+
+- A simple static frontend is sufficient to build a meaningful DevOps project
+- Starting with a clean application layer simplifies later infrastructure and deployment stages
+
+## ☁️ Task 2: AWS S3 Static Hosting
+
+### 🎯 Objective
+
+Deploy the portfolio to AWS, making it publicly accessible over the internet.
+
+### 💡 Why This Task Matters
+
+Task 1 established the application layer. Task 2 provides a real cloud runtime environment, transitioning the project from local development to public deployment.
+
+### ➕ What Was Added
+
+- S3 bucket for static website hosting
+- Static website hosting configuration
+- Public access configuration for content delivery
+- Upload of website assets to the bucket
+
+### ⚙️ How S3 Hosting Works Here
+
+Amazon S3 can serve static assets such as:
+
+- HTML
+- CSS
+- JavaScript
+- Images
+- PDF files
+
+At this stage, requests are served directly from the S3 website endpoint. This makes the application publicly accessible, but it still lacks:
+
+- CDN-based distribution
+- HTTPS support
+- Custom domain integration
+
+These limitations are addressed in later tasks.
+
+### 📸 Evidence
+
+The S3 bucket was created for the portfolio:
+
+![S3 bucket created for the portfolio website](assets/S3_Bucket_Created.png)
+
+Static website hosting was enabled:
+
+![Static website hosting enabled on the S3 bucket](assets/Static_Hosting_Enabled.png)
+
+The application became publicly accessible via the S3 endpoint:
+
+![Portfolio website accessible through the early hosted URL](assets/live_website.png)
+
+### 🧠 What A Learner Should Notice
+
+- S3 provides a simple and cost-effective entry point for hosting static applications
+- Direct S3 hosting is useful for initial deployment, but not sufficient for production-grade delivery due to lack of HTTPS and CDN support
+
+## 🏗️ Task 3: Terraform Infrastructure as Code
+
+### 🎯 Objective
+
+Replace manual AWS configuration with Terraform, making the infrastructure repeatable, version-controlled, and easier to manage.
+
+### 💡 Why This Task Matters
+
+Manual setup through the AWS Console is difficult to reproduce, audit, and maintain. Terraform enables infrastructure to be defined as code, which is a core DevOps practice for building consistent and reliable environments.
+
+### 📂 Key Terraform Files
+
+- [`terraform/versions.tf`](terraform/versions.tf)
+- [`terraform/main.tf`](terraform/main.tf)
+- [`terraform/variables.tf`](terraform/variables.tf)
+- [`terraform/outputs.tf`](terraform/outputs.tf)
+- [`terraform/terraform.tfvars`](terraform/terraform.tfvars)
+
+### ⚙️ What Terraform Now Manages
+
+- S3 bucket and static website configuration
+- Ownership controls and public access settings
+- Bucket policy for content delivery
+- CloudFront distribution
+- ACM certificate request
+- Certificate validation configuration
+- Custom domain aliases for CloudFront
+- Outputs used for DNS configuration and verification
+
+### 📈 How This Improved The Project
+
+**Before Terraform:**
+
+- Infrastructure changes were manual and click-based
+- Reproducibility was limited
+- Documentation relied on memory and screenshots
+
+**After Terraform:**
+
+- Infrastructure is defined, version-controlled, and reviewable
+- Changes are easier to track and reason about
+- CloudFront and custom domain integration became more structured and reliable
+
+### 🧠 Important Learning Note
+
+This repository currently uses a local Terraform state file as part of the learning process. In a production environment, a remote backend (e.g., S3 with DynamoDB state locking) should be used to enable collaboration and prevent state conflicts.
+
+### 🧠 What A Learner Should Notice
+
+- Terraform is not only for provisioning resources; it also improves documentation by defining the desired state in code
+- Once infrastructure is codified, automation (CI/CD) and advanced configurations such as custom domains become significantly easier to implement
+
+## 🔄 Task 4: GitHub Actions CI/CD
+
+### 🎯 Objective
+
+Automate deployments so that every push to `main` updates the live site without manual intervention.
+
+### 💡 Why This Task Matters
+
+This is the stage where the project transitions from static hosting to continuous delivery. The application is no longer updated manually, but through a repeatable and automated pipeline.
+
+### 📂 Workflow File
+
+- [`.github/workflows/deploy.yml`](.github/workflows/deploy.yml)
+
+### ⚙️ What The Workflow Does
+
+On every push to `main`, the workflow:
+
+- Checks out the repository
+- Configures AWS credentials using GitHub Secrets
+- Syncs static assets to the S3 bucket
+- Invalidates the CloudFront cache to ensure fresh content is served
+
+### ❗ Why CloudFront Invalidation Matters
+
+CloudFront caches content at edge locations. Without invalidation, users may continue to receive stale assets even after deployment.
+
+Including cache invalidation ensures that updates are propagated immediately, making the deployment pipeline more reliable and production-ready.
+
+### 📸 Evidence
+
+The deployment workflow completed successfully:
+
+![Successful GitHub Actions deployment workflow](assets/Successful_GitHub_Actions.png)
+
+### 🧠 What A Learner Should Notice
+
+- CI/CD is not limited to applications with build steps; static sites also benefit from automated deployment pipelines
+- A complete delivery pipeline must account for caching layers such as CloudFront
+
+## 🔐 Task 5: CloudFront + HTTPS
+
+### 🎯 Objective
+
+Introduce CloudFront in front of S3 to enable HTTPS delivery and improve performance through CDN distribution.
+
+### 💡 Why This Task Matters
+
+S3 website endpoints are suitable for initial hosting, but they are not ideal as a production-facing entry point. CloudFront enhances the architecture by providing:
+
+* HTTPS support
+* Global edge caching
+* Improved performance and reduced latency
+* A scalable foundation for custom domain integration
+
+### ➕ What Was Added
+
+* CloudFront distribution
+* HTTPS delivery via CloudFront
+* HTTP to HTTPS redirection
+* CDN-backed access layer in front of S3
+* Cache invalidation integration with GitHub Actions
+
+### 🔄 How Request Flow Changed
+
+**Before Task 5:**
+
+```text
+User -> S3 website endpoint
+```
+
+**After Task 5:**
+
+```text
+User -> CloudFront -> S3 website bucket
+```
+
+This represents a key architectural improvement, as end users now interact with a CDN layer instead of directly accessing the S3 origin.
+
+### ⚙️ How CloudFront Works in This Setup
+
+* CloudFront acts as the public entry point for the application
+* It retrieves content from the S3 bucket (origin)
+* Frequently requested content is cached at edge locations
+* HTTPS is handled at the CloudFront layer
+* Users are automatically redirected from HTTP to HTTPS
+
+### 📸 Evidence
+
+CloudFront became the secure public delivery layer:
+
+![CloudFront distribution used to deliver the portfolio over HTTPS](assets/deployed_cloudfront.png)
+
+### 🧠 What A Learner Should Notice
+
+* CloudFront acts as the entry point for production-style delivery of static applications
+* Introducing a CDN layer enables HTTPS, improves performance, and prepares the system for custom domain integration
+* Separating the origin (S3) from the delivery layer (CloudFront) is a key architectural pattern in cloud systems
+
+## 🌍 Task 6: Custom Domain Integration with Namecheap, ACM, and CloudFront
+
+### 🎯 Objective
+
+Replace the default CloudFront URL with a branded custom domain while maintaining an infrastructure-driven setup.
+
+### 💡 Why This Task Matters
+
+This step transforms the project from a technically functional deployment into a production-style system. A custom domain is not only about branding—it demonstrates:
+
+* TLS/SSL certificate management
+* DNS-based domain validation
+* Domain routing and resolution
+* CDN alias configuration
+
+---
+
+### 🌐 Final Domain Result
+
+* `https://philipoludolamu.com`
+* `https://www.philipoludolamu.com`
+
+### 1️⃣ Step 1: Terraform Requests the ACM Certificate
+
+The initial Terraform apply requests an ACM certificate and outputs the DNS validation records required for domain verification.
+
+This is critical because CloudFront requires ACM certificates to be provisioned in the `us-east-1` region.
+
+![Terraform output for custom domain and ACM setup](assets/terraform_apply_custom_domain.png)
+
+### 2️⃣ Step 2: Add DNS Validation Records in Namecheap
+
+The ACM-generated CNAME records are added in Namecheap to validate ownership of:
+
+* `philipoludolamu.com`
+* `www.philipoludolamu.com`
+
+![Namecheap ACM DNS validation records](assets/namecheap_acm_validation_records.png)
+
+### 3️⃣ Step 3: ACM Issues the Certificate
+
+After DNS propagation, ACM validates the records and issues the certificate.
+
+![ACM certificate issued for the custom domain](assets/ACM_certificate_issued.png)
+
+### 4️⃣ Step 4: Attach the Certificate to CloudFront
+
+The CloudFront distribution is updated with:
+
+* Alternate domain names (aliases)
+* The validated ACM certificate
+
+This enables secure HTTPS delivery for the custom domain.
+
+![CloudFront custom domain configuration](assets/cloudfront_custom_domain_config.png)
+
+### 5️⃣ Step 5: Configure DNS Routing in Namecheap
+
+DNS records are configured to route traffic:
+
+* Root domain (`@`) → CloudFront
+* `www` subdomain → CloudFront
+
+![Namecheap routing records pointing to CloudFront](assets/Namecheap_routing_records.png)
+
+### 6️⃣ Step 6: Validate the Live Domain
+
+The application becomes accessible over HTTPS using the custom domain, which now serves as the primary public entry point.
+
+![Live portfolio website on the custom domain](assets/live_custom_domain_root.png)
+
+### 🧠 What A Learner Should Notice
+
+* DNS validation and DNS routing serve different purposes and occur at different stages
+* Custom domain integration involves coordination between multiple systems: Terraform, ACM, CloudFront, and an external DNS provider
+* DNS-level URL redirects are different from CloudFront alias-based routing
+* Proper sequencing (certificate → validation → CloudFront → DNS routing) is critical for a successful setup
+
+## 📡 Task 7: Monitoring and Alerting with Prometheus, Grafana, Alertmanager, Blackbox Exporter, and Slack
+
+### 🎯 Objective
+
+Introduce observability into the system so the application is not only deployed, but also monitored, analyzed, and capable of triggering alerts when issues occur.
+
+### 💡 Why Task 7 Matters
+
+Most portfolio projects stop at deployment. In real-world systems, operational visibility is critical:
+
+* Is the system healthy?
+* Are infrastructure resources performing correctly?
+* Is the public application reachable?
+* Can incidents be detected automatically?
+* Can stakeholders be notified when issues occur and when they are resolved?
+
+Task 7 addresses these operational requirements.
+
+### 📊 Monitoring Stack At A Glance
+
+| Component         | Role in this project                           |
+| ----------------- | ---------------------------------------------- |
+| Prometheus        | Scrapes metrics and evaluates alert rules      |
+| Grafana           | Visualizes infrastructure and application data |
+| Node Exporter     | Exposes host-level metrics (CPU, memory)       |
+| Blackbox Exporter | Probes the public website endpoint             |
+| Alertmanager      | Routes alerts to notification channels         |
+| Slack             | Receives firing and resolved alerts            |
+
+### 📂 Monitoring Files
+
+* [`monitoring/docker-compose.yml`](monitoring/docker-compose.yml)
+* [`monitoring/prometheus/prometheus.yml`](monitoring/prometheus/prometheus.yml)
+* [`monitoring/prometheus/alerts.yml`](monitoring/prometheus/alerts.yml)
+* [`monitoring/grafana/provisioning/datasources/prometheus.yml`](monitoring/grafana/provisioning/datasources/prometheus.yml)
+* [`monitoring/grafana/provisioning/dashboards/default.yml`](monitoring/grafana/provisioning/dashboards/default.yml)
+* [`monitoring/grafana/dashboards/node-exporter-overview.json`](monitoring/grafana/dashboards/node-exporter-overview.json)
+* [`monitoring/alertmanager/alertmanager.yml`](monitoring/alertmanager/alertmanager.yml)
+* [`monitoring/blackbox/blackbox.yml`](monitoring/blackbox/blackbox.yml)
+
+### ⚙️ How The Monitoring Stack Was Built
+
+#### 1️⃣ Step 1: Bootstrap the Stack Locally
+
+The monitoring environment was initialized using Docker Compose:
 
 ```bash
-GitHub → GitHub Actions → AWS S3
+cd monitoring
+docker compose up -d
 ```
 
-This removes the need to upload website files manually through the AWS Console.
+![Docker Compose running the initial monitoring stack](assets/docker_compose_running.png)
 
-### 📌 Objective
+#### 2️⃣ Step 2: Verify Prometheus Self-Scraping
 
-The objective of this task is to build a CI/CD pipeline using GitHub Actions that automatically deploys the portfolio website to the S3 bucket whenever changes are pushed to the repository.
+Prometheus was configured to scrape itself to validate:
 
-### ✅ What This Task Automates
+* Service availability
+* Correct scrape configuration
+* Metric collection functionality
 
-With GitHub Actions, the project now:
+The `up` metric returned `1`, confirming a healthy target:
 
-- Detects code pushes to the main branch
-- Runs a deployment workflow automatically
-- Uploads the latest website files to AWS S3
-- Replaces manual file uploads completely
+![Prometheus targets page showing the self-scrape job](assets/prometheus_targets.png)
 
-### 🧠 Overview
+![Prometheus up query result](assets/prometheus_up_query.png)
 
-This task introduces continuous deployment for the frontend application.
+#### 3️⃣ Step 3: Connect Grafana to Prometheus
 
-Instead of:
+Grafana was integrated with Prometheus as a data source:
 
-* editing code locally
-* manually uploading files to S3
-* repeating the same steps every time
+* Manual verification via UI
+* Query validation in Explore view
 
-The workflow now handles deployment automatically after each push to `main`.
+![Grafana Prometheus datasource view](assets/grafana_prometheus_datasource.png)
 
-### 🏗️ Architecture (Task 4)
+![Grafana Explore up query result](assets/grafana_explore_up_query.png)
 
-```bash
-Developer → GitHub Repository → GitHub Actions Workflow → AWS S3 → Live Portfolio Website
+The setup was later improved by provisioning the data source from code, eliminating manual configuration:
+
+![Provisioned Prometheus datasource in Grafana](assets/grafana_provisioned_datasource.png)
+
+#### 4️⃣ Step 4: Add Node Exporter for Host Metrics
+
+Node Exporter was introduced to expose system-level metrics:
+
+* CPU usage
+* Memory usage
+
+Prometheus successfully scraped these metrics:
+
+![Node Exporter container running alongside the stack](assets/node_exporter_container_running.png)
+
+![Prometheus targets with Node Exporter included](assets/prometheus_targets_with_node_exporter.png)
+
+![Prometheus query for Node Exporter CPU metrics](assets/prometheus_node_exporter_query.png)
+
+![Grafana query for Node Exporter metrics](assets/grafana_node_exporter_query.png)
+
+#### 5️⃣ Step 5: Build Dashboards in Grafana
+
+Dashboards were provisioned automatically from configuration files:
+
+![Grafana dashboard loaded under the project folder](assets/grafana_dashboard_loaded.png)
+
+![Grafana dashboard view for the project](assets/grafana_dashboard_view.png)
+
+Expanded dashboards included:
+
+* CPU utilization
+* Memory usage
+* Exporter health
+
+![Grafana dashboard showing CPU and memory panels](assets/grafana_cpu_memory_dashboard.png)
+
+#### 6️⃣ Step 6: Add Alert Rules in Prometheus
+
+Prometheus alerting rules were introduced to detect failures.
+
+Example alert:
+
+```promql
+up{job="node-exporter"} == 0
 ```
 
-### 🔍 Architecture Explanation
+Triggers when Node Exporter is down for more than one minute.
 
-- **Developer**
-  - Updates the website code locally and pushes changes to GitHub
+![Prometheus alert rule loaded and inactive](assets/prometheus_alert_rule_loaded.png)
 
-- **GitHub Repository**
-  - Stores source code and triggers the workflow on push
+![Prometheus alert firing for Node Exporter downtime](assets/prometheus_alert_firing.png)
 
-- **GitHub Actions**
-  - Runs the deployment pipeline automatically
+#### 7️⃣ Step 7: Integrate Alertmanager
 
-- **AWS S3**
-  - Receives the latest static files and serves the updated website
+Alertmanager was added to route alerts:
 
-- **Live Portfolio Website**
-  - Reflects the newest deployed version
+![Alertmanager container running with the monitoring stack](assets/alertmanager_container_running.png)
 
-### 📁 Workflow File
+![Alertmanager UI running locally](assets/alertmanager_ui.png)
 
-The workflow is stored at:
+![Alertmanager receiving the firing alert](assets/alertmanager_alert_firing.png)
 
-```bash
-.github/workflows/deploy.yml
-```
+#### 8️⃣ Step 8: Add Blackbox Exporter for Service Monitoring
 
-### 🧾 GitHub Actions Workflow
+Blackbox Exporter was configured to probe:
 
-```yaml
-name: Deploy Portfolio to S3
-
-on:
-  push:
-    branches:
-      - main
-  workflow_dispatch:
-
-jobs:
-  deploy:
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@v5
-        with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: ${{ secrets.AWS_REGION }}
-          mask-aws-account-id: true
-
-      - name: Deploy website files to S3
-        run: |
-          aws s3 sync . s3://${{ secrets.S3_BUCKET_NAME }} \
-            --delete \
-            --exclude ".git/*" \
-            --exclude ".github/*" \
-            --exclude "terraform/*" \
-            --exclude "README.md"
-```
-
-### 🔐 Required GitHub Repository Secrets
-
-To make the workflow work, add these secrets in:
-
-```bash
-GitHub Repository → Settings → Secrets and variables → Actions
-```
-
-Required secrets:
-
-- `AWS_ACCESS_KEY_ID`
-- `AWS_SECRET_ACCESS_KEY`
-- `AWS_REGION`
-- `S3_BUCKET_NAME`
-
-Example values:
-
-```bash
-AWS_REGION=us-east-1
-S3_BUCKET_NAME=philipdev-portfolio-website
-```
-
-### 🔑 Minimum AWS Permissions
-
-The IAM user or role used by GitHub Actions should have permissions to:
-
-- list the target bucket
-- upload objects
-- update existing objects
-- delete removed objects
-
-S3 permissions scope:
-
-```json
-{
-  "Version": "2012-10-17",
-  "Statement": [
-    {
-      "Effect": "Allow",
-      "Action": [
-        "s3:ListBucket"
-      ],
-      "Resource": "arn:aws:s3:::philipdev-portfolio-website"
-    },
-    {
-      "Effect": "Allow",
-      "Action": [
-        "s3:GetObject",
-        "s3:PutObject",
-        "s3:DeleteObject"
-      ],
-      "Resource": "arn:aws:s3:::philipdev-portfolio-website/*"
-    }
-  ]
-}
-```
-
-### 🚀 Deployment Process
-
-Once the secrets are configured:
-
-1. Update the portfolio locally
-2. Commit the changes
-3. Push to the `main` branch
-4. GitHub Actions runs automatically
-5. Files are synced to the S3 bucket
-6. The live website updates automatically
-
-### 🎉 Result
-
-At the end of this task:
-
-* ✅ Deployment is automated on every push to `main`
-* ✅ Website files are uploaded to S3 automatically
-* ✅ Manual uploads are no longer needed
-* ✅ The portfolio deployment process becomes faster and more professional
-
-### 🧠 Key Concepts Demonstrated
-
-* CI/CD with GitHub Actions
-* Automated deployment to AWS S3
-* Git-based deployment workflows
-* Secret management in GitHub
-* Continuous delivery for static websites
-
-### 🔥 Why This Is Big
-
-This is a major improvement because the project now behaves like a real deployment pipeline.
-
-Instead of manually pushing files to AWS every time, the repository itself becomes the source of truth for deployment.
-
-That means:
-
-* less manual work
-* fewer deployment mistakes
-* faster updates
-* better DevOps workflow maturity
-
-### 📸 Recommended Screenshots For Task 4
-
-- **Successful GitHub Actions deployment run**
-![Successful GitHub Actions deployment](./assets/Successful_GitHub_Actions.png)
-
-- **S3 bucket objects after automated deployment**
-![S3 bucket objects after automated deployment](./assets/S3%20bucket_objects.png)
-
-## ⚡ Task 5: CloudFront + HTTPS
-
-### 🎯 Goal
-
-Move the portfolio from direct S3 hosting to a more production-grade delivery layer using CloudFront.
-
-The deployment flow now becomes:
-
-```bash
-User → CloudFront → AWS S3 Static Website
-```
-
-For now, the project uses the default CloudFront domain and HTTPS. A custom domain can be added later when ready.
-
-### 📌 Objective
-
-The objective of this task is to place CloudFront in front of the S3-hosted website so the portfolio can be delivered through:
-
-- HTTPS
-- better global performance
-- CDN caching
-- a more professional public endpoint
-
-### ✅ What This Task Adds
-
-With Task 5, the project now includes:
-
-- a CloudFront distribution created with Terraform
-- HTTPS through the default CloudFront certificate
-- redirect from HTTP to HTTPS at the viewer layer
-- CloudFront outputs for the live CDN URL
-- optional cache invalidation in GitHub Actions after deployment
-
-### 🧠 Overview
-
-S3 static website hosting is enough to get a site online, but it is not the best final delivery layer for a production-style portfolio.
-
-CloudFront improves the project by:
-
-- serving the site over HTTPS
-- caching content closer to users
-- reducing direct dependence on the raw S3 website endpoint
-- making the architecture closer to real-world cloud delivery patterns
-
-### 🏗️ Architecture (Task 5)
-
-```bash
-User Browser → CloudFront (HTTPS) → AWS S3 Website Endpoint
-```
-
-### 🔍 Architecture Explanation
-
-- **CloudFront**
-  - Delivers the website globally with caching and HTTPS
-
-- **AWS S3 Website Endpoint**
-  - Continues to serve the static frontend files as the origin
-
-- **End Users**
-  - Access the website through the default CloudFront domain
-
-### 📁 Terraform Resources Added
-
-Task 5 extends the Terraform configuration with:
-
-- `aws_cloudfront_distribution`
-- `aws_cloudfront_cache_policy` data source
-- CloudFront outputs for distribution ID, domain name, and HTTPS URL
-
-### 🧱 Terraform Implementation
-
-The CloudFront distribution is configured to:
-
-- use the S3 website endpoint as a custom origin
-- redirect viewers to HTTPS
-- use the default CloudFront certificate
-- cache static content using the managed caching policy
-- expose a default CloudFront domain such as:
-
-```bash
-https://dxxxxxxxxxxxx.cloudfront.net
-```
-
-### 🔐 No Custom Domain Yet
-
-This implementation does **not** require buying a domain yet.
-
-For now, the website can be accessed using the default CloudFront domain generated by AWS.
-
-This is the current production-style HTTPS access pattern for the project until a custom domain is connected later.
-
-### 🌐 Current HTTPS Access
-
-For now, the portfolio can be shared using the CloudFront domain, for example:
-
-```bash
-https://d22hq7kuctu23g.cloudfront.net
-```
-![Live website](./assets/live_website.png)
-
-This is a valid live HTTPS URL, even though it is not yet branded with a custom domain.
-
-Later, when a custom domain is available, you can extend this setup with:
-
-- ACM certificate for your domain
-- Route 53 DNS records
-- CloudFront aliases
-
-### 🚀 Terraform Workflow
-
-From the `terraform/` directory:
-
-```bash
-terraform plan
-terraform apply
-```
-
-CloudFront distributions usually take several minutes to deploy fully after `apply`.
-
-### 📤 New Terraform Outputs
-
-After deployment, Terraform will return:
-
-- `cloudfront_distribution_id`
-- `cloudfront_domain_name`
-- `cloudfront_url`
-
-The most important output for now is:
-
-```bash
-cloudfront_url
-```
-
-That becomes your new HTTPS live site URL.
-
-### 🔁 GitHub Actions Update
-
-The GitHub Actions workflow is extended to support optional CloudFront cache invalidation after each deployment.
-
-That means when new files are uploaded to S3, CloudFront can be told to refresh cached content immediately.
-
-### 🔐 Additional GitHub Secret For Task 5
-
-To enable automatic invalidation after deployment, add this extra secret to your GitHub repository:
-
-- `CLOUDFRONT_DISTRIBUTION_ID`
-
-You can get the value from Terraform output after applying Task 5.
-
-### 🔑 Additional AWS Permission Needed
-
-To support CloudFront invalidation from GitHub Actions, add this AWS permission for the same deployment identity:
-
-```json
-{
-  "Effect": "Allow",
-  "Action": [
-    "cloudfront:CreateInvalidation"
-  ],
-  "Resource": "*"
-}
-```
-
-### 🎉 Result
-
-At the end of this task:
-
-* ✅ The portfolio is available through CloudFront
-* ✅ The site can be accessed over HTTPS
-* ✅ Global delivery and caching are enabled
-* ✅ GitHub Actions can invalidate CloudFront after deployments
-* ✅ The project becomes more production-grade without needing a custom domain yet
-
-### 🧠 Key Concepts Demonstrated
-
-* CDN delivery with CloudFront
-* HTTPS for static websites
-* Terraform-based CloudFront provisioning
-* Cache invalidation in CI/CD
-* Progressive evolution from simple hosting to production-style architecture
-
-### 🔥 Why Task 5 Matters
-
-This is the step that makes the portfolio feel much more like a real production deployment.
-
-Before Task 5:
-
-* the site is live
-* but it depends directly on S3
-* and only uses the raw website endpoint
-
-After Task 5:
-
-* the site is fronted by a CDN
-* it is served over HTTPS
-* updates can propagate more cleanly
-* the architecture looks stronger to recruiters and hiring managers
-
-### 📸 Recommended Screenshots For Task 5
-
-- **CloudFront distribution details in the AWS Console**
-![CloudFront AWS Console](./assets/cloud_aws_console.png)
-
-- **Successful GitHub Actions run after CloudFront invalidation**
-![Successful GitHub Actions run after CloudFront invalidation](./assets/deployed_cloudfront.png)
-
-- **Live website opened through the HTTPS CloudFront URL**
-![Live website](./assets/live_website.png)
-
-## ⚡ Task 6: Custom Domain Integration with Namecheap + ACM + CloudFront
-
-### 🎯 Goal
-
-Replace the default CloudFront URL with a branded custom domain while keeping CloudFront as the HTTPS delivery layer.
-
-The delivery flow now becomes:
-
-```bash
-User → Namecheap DNS → CloudFront → AWS S3 Static Website
-```
-
-### 📌 Objective
-
-The objective of this task is to connect the purchased domain to the existing CloudFront distribution using:
-
-- Namecheap DNS for public routing
-- AWS Certificate Manager (ACM) for SSL/TLS certificates
-- Terraform for infrastructure changes
-- CloudFront aliases for the root and `www` domains
-
-### ✅ What This Task Adds
-
-With Task 6, the project now includes:
-
-- a branded primary domain: `https://philipoludolamu.com`
-- a working secondary `www` domain: `https://www.philipoludolamu.com`
-- an ACM-issued certificate in `us-east-1`
-- DNS validation through Namecheap CNAME records
-- CloudFront alternate domain names for root and `www`
-- Namecheap routing records pointing the domain to CloudFront
-
-### 🧠 Overview
-
-Task 6 builds directly on top of the CloudFront setup from Task 5.
-
-Instead of sharing the AWS-generated CloudFront URL, the portfolio is now delivered through a professional custom domain while still using CloudFront as the CDN and HTTPS layer.
-
-This introduces a more realistic production workflow because the setup now coordinates:
-
-- external DNS management in Namecheap
-- TLS certificate issuance in ACM
-- Terraform-managed infrastructure updates
-- CloudFront custom-domain routing
-
-### 🏗️ Architecture (Task 6)
-
-```bash
-User Browser → Namecheap DNS → CloudFront (Custom Domain + HTTPS) → AWS S3 Website Endpoint
-```
-
-### 🔍 Architecture Explanation
-
-- **Namecheap DNS**
-  - Hosts the ACM validation records and the routing records for `@` and `www`
-
-- **AWS Certificate Manager (ACM)**
-  - Issues and manages the public certificate for `philipoludolamu.com` and `www.philipoludolamu.com`
-
-- **CloudFront**
-  - Uses alternate domain names and the ACM certificate to serve the custom domain over HTTPS
-
-- **AWS S3 Website Endpoint**
-  - Remains the static website origin behind CloudFront
-
-- **End Users**
-  - Access the portfolio through a branded HTTPS domain instead of the default CloudFront hostname
-
-### 📁 Terraform Resources Added Or Updated
-
-Task 6 extends the Terraform configuration with:
-
-- `aws_acm_certificate`
-- `aws_acm_certificate_validation`
-- CloudFront alias and custom certificate configuration
-- new domain-related variables:
-  - `primary_domain_name`
-  - `alternate_domain_names`
-  - `enable_custom_domain`
-- new outputs for:
-  - `acm_certificate_arn`
-  - `acm_dns_validation_records`
-  - `custom_domain_names`
-  - `custom_domain_enabled`
-  - `namecheap_routing_records`
-
-### 🧱 Terraform Workflow
-
-The domain rollout follows a staged Terraform workflow:
-
-1. Request the ACM certificate with:
-   - `primary_domain_name`
-   - `alternate_domain_names`
-   - `enable_custom_domain = false`
-2. Apply Terraform to generate the DNS validation outputs
-3. Create the ACM validation CNAME records in Namecheap
-4. Wait for the certificate status to become `Issued`
-5. Set `enable_custom_domain = true`
-6. Apply Terraform again to attach the certificate and aliases to CloudFront
-7. Confirm the root and `www` routing records in Namecheap
-
-This staged approach avoids attaching an unvalidated certificate to CloudFront.
-
-### 🌐 Final Public Access
-
-After Task 6, the portfolio can be accessed through:
-
-```bash
+```text
 https://philipoludolamu.com
-https://www.philipoludolamu.com
 ```
 
-The default CloudFront domain still exists as the underlying CDN endpoint, but the branded domain is now the public-facing URL.
+Key metrics:
 
-### 🎉 Result
+* `probe_success`
+* `probe_duration_seconds`
 
-At the end of this task:
+![Prometheus blackbox target for the live portfolio website](assets/prometheus_blackbox_target.png)
 
-* ✅ The portfolio is accessible through a branded custom domain
-* ✅ HTTPS works through an ACM-issued certificate
-* ✅ Both root and `www` domains are connected to CloudFront
-* ✅ Namecheap DNS is integrated into the deployment story
-* ✅ The project looks more production-ready and recruiter-friendly
+![Prometheus probe\_success query result](assets/prometheus_probe_success.png)
 
-### 🧠 Key Concepts Demonstrated
+![Prometheus probe\_duration\_seconds query result](assets/prometheus_probe_duration.png)
 
-* ACM DNS validation
-* CloudFront alternate domain names
-* External DNS provider integration with Namecheap
-* Safe staged Terraform rollout for custom domains
-* Branded HTTPS delivery for static websites
+#### 9️⃣ Step 9: Expand Alert Rules for Website Monitoring
 
-### 🔥 Why Task 6 Matters
+New alerts were added:
 
-This is the step that transforms the portfolio from a technically working cloud project into a polished public-facing product.
+* `PortfolioWebsiteDown`
+* `PortfolioWebsiteSlow`
 
-Before Task 6:
+These monitor:
 
-* the site worked through the default CloudFront URL
-* HTTPS was available
-* but the public address was still AWS-branded
+* Website availability
+* Response latency
 
-After Task 6:
+![Prometheus alert rules including website-specific alerts](assets/portfolio_alert_rules_loaded.png)
 
-* the site has a personal custom domain
-* the delivery path still uses CloudFront and HTTPS
-* DNS, certificates, CDN, and Terraform all work together
-* the project feels much closer to a real production deployment
+#### 🔟 Step 10: Build Final Unified Dashboard
 
-### 📸 Recommended Screenshots For Task 6
+The final dashboard combines:
 
-- **Terraform apply output showing the custom-domain rollout**
-![Terraform apply output](./assets/terraform_apply_custom_domain.png)
+* Infrastructure metrics
+* Service availability
+* Performance indicators
 
-- **Namecheap ACM validation records**
-![Namecheap ACM validation records](./assets/namecheap_acm_validation_records.png)
+![Full Grafana monitoring dashboard for the portfolio](assets/grafana_full_monitoring_dashboard.png)
 
-- **ACM certificate issued for root and `www` domains**
-![ACM certificate issued](./assets/ACM_certificate_issued.png)
+#### 📣 Step 11: Send Alerts to Slack
 
-- **CloudFront distribution configured with alternate domain names and custom SSL**
-![CloudFront custom domain configuration](./assets/cloudfront_custom_domain_config.png)
+Alertmanager was configured with a Slack webhook:
 
-- **Namecheap routing records pointing the domain to CloudFront**
-![Namecheap routing records](./assets/Namecheap_routing_records.png)
+```text
+monitoring/secrets/slack_webhook_url
+```
 
-- **Live website loaded through the custom domain**
-![Live custom domain website](./assets/live_custom_domain_root.png)
+* Alerts are sent when issues occur
+* Recovery notifications are sent when resolved
+
+![Slack firing alert notification](assets/slack_alert_firing.png)
+
+![Slack resolved alert notification](assets/slack_alert_resolved.png)
+
+### 🧪 How To Reproduce the Main Alert Test
+
+```bash
+cd monitoring
+docker compose stop node-exporter
+```
+
+Wait ~1 minute, then verify:
+
+* Prometheus Alerts
+* Alertmanager Alerts
+* Slack notifications
+
+To restore:
+
+```bash
+docker compose start node-exporter
+```
+
+## 🧪 Failure Testing & Validation
+
+To ensure the monitoring and alerting system behaves correctly under real-world conditions, controlled failure scenarios were intentionally simulated and observed end-to-end.
+
+### 🔻 Infrastructure Failure Test (Node Exporter)
+
+The Node Exporter container was stopped to simulate a host-level monitoring failure:
+
+```bash
+docker compose stop node-exporter
+```
+
+**Observed behavior:**
+
+* Prometheus marked the target as `DOWN`
+* Alert rule `NodeExporterDown` transitioned to `FIRING`
+* Alertmanager received and processed the alert
+* Slack received a real-time incident notification
+
+![Prometheus alert firing for Node Exporter downtime](assets/prometheus_alert_firing.png)
+
+![Slack firing alert notification](assets/slack_alert_firing.png)
+
+After restarting the container:
+
+```bash
+docker compose start node-exporter
+```
+
+* Alert transitioned to `RESOLVED`
+* Slack received a recovery notification
+
+![Slack resolved alert notification](assets/slack_alert_resolved.png)
+
+### 🌐 Application Availability Test (Blackbox Exporter)
+
+The live portfolio website was monitored using Blackbox Exporter to validate external uptime detection.
+
+**Observed behavior during failure conditions:**
+
+* Blackbox probe failed (`probe_success = 0`)
+* Prometheus triggered `PortfolioWebsiteDown`
+* Alertmanager routed the alert
+* Slack received a firing alert notification
+
+Once the service recovered:
+
+* Probe returned to success (`probe_success = 1`)
+* Alert resolved automatically
+* Slack received recovery notification
+
+### ⚡ Key Validation Outcomes
+
+* Alerts trigger only after defined thresholds (reducing false positives)
+* Alert lifecycle is correctly handled (`FIRING → RESOLVED`)
+* Slack integration provides real-time incident visibility
+* Monitoring system detects both infrastructure and application failures
+* End-to-end alert pipeline (Prometheus → Alertmanager → Slack) is fully validated
+
+### 💥 Why This Matters
+
+This validation demonstrates that the system is not only deployed, but also **operationally reliable**.
+
+* Monitoring is actively verified, not assumed
+* Failure scenarios are tested and observed
+* Alert delivery is confirmed in real time
+
+This reflects real-world DevOps and Site Reliability Engineering (SRE) practices.
+
+### 💪 Why Task 7 Strengthens the Project
+
+Task 7 transforms the project from a static deployment into a **production-style observable system**.
+
+It shifts the focus from:
+
+```text
+"I can deploy a website"
+```
+
+to:
+
+```text
+"I can deploy, monitor, detect failures, and respond to incidents"
+```
+
+This progression reflects real-world DevOps and Site Reliability Engineering (SRE) responsibilities, where operating systems reliably is as important as deploying them.
+
+## 🛠️ Troubleshooting and Lessons Learned
+
+### ⚠️ Browser Caching Can Mask Recent Changes
+
+During development, browser caching affected:
+
+* CSS updates
+* Resume (PDF) updates
+* Image replacements
+
+A hard refresh was required to ensure the latest assets were loaded:
+
+```text
+Ctrl + Shift + R
+```
+
+### ⚠️ Docker Port Conflicts
+
+Running multiple services locally resulted in port conflicts with previously running containers.
+
+This was resolved by assigning custom host ports:
+
+* Grafana → `3001`
+* Prometheus → `9091`
+* Alertmanager → `9094`
+* Node Exporter → `9101`
+* Blackbox Exporter → `9116`
+
+This ensured all services remained accessible without interfering with each other.
+
+### ⚠️ Container Restart vs Recreate
+
+In cases where configuration files or mounted volumes were updated, restarting containers did not always apply changes.
+
+Forcing container recreation ensured that updates were properly reflected:
+
+```bash
+docker compose up -d --force-recreate
+```
+
+### 🔒 Secret Management for Slack Webhooks
+
+Slack webhook URLs are treated as sensitive credentials and must never be committed to version control.
+
+In this project, the webhook is stored in a gitignored local file and injected into the Alertmanager container at runtime.
+
+This approach prevents accidental exposure of secrets and aligns with secure configuration practices commonly used in production environments, where sensitive values are externalized and managed outside of source code.
+
+### 🌐 DNS Validation vs DNS Routing
+
+DNS validation (for ACM certificates) and DNS routing (for directing traffic) serve different purposes and occur at different stages.
+
+Understanding this distinction is essential for successfully configuring custom domains.
+
+## 🏁 Final Outcome
+
+This project demonstrates the ability to design, deploy, and operate a production-style DevOps system:
+
+* Build a recruiter-facing frontend and treat it as a real application workload
+* Provision AWS infrastructure using Terraform
+* Automate deployments using GitHub Actions
+* Secure delivery using CloudFront, ACM, and a custom domain
+* Collect infrastructure metrics using Prometheus and Node Exporter
+* Monitor application availability using Blackbox Exporter
+* Visualize system metrics using Grafana
+* Route alerts through Alertmanager
+* Send incident notifications to Slack
+
+In summary, the project evolved from a simple static website into a complete DevOps workflow covering:
+
+```text
+**build → deploy → secure → observe → alert → respond**
+```
 
 ## 👤 Author
 
-**Philip Oludolamu**  
-DevOps Engineer focused on cloud infrastructure, CI/CD automation, containerization, and Kubernetes.
+### **Philip Oludolamu**
 
-- Email: `oluphilix@gmail.com`
-- GitHub: [Holuphilix](https://github.com/Holuphilix)
-- LinkedIn: [Philip Oludolamu](https://www.linkedin.com/in/philip-oludolamu)
+* 🌐 Portfolio: https://philipoludolamu.com
+* 💻 GitHub: https://github.com/holuphilix
+* 🔗 LinkedIn: https://www.linkedin.com/in/philip-oludolamu
