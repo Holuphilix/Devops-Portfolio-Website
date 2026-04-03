@@ -960,6 +960,121 @@ Forcing container recreation ensured that updates were properly reflected:
 docker compose up -d --force-recreate
 ```
 
+### ⚠️ Git Commit Scope Confusion (Subdirectory Commits)
+
+At one point, commits were made from inside the `terraform/` directory. Although `git add .` was used, only changes within that directory were staged and committed.
+
+This led to a situation where:
+
+* Monitoring files were not included
+* README and frontend updates were not pushed
+* GitHub reflected outdated project state
+
+**Lesson learned:**
+
+> Always run Git commands from the repository root to ensure all changes are included.
+
+### ⚠️ Force Reset and History Rewrite Can Cause Data Loss
+
+Using commands like:
+
+```bash
+git reset --hard
+git push --force
+```
+
+resulted in loss of uncommitted local changes and overwriting of branch history.
+
+This caused:
+
+* Loss of monitoring configuration files
+* Reversion of README and frontend updates
+
+**Lesson learned:**
+
+> Avoid destructive commands unless you fully understand their impact. Always commit or stash changes before performing resets.
+
+### ⚠️ Detached HEAD State Is Unsafe for Development
+
+While inspecting previous commits, the repository entered a **detached HEAD** state:
+
+```bash
+git checkout <commit-hash>
+```
+
+In this state:
+
+* Changes are not attached to a branch
+* Work can be lost if not saved to a new branch
+
+**Lesson learned:**
+
+> Always return to a branch (e.g., `recovery-7` or `main`) before making changes.
+
+### ⚠️ Uncommitted Changes Can Be Lost During Branch Switching
+
+Attempting to switch branches without committing changes resulted in Git blocking the operation:
+
+```text
+Your local changes would be overwritten by checkout
+```
+
+This highlighted the risk of losing work when switching contexts.
+
+**Lesson learned:**
+
+> Always commit or stash changes before switching branches.
+
+### ⚠️ Importance of Git Stash for Temporary Recovery
+
+During recovery, `git stash` played a critical role in preserving uncommitted work.
+
+Using:
+
+```bash
+git stash list
+git stash apply stash@{0}
+```
+
+allowed restoration of:
+
+* CSS updates
+* Index changes
+* README edits
+
+**Lesson learned:**
+
+> `git stash` is a powerful safety tool for temporarily saving work without committing.
+
+### ⚠️ CloudFront Caching Can Delay Website Updates
+
+Even after successful deployment via GitHub Actions, changes were not immediately visible on the live website.
+
+This was due to CloudFront caching old assets.
+
+**Solution:**
+
+* Ensure CloudFront invalidation runs in CI/CD
+* Wait briefly for propagation
+
+**Lesson learned:**
+
+> Deployment success does not always mean immediate visibility — caching layers must be considered.
+
+## 🧠 Key Takeaway
+
+This project reinforced that DevOps is not just about building systems, but also about:
+
+```text
+debugging → recovering → understanding → improving
+```
+
+Each issue provided deeper insight into:
+
+* Git workflows and recovery strategies
+* Infrastructure behavior
+* Deployment and caching mechanisms
+
 ### 🔒 Secret Management for Slack Webhooks
 
 Slack webhook URLs are treated as sensitive credentials and must never be committed to version control.
@@ -1001,3 +1116,9 @@ In summary, the project evolved from a simple static website into a complete Dev
 * 🌐 Portfolio: https://philipoludolamu.com
 * 💻 GitHub: https://github.com/holuphilix
 * 🔗 LinkedIn: https://www.linkedin.com/in/philip-oludolamu
+
+## 📄 License
+
+This project is licensed under the **MIT License**.
+
+You are free to use, modify, and share the code with attribution. See the [LICENSE](LICENSE) file for full details.
