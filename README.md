@@ -1,65 +1,69 @@
-# 🚀 Production-Ready DevOps Portfolio Website
+# 🚀 Production-Style DevOps Portfolio Platform
 
-This project is a **production-style DevOps portfolio** that demonstrates how a simple static website evolves into a fully automated, secure, and observable cloud system.
+This project is a production-style DevOps portfolio platform that demonstrates how a simple static website can evolve into a fully automated, secure, observable, and operationally monitored cloud workload.
 
-It showcases end-to-end DevOps practices including:
+It showcases practical DevOps and cloud engineering workflows including:
 
 - Infrastructure as Code (Terraform)
 - CI/CD automation (GitHub Actions)
-- Secure global delivery (AWS CloudFront + ACM)
+- Secure global content delivery (AWS CloudFront + ACM)
 - Custom domain integration (Namecheap)
 - Monitoring and alerting (Prometheus, Grafana, Alertmanager, Blackbox Exporter)
-- Incident notifications (Slack integration)
+- Incident notification workflows (Slack integration)
 
 👉 **Live Site:** https://philipoludolamu.com
 
-![Production-Ready DevOps Portfolio Website homepage](assets/portfolio-devops-website.png)
+![Production-Style DevOps Portfolio Platform homepage](assets/portfolio-devops-website.png)
 
 ## 🎯 Why This Repository Exists
 
-This project serves two purposes at the same time:
+This repository serves two purposes:
 
-1. It is my live portfolio website at `https://philipoludolamu.com`.
-2. It is a documented DevOps case study that shows how a simple frontend can evolve into a secure, automated, observable workload.
+1. It powers my live portfolio website at `https://philipoludolamu.com`
+2. It demonstrates how a simple frontend application can be engineered, automated, secured, monitored, and operated using modern DevOps practices
 
-That second goal matters because many portfolio sites stop at "I built a webpage." This project goes further and shows:
+Many portfolio websites stop at frontend deployment alone.
 
-* cloud hosting
-* infrastructure as code
+This project extends beyond static hosting by introducing:
+
+* Infrastructure as Code
 * CI/CD automation
-* CDN delivery
-* HTTPS and DNS integration
-* monitoring and alerting
-* basic incident response workflow through Slack
+* CDN-backed HTTPS delivery
+* DNS and certificate management
+* Monitoring and observability
+* Alert routing and incident notifications
+* Operational validation through controlled failure testing
 
-## 📘 What You Will Learn From This Project
+The goal is to treat a simple web application like a real production-style workload rather than a static showcase page.
 
-By working through this repository, a learner can see how to:
+## 🧩 Engineering Areas Demonstrated
 
-* build a recruiter-friendly frontend with HTML, CSS, and JavaScript
-* host a static site on AWS S3
-* convert manual infrastructure to Terraform
-* automate deployment with GitHub Actions
-* place CloudFront in front of S3 for HTTPS and CDN delivery
-* connect a real custom domain using Namecheap and ACM
-* build a monitoring stack with Prometheus and Grafana
-* expose infrastructure metrics with Node Exporter
-* probe a real live website with Blackbox Exporter
-* route alerts with Alertmanager
-* send firing and resolved notifications to Slack
+This repository demonstrates practical implementation across multiple areas of DevOps and cloud engineering:
+
+* Static frontend delivery on AWS
+* Infrastructure provisioning with Terraform
+* CI/CD automation using GitHub Actions
+* CDN-backed HTTPS delivery with CloudFront and ACM
+* DNS integration using Namecheap
+* Infrastructure observability with Prometheus and Grafana
+* Host-level metrics collection with Node Exporter
+* External uptime probing with Blackbox Exporter
+* Alert routing with Alertmanager
+* Incident notifications through Slack
+* Operational validation through simulated failure scenarios
 
 ## 📊 Project Snapshot
 
 | Area           | What this project demonstrates                                      |
 | -------------- | ------------------------------------------------------------------- |
-| Frontend       | Responsive personal portfolio with recruiter-focused sections       |
+| Frontend       | Responsive portfolio frontend optimized for recruiter visibility    |
 | Hosting        | AWS S3 static website hosting                                       |
-| Delivery       | GitHub Actions deployment pipeline                                  |
+| Delivery       | Automated CI/CD deployment pipeline                                 |
 | Infrastructure | Terraform-managed AWS resources                                     |
 | Security       | HTTPS via CloudFront + ACM                                          |
 | DNS            | Namecheap custom domain routing                                     |
 | Observability  | Prometheus, Grafana, Alertmanager, Node Exporter, Blackbox Exporter |
-| Notifications  | Slack alerts for firing and resolved incidents                      |
+| Notifications  | Real-time incident and recovery notifications via Slack             |
 
 ## 🌐 Live Access
 
@@ -115,51 +119,53 @@ flowchart LR
 ```
 
 ## 🧠 Architecture Explained
-This section illustrates both the delivery pipeline and the observability system used to operate the application in a production-style environment.
+
+This section outlines both the delivery pipeline and the observability workflow used to deploy, monitor, and operate the application in a production-style environment.
 
 ### 🚚 Delivery Path
 
-* `GitHub` stores the application source, infrastructure files, and deployment workflow.
-* `GitHub Actions` publishes updated files to the S3 website bucket after pushes to `main`.
-* `Terraform` manages the AWS infrastructure required for delivery.
-* `S3` stores the static website files.
-* `CloudFront` sits in front of S3 to add global delivery, caching, and HTTPS.
-* `ACM` provides the certificate used by CloudFront.
-* `Namecheap` routes the custom domain to the CloudFront distribution.
+* `GitHub` stores the application source, infrastructure files, and deployment workflows.
+* `GitHub Actions` automatically deploys updated frontend assets to the S3 website bucket after changes are pushed to `main`.
+* `Terraform` provisions and manages the AWS infrastructure required for application delivery.
+* `S3` stores the static frontend assets.
+* `CloudFront` provides global CDN delivery, HTTPS termination, and edge caching.
+* `ACM` manages the TLS certificate attached to the CloudFront distribution.
+* `Namecheap` routes the custom domain to CloudFront through DNS configuration.
 
 ### 📡 Monitoring Path
 
-* `Node Exporter` exposes host metrics such as CPU and memory.
-* `Blackbox Exporter` probes the live portfolio URL and returns probe metrics.
-* `Prometheus` scrapes exporters, stores time-series data, and evaluates alert rules.
-* `Grafana` visualizes the metrics.
-* `Alertmanager` receives alerts from Prometheus and forwards them to Slack.
-* `Slack` serves the human-facing notification channel for incidents and recoveries.
+* `Node Exporter` exposes host-level infrastructure metrics such as CPU, memory, and system usage.
+* `Blackbox Exporter` probes the live portfolio endpoint and returns uptime and response metrics.
+* `Prometheus` scrapes exporters, stores time-series metrics, and evaluates alert rules.
+* `Grafana` visualizes infrastructure and application monitoring data through dashboards.
+* `Alertmanager` receives alerts from Prometheus and manages routing, grouping, and notification delivery.
+* `Slack` serves as the operational notification channel for incidents and recovery events.
 
 ## 🎯 Project Objectives
 
-* Build a professional personal portfolio and treat it like a real workload
-* Move from manual hosting to repeatable infrastructure as code
-* Automate deployment from source control to AWS
-* Secure public traffic with HTTPS and CloudFront
-* Attach a real custom domain through DNS and ACM
-* Add observability so the project can be operated, not only deployed
-* Demonstrate a monitoring and notification workflow that is easy to explain in interviews
+* Build and operate a production-style personal portfolio platform
+* Automate infrastructure provisioning using Terraform
+* Implement repeatable CI/CD deployment workflows
+* Secure public delivery using CloudFront and HTTPS
+* Integrate DNS and certificate management for a real custom domain
+* Introduce observability and operational monitoring
+* Validate monitoring and alerting workflows through controlled failure testing
+* Demonstrate practical DevOps, cloud, and platform engineering workflows in a single repository
 
 ## 🛠️ Tools and Services
 
 | Category       | Tools / Services                 | Why they are here                              |
 | -------------- | -------------------------------- | ---------------------------------------------- |
-| Frontend       | HTML, CSS, JavaScript            | Build the portfolio UI                         |
-| Cloud Platform | AWS S3, CloudFront, ACM          | Host, secure, and distribute the site          |
+| Frontend       | HTML, CSS, JavaScript            | Build the portfolio frontend                   |
+| Cloud Platform | AWS S3, CloudFront, ACM          | Host, secure, and globally distribute the site |
 | DNS            | Namecheap                        | Route the custom domain to CloudFront          |
 | IaC            | Terraform                        | Provision infrastructure consistently          |
-| CI/CD          | GitHub Actions                   | Automate website deployment                    |
-| Monitoring     | Prometheus, Grafana              | Collect and visualize metrics                  |
-| Exporters      | Node Exporter, Blackbox Exporter | Expose host metrics and probe the live website |
-| Alerting       | Alertmanager, Slack              | Route incidents to a communication channel     |
+| CI/CD          | GitHub Actions                   | Automate deployment workflows                  |
+| Monitoring     | Prometheus, Grafana              | Collect and visualize operational metrics      |
+| Exporters      | Node Exporter, Blackbox Exporter | Expose host metrics and probe website uptime   |
+| Alerting       | Alertmanager, Slack              | Route incidents and recovery notifications     |
 | Runtime        | Docker Compose                   | Run the local observability stack              |
-| OS / Shell     | Linux, Bash                      | Local development and operations               |
+| OS / Shell     | Linux, Bash                      | Local development and operational workflows    |
 
 ## 📁 Repository Structure
 
@@ -211,7 +217,7 @@ Devops-Portfolio-Website/
         └── slack_webhook_url   # local only, gitignored
 ```
 
-> `monitoring/secrets/slack_webhook_url` is intentionally kept local and excluded from Git. The webhook is a secret and should never be committed.
+> `monitoring/secrets/slack_webhook_url` is intentionally kept local and excluded from Git. The webhook is treated as a secret and should never be committed to source control.
 
 ## ⚙️ Prerequisites
 
@@ -222,13 +228,13 @@ The following tools and services were used to build and operate this project:
 - GitHub repository with Actions enabled
 - Terraform installed locally
 - Docker and Docker Compose installed locally
-- Slack workspace with an incoming webhook (for alert notifications)
+- Slack workspace with an incoming webhook for alert notifications
 
 ## ⚡ Quick Start
 
 ### ▶️ Run the Portfolio Locally
 
-Because the frontend is static, you can serve it with any simple local web server.
+Because the frontend is fully static, it can be served locally using any lightweight web server.
 
 ```bash
 python3 -m http.server 8000
@@ -262,48 +268,61 @@ Current Grafana credentials from `monitoring/docker-compose.yml`:
 
 ## 📖 How To Read The Rest Of This README
 
-This project is structured as a step-by-step journey from Task 1 to Task 7.
+This project is structured as a progressive engineering journey from Task 1 through Task 7.
 
-- Tasks 1 to 6 cover how the application was built, deployed, automated, secured, and connected to a custom domain.
-- Task 7 focuses on observability, showing how the system is monitored and operated in a production-style environment.
+- Tasks 1 to 6 cover frontend delivery, infrastructure provisioning, CI/CD automation, HTTPS enablement, and custom domain integration.
+- Task 7 focuses on observability, monitoring, alerting, and operational validation workflows.
 
 Each task section explains:
 
-- why the task matters
-- what was implemented
-- how the components work together
-- where to find the relevant files
-- supporting screenshots as evidence
+- why the implementation matters
+- what was deployed or configured
+- how the components interact operationally
+- where the relevant files are located
+- supporting screenshots and validation evidence
 
 ## 🛣️ Delivery Journey Summary
 
 | Task   | Focus                   | Outcome                                                     |
 | ------ | ----------------------- | ----------------------------------------------------------- |
-| Task 1 | Frontend engineering    | Built a recruiter-focused portfolio interface               |
-| Task 2 | AWS S3 static hosting   | Deployed the site as a public static website                |
-| Task 3 | Terraform               | Converted infrastructure into code (IaC)                    |
+| Task 1 | Frontend engineering    | Built a recruiter-focused portfolio frontend                |
+| Task 2 | AWS S3 static hosting   | Deployed the site as a publicly accessible static workload  |
+| Task 3 | Terraform               | Converted infrastructure provisioning into reusable IaC     |
 | Task 4 | GitHub Actions CI/CD    | Automated deployments from GitHub to AWS                    |
-| Task 5 | CloudFront + HTTPS      | Enabled CDN delivery and secure HTTPS access                |
-| Task 6 | Custom domain           | Connected domain via Namecheap, ACM, and CloudFront         |
-| Task 7 | Monitoring and alerting | Implemented observability, dashboards, and Slack alerts     |
+| Task 5 | CloudFront + HTTPS      | Enabled secure CDN-backed HTTPS delivery                    |
+| Task 6 | Custom domain           | Integrated Namecheap DNS, ACM, and CloudFront               |
+| Task 7 | Monitoring and alerting | Implemented observability, dashboards, alerting, and Slack notifications |
 
 ## 🧩 Task 1: Frontend Engineering
 
 ### 🎯 Objective
 
-Build a clean, recruiter-focused portfolio frontend that serves as the application layer for the rest of the DevOps workflow.
+Build a clean, recruiter-focused portfolio frontend that serves as the application layer for the broader DevOps and cloud delivery workflow.
 
 ### 💡 Why This Task Matters
 
-Without a real application layer, the project would be limited to infrastructure. Task 1 establishes a visible product surface that is later deployed, automated, secured, and monitored throughout the DevOps lifecycle.
+Without an actual application workload, the project would remain infrastructure-only.
+
+Task 1 establishes the frontend application that is later deployed, automated, secured, monitored, and operationally validated throughout the rest of the project lifecycle.
+
+This creates a realistic foundation for demonstrating:
+
+- deployment workflows
+- infrastructure automation
+- CI/CD pipelines
+- CDN delivery
+- monitoring and alerting
+- production-style operational practices
 
 ### ⚙️ What Was Implemented
 
-- Sticky navigation for quick section access
-- Hero section with a clear DevOps value proposition
+- Sticky navigation for fast section access
+- Hero section with a clear DevOps engineering value proposition
 - About, Skills, Projects, Resume, and Contact sections
-- Theme toggle and refined UI interactions
-- Project cards designed to showcase real engineering work
+- Responsive layout for desktop and mobile viewing
+- Theme toggle and improved UI interactions
+- Project cards designed to showcase real engineering work and technical projects
+- Resume integration for recruiter accessibility
 
 ### 📂 Key Files
 
@@ -313,88 +332,137 @@ Without a real application layer, the project would be limited to infrastructure
 
 ### 🔍 How It Works
 
-The frontend is intentionally simple in technology but deliberate in design:
+The frontend intentionally uses a lightweight static architecture while maintaining a professional and recruiter-focused user experience.
 
-- `index.html` defines the structure and content
-- `style.css` manages layout, responsiveness, and theming
-- `script.js` handles interactivity and UI behavior
+- `index.html` defines the structure and content layout
+- `style.css` manages responsiveness, theming, spacing, and visual presentation
+- `script.js` handles UI interactions and frontend behavior
 
-This simplicity becomes an advantage later, as static assets are easy to host on S3 and distribute through CloudFront.
+Using a static frontend architecture simplifies downstream infrastructure and delivery workflows because the application can be efficiently:
+
+- hosted on S3
+- distributed globally through CloudFront
+- deployed through CI/CD pipelines
+- monitored externally through uptime probes
+
+This keeps the operational model simple while still enabling production-style DevOps practices around the application.
 
 ### 📸 Evidence
 
-The application was fully functional locally before any cloud integration:
+The application was fully functional locally before cloud deployment and infrastructure automation were introduced:
 
 ![Local portfolio website during frontend development](assets/local_website.png)
 
-### 🧠 What A Learner Should Notice
+### 🧠 What To Notice
 
-- A simple static frontend is sufficient to build a meaningful DevOps project
-- Starting with a clean application layer simplifies later infrastructure and deployment stages
+- A simple static application is sufficient for demonstrating real DevOps workflows
+- Clean frontend structure simplifies automation, deployment, and observability later in the project
+- Lightweight applications are ideal for learning infrastructure automation and operational workflows without unnecessary backend complexity
 
 ## ☁️ Task 2: AWS S3 Static Hosting
 
 ### 🎯 Objective
 
-Deploy the portfolio to AWS, making it publicly accessible over the internet.
+Deploy the portfolio application to AWS and make it publicly accessible through cloud-based static hosting.
 
 ### 💡 Why This Task Matters
 
-Task 1 established the application layer. Task 2 provides a real cloud runtime environment, transitioning the project from local development to public deployment.
+Task 1 established the application layer locally.
 
-### ➕ What Was Added
+Task 2 transitions the project into a real cloud runtime environment by introducing public hosting on AWS. This marks the shift from local-only development into externally accessible infrastructure.
 
-- S3 bucket for static website hosting
+It also establishes the delivery foundation that is later enhanced with:
+
+- Terraform automation
+- CI/CD deployment workflows
+- CloudFront CDN integration
+- HTTPS encryption
+- custom domain routing
+- monitoring and observability
+
+### ⚙️ What Was Implemented
+
+- S3 bucket creation for static website hosting
 - Static website hosting configuration
-- Public access configuration for content delivery
-- Upload of website assets to the bucket
+- Public access configuration for website delivery
+- Upload and hosting of frontend application assets
+- Initial public endpoint exposure through the S3 website URL
 
-### ⚙️ How S3 Hosting Works Here
+### 📂 AWS Components Introduced
 
-Amazon S3 can serve static assets such as:
+| Component | Purpose |
+| --- | --- |
+| Amazon S3 | Stores and serves static frontend assets |
+| Static Website Hosting | Enables browser-based public website access |
+| Bucket Policy / Public Access | Allows external users to access website files |
+
+### 🔍 How S3 Hosting Works Here
+
+Amazon S3 can directly host static frontend assets including:
 
 - HTML
 - CSS
 - JavaScript
 - Images
-- PDF files
+- PDF documents
 
-At this stage, requests are served directly from the S3 website endpoint. This makes the application publicly accessible, but it still lacks:
+At this stage, requests are served directly from the S3 static website endpoint.
 
-- CDN-based distribution
-- HTTPS support
-- Custom domain integration
+This provides a fast and cost-effective method for publicly hosting frontend applications, but there are still important limitations:
 
-These limitations are addressed in later tasks.
+- no HTTPS encryption
+- no CDN edge caching
+- no custom domain support
+- limited production-grade traffic optimization
+
+These limitations are addressed later through CloudFront, ACM, and DNS integration.
 
 ### 📸 Evidence
 
-The S3 bucket was created for the portfolio:
+The S3 bucket was created for static website hosting:
 
 ![S3 bucket created for the portfolio website](assets/S3_Bucket_Created.png)
 
-Static website hosting was enabled:
+Static website hosting was enabled successfully:
 
 ![Static website hosting enabled on the S3 bucket](assets/Static_Hosting_Enabled.png)
 
-The application became publicly accessible via the S3 endpoint:
+The application became publicly accessible through the S3 website endpoint:
 
 ![Portfolio website accessible through the early hosted URL](assets/live_website.png)
 
-### 🧠 What A Learner Should Notice
+### 🧠 What To Notice
 
-- S3 provides a simple and cost-effective entry point for hosting static applications
-- Direct S3 hosting is useful for initial deployment, but not sufficient for production-grade delivery due to lack of HTTPS and CDN support
+- S3 provides a lightweight and highly cost-effective hosting model for static applications
+- Static hosting creates a strong foundation for later CDN and HTTPS integration
+- Separating frontend delivery from backend infrastructure simplifies deployment workflows
+- Direct S3 hosting is useful for initial deployment validation before introducing production-grade delivery optimizations
 
 ## 🏗️ Task 3: Terraform Infrastructure as Code
 
 ### 🎯 Objective
 
-Replace manual AWS configuration with Terraform, making the infrastructure repeatable, version-controlled, and easier to manage.
+Replace manual AWS configuration with Terraform to make the infrastructure reproducible, version-controlled, and easier to manage operationally.
 
 ### 💡 Why This Task Matters
 
-Manual setup through the AWS Console is difficult to reproduce, audit, and maintain. Terraform enables infrastructure to be defined as code, which is a core DevOps practice for building consistent and reliable environments.
+Manual infrastructure provisioning through the AWS Console introduces several operational challenges:
+
+- inconsistent environments
+- difficult change tracking
+- limited reproducibility
+- increased risk of configuration drift
+
+Terraform addresses these issues by defining infrastructure declaratively as code.
+
+This enables the infrastructure to become:
+
+- reusable
+- reviewable
+- auditable
+- easier to maintain over time
+
+Introducing Infrastructure as Code (IaC) also establishes the foundation for scalable automation and repeatable cloud delivery workflows.
 
 ### 📂 Key Terraform Files
 
@@ -406,243 +474,349 @@ Manual setup through the AWS Console is difficult to reproduce, audit, and maint
 
 ### ⚙️ What Terraform Now Manages
 
+Terraform provisions and manages the core AWS delivery infrastructure, including:
+
 - S3 bucket and static website configuration
-- Ownership controls and public access settings
-- Bucket policy for content delivery
-- CloudFront distribution
-- ACM certificate request
-- Certificate validation configuration
+- Bucket ownership controls and public access settings
+- Bucket policy for public content delivery
+- CloudFront CDN distribution
+- ACM certificate request configuration
+- Certificate validation outputs
 - Custom domain aliases for CloudFront
-- Outputs used for DNS configuration and verification
+- Infrastructure outputs used for DNS routing and verification
 
-### 📈 How This Improved The Project
+This transitions the project from manually configured infrastructure into a codified and repeatable cloud environment.
 
-**Before Terraform:**
+### 📈 Infrastructure Evolution
 
-- Infrastructure changes were manual and click-based
-- Reproducibility was limited
-- Documentation relied on memory and screenshots
+#### Before Terraform
 
-**After Terraform:**
+- Infrastructure provisioning was manual and console-driven
+- Resource configuration required repetitive click-based setup
+- Reproducing environments was time-consuming
+- Infrastructure changes were difficult to audit or version-control
 
-- Infrastructure is defined, version-controlled, and reviewable
-- Changes are easier to track and reason about
-- CloudFront and custom domain integration became more structured and reliable
+#### After Terraform
 
-### 🧠 Important Learning Note
+- Infrastructure is defined declaratively in code
+- Cloud resources are version-controlled alongside the application
+- Infrastructure changes are easier to review and maintain
+- CloudFront, ACM, and DNS workflows became more structured and repeatable
+- Deployment environments became easier to reproduce consistently
 
-This repository currently uses a local Terraform state file as part of the learning process. In a production environment, a remote backend (e.g., S3 with DynamoDB state locking) should be used to enable collaboration and prevent state conflicts.
+### 🧠 Operational Considerations
 
-### 🧠 What A Learner Should Notice
+This repository currently uses a local Terraform state file as part of the project scope.
 
-- Terraform is not only for provisioning resources; it also improves documentation by defining the desired state in code
-- Once infrastructure is codified, automation (CI/CD) and advanced configurations such as custom domains become significantly easier to implement
+In collaborative or production-grade environments, Terraform state should typically be stored remotely using a backend such as:
+
+- Amazon S3 for remote state storage
+- DynamoDB for state locking and concurrency protection
+
+This helps prevent state conflicts and improves collaboration across teams and deployment environments.
+
+### 📸 Evidence
+
+Terraform was used to provision and manage the AWS infrastructure required for application delivery and HTTPS configuration:
+
+![Terraform provisioning and infrastructure deployment](assets/terraform_apply_custom_domain.png)
+
+### 🧠 What To Notice
+
+- Terraform improves both infrastructure automation and operational consistency
+- Infrastructure definitions become version-controlled alongside application code
+- Declarative infrastructure simplifies repeatability and long-term maintenance
+- Infrastructure as Code enables more reliable CI/CD and cloud delivery workflows
 
 ## 🔄 Task 4: GitHub Actions CI/CD
 
 ### 🎯 Objective
 
-Automate deployments so that every push to `main` updates the live site without manual intervention.
+Automate deployment workflows so that updates pushed to `main` are automatically delivered to the live production environment.
 
 ### 💡 Why This Task Matters
 
-This is the stage where the project transitions from static hosting to continuous delivery. The application is no longer updated manually, but through a repeatable and automated pipeline.
+Before automation, deployments required manual file uploads and infrastructure interaction.
+
+This introduces operational risks such as:
+
+- inconsistent deployments
+- missed files
+- manual deployment errors
+- slower release workflows
+
+GitHub Actions introduces Continuous Integration and Continuous Delivery (CI/CD) automation into the project lifecycle.
+
+This transforms deployments into:
+
+- repeatable workflows
+- source-controlled delivery pipelines
+- automated release operations
+- faster and more reliable deployment processes
 
 ### 📂 Workflow File
 
 - [`.github/workflows/deploy.yml`](.github/workflows/deploy.yml)
 
-### ⚙️ What The Workflow Does
+### ⚙️ What The Deployment Workflow Does
 
-On every push to `main`, the workflow:
+On every push to the `main` branch, the GitHub Actions workflow automatically:
 
-- Checks out the repository
-- Configures AWS credentials using GitHub Secrets
-- Syncs static assets to the S3 bucket
-- Invalidates the CloudFront cache to ensure fresh content is served
+1. Checks out the latest repository code
+2. Configures AWS authentication using GitHub Secrets
+3. Syncs updated frontend assets to the S3 bucket
+4. Invalidates the CloudFront cache to refresh edge-delivered content
 
-### ❗ Why CloudFront Invalidation Matters
+This creates a lightweight but production-style deployment pipeline for the static application.
 
-CloudFront caches content at edge locations. Without invalidation, users may continue to receive stale assets even after deployment.
+### 🔐 Secure Credential Handling
 
-Including cache invalidation ensures that updates are propagated immediately, making the deployment pipeline more reliable and production-ready.
+AWS credentials are stored securely using GitHub Secrets rather than hardcoded into the repository.
+
+This helps:
+
+- protect sensitive credentials
+- separate secrets from source control
+- align with secure CI/CD practices
+
+### ❗ Why CloudFront Cache Invalidation Matters
+
+CloudFront caches assets at edge locations to improve performance and reduce latency.
+
+Without cache invalidation:
+
+- users may continue receiving stale frontend assets
+- newly deployed updates may not appear immediately
+
+Including automated invalidation ensures that updated files propagate consistently across edge locations after deployment.
+
+This improves delivery reliability and reduces deployment inconsistency.
 
 ### 📸 Evidence
 
-The deployment workflow completed successfully:
+The CI/CD workflow completed successfully and deployed updates automatically to the live environment:
 
 ![Successful GitHub Actions deployment workflow](assets/Successful_GitHub_Actions.png)
 
-### 🧠 What A Learner Should Notice
+### 🧠 What To Notice
 
-- CI/CD is not limited to applications with build steps; static sites also benefit from automated deployment pipelines
-- A complete delivery pipeline must account for caching layers such as CloudFront
+- CI/CD workflows are valuable even for static frontend applications
+- Deployment automation improves reliability and reduces operational overhead
+- GitHub Actions enables infrastructure-aware deployment workflows directly from source control
+- CDN cache behavior must be considered in production-style deployment pipelines
 
 ## 🔐 Task 5: CloudFront + HTTPS
 
 ### 🎯 Objective
 
-Introduce CloudFront in front of S3 to enable HTTPS delivery and improve performance through CDN distribution.
+Introduce CloudFront in front of the S3 origin to enable secure HTTPS delivery, improve performance through CDN edge caching, and establish a production-style public delivery layer.
 
 ### 💡 Why This Task Matters
 
-S3 website endpoints are suitable for initial hosting, but they are not ideal as a production-facing entry point. CloudFront enhances the architecture by providing:
+Although S3 static website hosting is suitable for initial frontend deployment, it is not ideal as a direct production-facing entry point.
 
-* HTTPS support
-* Global edge caching
-* Improved performance and reduced latency
-* A scalable foundation for custom domain integration
+Introducing CloudFront significantly improves the delivery architecture by adding:
 
-### ➕ What Was Added
+- HTTPS encryption
+- Global CDN edge caching
+- Lower latency for end users
+- Improved scalability and availability
+- Centralized traffic handling
+- A foundation for custom domain integration
 
-* CloudFront distribution
-* HTTPS delivery via CloudFront
-* HTTP to HTTPS redirection
-* CDN-backed access layer in front of S3
-* Cache invalidation integration with GitHub Actions
+This marks the transition from basic static hosting into a more production-oriented cloud delivery model.
+
+### ⚙️ What Was Added
+
+- CloudFront distribution
+- HTTPS delivery through CloudFront
+- HTTP-to-HTTPS redirection
+- CDN-backed frontend delivery
+- Edge caching for improved response performance
+- CloudFront cache invalidation integration with GitHub Actions
 
 ### 🔄 How Request Flow Changed
 
-**Before Task 5:**
+#### Before Task 5
 
 ```text
-User -> S3 website endpoint
+User → S3 Website Endpoint
 ```
 
-**After Task 5:**
+#### After Task 5
 
 ```text
-User -> CloudFront -> S3 website bucket
+User → CloudFront CDN → S3 Website Bucket
 ```
 
-This represents a key architectural improvement, as end users now interact with a CDN layer instead of directly accessing the S3 origin.
+This architectural change introduces a dedicated delivery layer between end users and the application origin.
+
+Instead of accessing S3 directly, users now interact with CloudFront, which becomes the secure public-facing entry point for the application.
 
 ### ⚙️ How CloudFront Works in This Setup
 
-* CloudFront acts as the public entry point for the application
-* It retrieves content from the S3 bucket (origin)
-* Frequently requested content is cached at edge locations
-* HTTPS is handled at the CloudFront layer
-* Users are automatically redirected from HTTP to HTTPS
+In this architecture:
+
+- CloudFront acts as the public entry layer
+- S3 remains the application origin storing static assets
+- Frequently requested content is cached at CloudFront edge locations
+- HTTPS termination is handled at the CDN layer
+- Users are automatically redirected from HTTP to HTTPS
+- GitHub Actions invalidates cached assets after deployments
+
+This improves both delivery performance and operational consistency.
 
 ### 📸 Evidence
 
-CloudFront became the secure public delivery layer:
+CloudFront became the secure public delivery layer for the application:
 
 ![CloudFront distribution used to deliver the portfolio over HTTPS](assets/deployed_cloudfront.png)
 
-### 🧠 What A Learner Should Notice
+### 🧠 What To Notice
 
-* CloudFront acts as the entry point for production-style delivery of static applications
-* Introducing a CDN layer enables HTTPS, improves performance, and prepares the system for custom domain integration
-* Separating the origin (S3) from the delivery layer (CloudFront) is a key architectural pattern in cloud systems
+- CloudFront introduces a production-style CDN delivery architecture
+- CDN-backed delivery improves scalability, latency, and user experience
+- HTTPS encryption is handled at the edge through CloudFront and ACM
+- Separating the application origin (S3) from the delivery layer (CloudFront) is a common cloud architecture pattern
+- CDN cache invalidation becomes an important operational consideration during deployments
 
 ## 🌍 Task 6: Custom Domain Integration with Namecheap, ACM, and CloudFront
 
 ### 🎯 Objective
 
-Replace the default CloudFront URL with a branded custom domain while maintaining an infrastructure-driven setup.
+Replace the default CloudFront distribution URL with a branded custom domain while maintaining secure HTTPS delivery and infrastructure-driven configuration.
 
 ### 💡 Why This Task Matters
 
-This step transforms the project from a technically functional deployment into a production-style system. A custom domain is not only about branding—it demonstrates:
+Custom domain integration transforms the application from a technically functional deployment into a more realistic production-style system.
 
-* TLS/SSL certificate management
-* DNS-based domain validation
-* Domain routing and resolution
-* CDN alias configuration
+This task introduces several important cloud and networking concepts including:
 
----
+- TLS/SSL certificate management
+- DNS-based domain ownership validation
+- Public DNS routing
+- CDN alias configuration
+- HTTPS delivery for custom domains
+
+It also improves the professional presentation and accessibility of the application.
 
 ### 🌐 Final Domain Result
 
-* `https://philipoludolamu.com`
-* `https://www.philipoludolamu.com`
+- `https://philipoludolamu.com`
+- `https://www.philipoludolamu.com`
+
+These domains now serve as the primary public entry points for the application.
 
 ### 1️⃣ Step 1: Terraform Requests the ACM Certificate
 
-The initial Terraform apply requests an ACM certificate and outputs the DNS validation records required for domain verification.
+Terraform was used to request an ACM certificate for the custom domains.
 
-This is critical because CloudFront requires ACM certificates to be provisioned in the `us-east-1` region.
+The initial Terraform apply outputs the DNS validation records required to prove domain ownership.
+
+This step is critical because CloudFront requires ACM certificates to exist in the `us-east-1` region.
 
 ![Terraform output for custom domain and ACM setup](assets/terraform_apply_custom_domain.png)
 
 ### 2️⃣ Step 2: Add DNS Validation Records in Namecheap
 
-The ACM-generated CNAME records are added in Namecheap to validate ownership of:
+The ACM-generated DNS validation records were added in Namecheap to validate ownership of:
 
-* `philipoludolamu.com`
-* `www.philipoludolamu.com`
+- `philipoludolamu.com`
+- `www.philipoludolamu.com`
+
+Once propagated, ACM was able to verify domain ownership successfully.
 
 ![Namecheap ACM DNS validation records](assets/namecheap_acm_validation_records.png)
 
 ### 3️⃣ Step 3: ACM Issues the Certificate
 
-After DNS propagation, ACM validates the records and issues the certificate.
+After DNS propagation completed, ACM validated the records and issued the TLS certificate.
+
+This certificate is later attached to the CloudFront distribution to enable HTTPS delivery for the custom domain.
 
 ![ACM certificate issued for the custom domain](assets/ACM_certificate_issued.png)
 
 ### 4️⃣ Step 4: Attach the Certificate to CloudFront
 
-The CloudFront distribution is updated with:
+The CloudFront distribution was updated with:
 
-* Alternate domain names (aliases)
-* The validated ACM certificate
+- Alternate domain names (CNAME aliases)
+- The validated ACM certificate
 
-This enables secure HTTPS delivery for the custom domain.
+This enables CloudFront to securely serve the application over HTTPS using the custom domain.
 
 ![CloudFront custom domain configuration](assets/cloudfront_custom_domain_config.png)
 
 ### 5️⃣ Step 5: Configure DNS Routing in Namecheap
 
-DNS records are configured to route traffic:
+DNS routing records were configured in Namecheap to direct traffic from the public domains to the CloudFront distribution.
 
-* Root domain (`@`) → CloudFront
-* `www` subdomain → CloudFront
+Routing configuration included:
+
+- Root domain (`@`) → CloudFront
+- `www` subdomain → CloudFront
 
 ![Namecheap routing records pointing to CloudFront](assets/Namecheap_routing_records.png)
 
 ### 6️⃣ Step 6: Validate the Live Domain
 
-The application becomes accessible over HTTPS using the custom domain, which now serves as the primary public entry point.
+After DNS propagation completed, the application became publicly accessible through the custom domain over HTTPS.
+
+The custom domain now acts as the primary production-style public endpoint for the application.
 
 ![Live portfolio website on the custom domain](assets/live_custom_domain_root.png)
 
-### 🧠 What A Learner Should Notice
+### 🧠 What To Notice
 
-* DNS validation and DNS routing serve different purposes and occur at different stages
-* Custom domain integration involves coordination between multiple systems: Terraform, ACM, CloudFront, and an external DNS provider
-* DNS-level URL redirects are different from CloudFront alias-based routing
-* Proper sequencing (certificate → validation → CloudFront → DNS routing) is critical for a successful setup
+- DNS validation and DNS routing serve different operational purposes
+- ACM certificate validation must complete before HTTPS delivery can function properly
+- Custom domain integration requires coordination across multiple services:
+  - Terraform
+  - ACM
+  - CloudFront
+  - Namecheap DNS
+- CloudFront aliases differ from DNS redirects and serve a different routing role
+- Proper sequencing is important:
+  - certificate request
+  - DNS validation
+  - certificate issuance
+  - CloudFront configuration
+  - DNS routing
+- HTTPS delivery depends on successful integration between DNS, CloudFront, and ACM
 
 ## 📡 Task 7: Monitoring and Alerting with Prometheus, Grafana, Alertmanager, Blackbox Exporter, and Slack
 
 ### 🎯 Objective
 
-Introduce observability into the system so the application is not only deployed, but also monitored, analyzed, and capable of triggering alerts when issues occur.
+Introduce observability and operational monitoring into the platform so the application is not only deployed, but also measurable, monitorable, and capable of generating actionable alerts during failure conditions.
 
 ### 💡 Why Task 7 Matters
 
-Most portfolio projects stop at deployment. In real-world systems, operational visibility is critical:
+Many portfolio projects stop after deployment.
 
-* Is the system healthy?
-* Are infrastructure resources performing correctly?
-* Is the public application reachable?
-* Can incidents be detected automatically?
-* Can stakeholders be notified when issues occur and when they are resolved?
+In production environments, deployment alone is not sufficient. Systems must also provide operational visibility into:
 
-Task 7 addresses these operational requirements.
+- infrastructure health
+- service availability
+- uptime status
+- response performance
+- failure detection
+- incident notification workflows
+
+This task introduces a complete observability and alerting workflow that allows the platform to be monitored and operationally validated in real time.
+
+It transforms the project from a simple hosted application into a production-style observable system.
 
 ### 📊 Monitoring Stack At A Glance
 
-| Component         | Role in this project                           |
-| ----------------- | ---------------------------------------------- |
-| Prometheus        | Scrapes metrics and evaluates alert rules      |
-| Grafana           | Visualizes infrastructure and application data |
-| Node Exporter     | Exposes host-level metrics (CPU, memory)       |
-| Blackbox Exporter | Probes the public website endpoint             |
-| Alertmanager      | Routes alerts to notification channels         |
-| Slack             | Receives firing and resolved alerts            |
+| Component | Role in this project |
+| --- | --- |
+| Prometheus | Scrapes metrics and evaluates alert rules |
+| Grafana | Visualizes infrastructure and application metrics |
+| Node Exporter | Exposes host-level metrics such as CPU and memory |
+| Blackbox Exporter | Probes the public website endpoint externally |
+| Alertmanager | Routes and manages alert notifications |
+| Slack | Receives real-time incident and recovery alerts |
 
 ### 📂 Monitoring Files
 
@@ -659,24 +833,26 @@ Task 7 addresses these operational requirements.
 
 #### 1️⃣ Step 1: Bootstrap the Stack Locally
 
-The monitoring environment was initialized using Docker Compose:
+The observability stack was initialized locally using Docker Compose:
 
 ```bash
 cd monitoring
 docker compose up -d
 ```
 
+This provisions the monitoring components as isolated containers and establishes the local operational environment.
+
 ![Docker Compose running the initial monitoring stack](assets/docker_compose_running.png)
 
 #### 2️⃣ Step 2: Verify Prometheus Self-Scraping
 
-Prometheus was configured to scrape itself to validate:
+Prometheus was first configured to scrape its own metrics in order to validate:
 
-* Service availability
-* Correct scrape configuration
-* Metric collection functionality
+- service availability
+- scrape configuration correctness
+- metric ingestion functionality
 
-The `up` metric returned `1`, confirming a healthy target:
+The `up` metric returned `1`, confirming successful metric collection and healthy target status.
 
 ![Prometheus targets page showing the self-scrape job](assets/prometheus_targets.png)
 
@@ -684,27 +860,32 @@ The `up` metric returned `1`, confirming a healthy target:
 
 #### 3️⃣ Step 3: Connect Grafana to Prometheus
 
-Grafana was integrated with Prometheus as a data source:
+Grafana was integrated with Prometheus as the primary metrics data source.
 
-* Manual verification via UI
-* Query validation in Explore view
+Initial validation included:
+
+- manual datasource verification
+- query testing in Grafana Explore
 
 ![Grafana Prometheus datasource view](assets/grafana_prometheus_datasource.png)
 
 ![Grafana Explore up query result](assets/grafana_explore_up_query.png)
 
-The setup was later improved by provisioning the data source from code, eliminating manual configuration:
+The setup was later improved by provisioning the datasource through configuration files rather than manual UI configuration.
+
+This makes the monitoring environment more reproducible and infrastructure-driven.
 
 ![Provisioned Prometheus datasource in Grafana](assets/grafana_provisioned_datasource.png)
 
 #### 4️⃣ Step 4: Add Node Exporter for Host Metrics
 
-Node Exporter was introduced to expose system-level metrics:
+Node Exporter was introduced to expose host-level infrastructure metrics including:
 
-* CPU usage
-* Memory usage
+- CPU utilization
+- memory consumption
+- system-level operational metrics
 
-Prometheus successfully scraped these metrics:
+Prometheus successfully scraped the exporter metrics:
 
 ![Node Exporter container running alongside the stack](assets/node_exporter_container_running.png)
 
@@ -714,41 +895,50 @@ Prometheus successfully scraped these metrics:
 
 ![Grafana query for Node Exporter metrics](assets/grafana_node_exporter_query.png)
 
+This introduced infrastructure observability into the stack.
+
 #### 5️⃣ Step 5: Build Dashboards in Grafana
 
-Dashboards were provisioned automatically from configuration files:
+Grafana dashboards were provisioned automatically through mounted configuration files.
+
+This avoids manual dashboard setup and improves reproducibility across environments.
 
 ![Grafana dashboard loaded under the project folder](assets/grafana_dashboard_loaded.png)
 
 ![Grafana dashboard view for the project](assets/grafana_dashboard_view.png)
 
-Expanded dashboards included:
+Expanded dashboards included operational metrics such as:
 
-* CPU utilization
-* Memory usage
-* Exporter health
+- CPU utilization
+- memory usage
+- exporter health status
+- infrastructure visibility panels
 
 ![Grafana dashboard showing CPU and memory panels](assets/grafana_cpu_memory_dashboard.png)
 
 #### 6️⃣ Step 6: Add Alert Rules in Prometheus
 
-Prometheus alerting rules were introduced to detect failures.
+Prometheus alert rules were introduced to detect infrastructure and service failures automatically.
 
-Example alert:
+Example alert rule:
 
 ```promql
 up{job="node-exporter"} == 0
 ```
 
-Triggers when Node Exporter is down for more than one minute.
+This alert transitions to `FIRING` if the Node Exporter target remains unavailable for more than one minute.
 
 ![Prometheus alert rule loaded and inactive](assets/prometheus_alert_rule_loaded.png)
 
 ![Prometheus alert firing for Node Exporter downtime](assets/prometheus_alert_firing.png)
 
+This introduces automated failure detection into the monitoring workflow.
+
 #### 7️⃣ Step 7: Integrate Alertmanager
 
-Alertmanager was added to route alerts:
+Alertmanager was added to receive alerts from Prometheus and manage notification routing.
+
+This component acts as the central alert orchestration layer for the monitoring stack.
 
 ![Alertmanager container running with the monitoring stack](assets/alertmanager_container_running.png)
 
@@ -756,63 +946,86 @@ Alertmanager was added to route alerts:
 
 ![Alertmanager receiving the firing alert](assets/alertmanager_alert_firing.png)
 
-#### 8️⃣ Step 8: Add Blackbox Exporter for Service Monitoring
+Alertmanager enables:
 
-Blackbox Exporter was configured to probe:
+- alert routing
+- grouping
+- deduplication
+- notification delivery workflows
+
+#### 8️⃣ Step 8: Add Blackbox Exporter for External Service Monitoring
+
+Blackbox Exporter was configured to probe the live production endpoint externally:
 
 ```text
 https://philipoludolamu.com
 ```
 
-Key metrics:
+This introduced uptime and response monitoring for the publicly accessible application.
 
-* `probe_success`
-* `probe_duration_seconds`
+Key metrics included:
+
+- `probe_success`
+- `probe_duration_seconds`
 
 ![Prometheus blackbox target for the live portfolio website](assets/prometheus_blackbox_target.png)
 
-![Prometheus probe\_success query result](assets/prometheus_probe_success.png)
+![Prometheus probe_success query result](assets/prometheus_probe_success.png)
 
-![Prometheus probe\_duration\_seconds query result](assets/prometheus_probe_duration.png)
+![Prometheus probe_duration_seconds query result](assets/prometheus_probe_duration.png)
+
+This extends monitoring beyond infrastructure metrics into application availability monitoring.
 
 #### 9️⃣ Step 9: Expand Alert Rules for Website Monitoring
 
-New alerts were added:
+Additional alert rules were introduced for application-level monitoring:
 
-* `PortfolioWebsiteDown`
-* `PortfolioWebsiteSlow`
+- `PortfolioWebsiteDown`
+- `PortfolioWebsiteSlow`
 
-These monitor:
+These alerts monitor:
 
-* Website availability
-* Response latency
+- website availability
+- external uptime status
+- response latency thresholds
 
 ![Prometheus alert rules including website-specific alerts](assets/portfolio_alert_rules_loaded.png)
 
+This introduces service-level operational monitoring into the stack.
+
 #### 🔟 Step 10: Build Final Unified Dashboard
 
-The final dashboard combines:
+The final Grafana dashboard consolidated:
 
-* Infrastructure metrics
-* Service availability
-* Performance indicators
+- infrastructure metrics
+- exporter health
+- website uptime
+- response latency
+- operational visibility indicators
 
 ![Full Grafana monitoring dashboard for the portfolio](assets/grafana_full_monitoring_dashboard.png)
 
+This creates a centralized operational visibility layer for the application.
+
 #### 📣 Step 11: Send Alerts to Slack
 
-Alertmanager was configured with a Slack webhook:
+Alertmanager was configured to send notifications to Slack through an incoming webhook integration.
 
 ```text
 monitoring/secrets/slack_webhook_url
 ```
 
-* Alerts are sent when issues occur
-* Recovery notifications are sent when resolved
+This enables:
+
+- real-time incident notifications
+- recovery notifications
+- operational visibility outside the monitoring stack itself
 
 ![Slack firing alert notification](assets/slack_alert_firing.png)
 
 ![Slack resolved alert notification](assets/slack_alert_resolved.png)
+
+This completes the end-to-end alerting workflow from detection through notification delivery.
 
 ### 🧪 How To Reproduce the Main Alert Test
 
@@ -821,13 +1034,13 @@ cd monitoring
 docker compose stop node-exporter
 ```
 
-Wait ~1 minute, then verify:
+Wait approximately one minute, then verify:
 
-* Prometheus Alerts
-* Alertmanager Alerts
-* Slack notifications
+- Prometheus alert status
+- Alertmanager notification routing
+- Slack alert delivery
 
-To restore:
+To restore the exporter:
 
 ```bash
 docker compose start node-exporter
@@ -835,78 +1048,89 @@ docker compose start node-exporter
 
 ## 🧪 Failure Testing & Validation
 
-To ensure the monitoring and alerting system behaves correctly under real-world conditions, controlled failure scenarios were intentionally simulated and observed end-to-end.
+To validate the monitoring and alerting workflows under realistic operational conditions, controlled failure scenarios were intentionally simulated and observed end-to-end.
+
+This ensured that the monitoring stack was not only configured, but operationally verified.
 
 ### 🔻 Infrastructure Failure Test (Node Exporter)
 
-The Node Exporter container was stopped to simulate a host-level monitoring failure:
+The Node Exporter container was stopped to simulate infrastructure-level monitoring failure:
 
 ```bash
 docker compose stop node-exporter
 ```
 
-**Observed behavior:**
+### ✅ Observed Behavior
 
-* Prometheus marked the target as `DOWN`
-* Alert rule `NodeExporterDown` transitioned to `FIRING`
-* Alertmanager received and processed the alert
-* Slack received a real-time incident notification
+- Prometheus marked the exporter target as `DOWN`
+- Alert rule `NodeExporterDown` transitioned to `FIRING`
+- Alertmanager received and processed the alert
+- Slack received a real-time incident notification
 
 ![Prometheus alert firing for Node Exporter downtime](assets/prometheus_alert_firing.png)
 
 ![Slack firing alert notification](assets/slack_alert_firing.png)
 
-After restarting the container:
+After restarting the exporter:
 
 ```bash
 docker compose start node-exporter
 ```
 
-* Alert transitioned to `RESOLVED`
-* Slack received a recovery notification
+- The alert transitioned to `RESOLVED`
+- Slack received a recovery notification
 
 ![Slack resolved alert notification](assets/slack_alert_resolved.png)
 
+This validated the full infrastructure alert lifecycle from detection through recovery.
+
 ### 🌐 Application Availability Test (Blackbox Exporter)
 
-The live portfolio website was monitored using Blackbox Exporter to validate external uptime detection.
+The live portfolio endpoint was monitored through Blackbox Exporter to validate external uptime monitoring behavior.
 
-**Observed behavior during failure conditions:**
+### ✅ Observed Behavior During Failure Conditions
 
-* Blackbox probe failed (`probe_success = 0`)
-* Prometheus triggered `PortfolioWebsiteDown`
-* Alertmanager routed the alert
-* Slack received a firing alert notification
+- Blackbox probe failed (`probe_success = 0`)
+- Prometheus triggered `PortfolioWebsiteDown`
+- Alertmanager routed the incident
+- Slack received a firing alert notification
 
-Once the service recovered:
+After service recovery:
 
-* Probe returned to success (`probe_success = 1`)
-* Alert resolved automatically
-* Slack received recovery notification
+- Probe returned to success (`probe_success = 1`)
+- The alert resolved automatically
+- Slack received a recovery notification
+
+This validated application-level availability monitoring and external uptime detection workflows.
 
 ### ⚡ Key Validation Outcomes
 
-* Alerts trigger only after defined thresholds (reducing false positives)
-* Alert lifecycle is correctly handled (`FIRING → RESOLVED`)
-* Slack integration provides real-time incident visibility
-* Monitoring system detects both infrastructure and application failures
-* End-to-end alert pipeline (Prometheus → Alertmanager → Slack) is fully validated
+- Alerts trigger only after configured thresholds are exceeded
+- False-positive risk is reduced through alert timing controls
+- Alert lifecycle transitions function correctly (`FIRING → RESOLVED`)
+- Slack integration provides real-time operational visibility
+- Both infrastructure and application failures are detected successfully
+- The full alert pipeline (`Prometheus → Alertmanager → Slack`) is operationally validated
 
 ### 💥 Why This Matters
 
-This validation demonstrates that the system is not only deployed, but also **operationally reliable**.
+This validation process demonstrates that the platform is not only deployed, but also operationally observable and incident-aware.
 
-* Monitoring is actively verified, not assumed
-* Failure scenarios are tested and observed
-* Alert delivery is confirmed in real time
+Key operational behaviors were actively verified rather than assumed:
 
-This reflects real-world DevOps and Site Reliability Engineering (SRE) practices.
+- monitoring functionality
+- failure detection
+- alert routing
+- notification delivery
+- recovery handling
+
+This reflects real-world DevOps and Site Reliability Engineering (SRE) practices where system reliability must be continuously observable and operationally validated.
 
 ### 💪 Why Task 7 Strengthens the Project
 
-Task 7 transforms the project from a static deployment into a **production-style observable system**.
+Task 7 transforms the project from a simple deployed application into a production-style observable platform.
 
-It shifts the focus from:
+The project evolves from:
 
 ```text
 "I can deploy a website"
@@ -918,85 +1142,124 @@ to:
 "I can deploy, monitor, detect failures, and respond to incidents"
 ```
 
-This progression reflects real-world DevOps and Site Reliability Engineering (SRE) responsibilities, where operating systems reliably is as important as deploying them.
+This reflects a broader operational engineering mindset where deployment, observability, reliability, and incident response are treated as equally important parts of the system lifecycle.
 
 ## 🛠️ Troubleshooting and Lessons Learned
 
 ### ⚠️ Browser Caching Can Mask Recent Changes
 
-During development, browser caching affected:
+During frontend development and deployment validation, browser caching occasionally caused stale assets to appear even after successful updates.
 
-* CSS updates
-* Resume (PDF) updates
-* Image replacements
+This affected:
 
-A hard refresh was required to ensure the latest assets were loaded:
+- CSS modifications
+- Resume (PDF) updates
+- Image replacements
+
+A hard browser refresh was required to force retrieval of the latest assets:
 
 ```text
 Ctrl + Shift + R
 ```
 
+### 🧠 Operational Insight
+
+Client-side caching can create misleading deployment validation results if stale assets remain stored locally.
+
+This reinforces the importance of:
+
+- cache invalidation strategies
+- deployment verification
+- CDN cache awareness during frontend delivery workflows
+
 ### ⚠️ Docker Port Conflicts
 
-Running multiple services locally resulted in port conflicts with previously running containers.
+Running multiple local services and previously existing containers resulted in host port conflicts during monitoring stack initialization.
 
-This was resolved by assigning custom host ports:
+To resolve this, custom host ports were assigned:
 
-* Grafana → `3001`
-* Prometheus → `9091`
-* Alertmanager → `9094`
-* Node Exporter → `9101`
-* Blackbox Exporter → `9116`
+- Grafana → `3001`
+- Prometheus → `9091`
+- Alertmanager → `9094`
+- Node Exporter → `9101`
+- Blackbox Exporter → `9116`
 
-This ensured all services remained accessible without interfering with each other.
+This ensured all observability services remained accessible simultaneously without interfering with existing local workloads.
+
+### 🧠 Operational Insight
+
+Port allocation planning becomes increasingly important when operating multiple local services, monitoring stacks, or development environments concurrently.
 
 ### ⚠️ Container Restart vs Recreate
 
-In cases where configuration files or mounted volumes were updated, restarting containers did not always apply changes.
+When configuration files or mounted volumes were updated, restarting containers alone did not always apply changes correctly.
 
-Forcing container recreation ensured that updates were properly reflected:
+Forcing container recreation ensured updated configurations were fully reflected:
 
 ```bash
 docker compose up -d --force-recreate
 ```
 
+### 🧠 Operational Insight
+
+Container recreation is sometimes required when:
+
+- mounted configuration files change
+- provisioning files are updated
+- persistent container state causes stale behavior
+
+Understanding the difference between restarting and recreating containers is important when troubleshooting containerized environments.
+
 ### ⚠️ Git Commit Scope Confusion (Subdirectory Commits)
 
-At one point, commits were made from inside the `terraform/` directory. Although `git add .` was used, only changes within that directory were staged and committed.
+At one stage, commits were executed from inside the `terraform/` directory instead of the repository root.
 
-This led to a situation where:
+Although `git add .` was used, only changes within that subdirectory were staged and committed.
 
-* Monitoring files were not included
-* README and frontend updates were not pushed
-* GitHub reflected outdated project state
+This resulted in:
 
-**Lesson learned:**
+- monitoring files being excluded
+- frontend updates not being committed
+- README changes missing from GitHub
 
-> Always run Git commands from the repository root to ensure all changes are included.
+### 🧠 Lesson Learned
+
+Git command scope depends on the current working directory.
+
+To ensure complete repository visibility during commits:
+
+> Always execute Git commands from the repository root unless intentionally targeting a specific subdirectory.
 
 ### ⚠️ Force Reset and History Rewrite Can Cause Data Loss
 
-Using commands like:
+Using destructive Git commands such as:
 
 ```bash
 git reset --hard
 git push --force
 ```
 
-resulted in loss of uncommitted local changes and overwriting of branch history.
+resulted in:
 
-This caused:
+- loss of uncommitted local changes
+- overwritten branch history
+- reverted monitoring and frontend updates
 
-* Loss of monitoring configuration files
-* Reversion of README and frontend updates
+### 🧠 Lesson Learned
 
-**Lesson learned:**
+Destructive Git operations should be used carefully and only with a clear understanding of their impact.
 
-> Avoid destructive commands unless you fully understand their impact. Always commit or stash changes before performing resets.
+Before performing resets or force pushes:
 
-### ⚠️ Detached HEAD State Is Unsafe for Development
+- commit changes
+- create backup branches
+- or stash uncommitted work
 
-While inspecting previous commits, the repository entered a **detached HEAD** state:
+This reduces the risk of accidental data loss during repository recovery operations.
+
+### ⚠️ Detached HEAD State Is Unsafe for Active Development
+
+While inspecting historical commits, the repository entered a detached `HEAD` state:
 
 ```bash
 git checkout <commit-hash>
@@ -1004,114 +1267,151 @@ git checkout <commit-hash>
 
 In this state:
 
-* Changes are not attached to a branch
-* Work can be lost if not saved to a new branch
+- changes are not attached to a branch
+- new work can become difficult to recover
+- commits may become orphaned if not preserved properly
 
-**Lesson learned:**
+### 🧠 Lesson Learned
 
-> Always return to a branch (e.g., `recovery-7` or `main`) before making changes.
+Detached `HEAD` mode is useful for repository inspection, but unsafe for ongoing development work.
+
+Before continuing development:
+
+> Always return to an active branch such as `main` or a dedicated recovery branch.
 
 ### ⚠️ Uncommitted Changes Can Be Lost During Branch Switching
 
-Attempting to switch branches without committing changes resulted in Git blocking the operation:
+Attempting to switch branches while local changes were still uncommitted caused Git to block the checkout operation:
 
 ```text
 Your local changes would be overwritten by checkout
 ```
 
-This highlighted the risk of losing work when switching contexts.
+This highlighted the importance of preserving work before changing contexts.
 
-**Lesson learned:**
+### 🧠 Lesson Learned
 
-> Always commit or stash changes before switching branches.
+Before switching branches:
 
-### ⚠️ Importance of Git Stash for Temporary Recovery
+- commit work
+- stash changes
+- or create a temporary recovery branch
 
-During recovery, `git stash` played a critical role in preserving uncommitted work.
+This prevents accidental overwrites and improves workflow safety during active development.
 
-Using:
+### ⚠️ Git Stash Became Critical During Recovery
+
+During repository recovery and troubleshooting, `git stash` became an important safety mechanism for temporarily preserving local changes.
+
+Commands used:
 
 ```bash
 git stash list
 git stash apply stash@{0}
 ```
 
-allowed restoration of:
+This allowed restoration of:
 
-* CSS updates
-* Index changes
-* README edits
+- CSS changes
+- README updates
+- frontend modifications
 
-**Lesson learned:**
+### 🧠 Lesson Learned
 
-> `git stash` is a powerful safety tool for temporarily saving work without committing.
+`git stash` is highly valuable when:
+
+- switching branches
+- troubleshooting risky operations
+- recovering interrupted work
+- preserving temporary changes without committing incomplete work
 
 ### ⚠️ CloudFront Caching Can Delay Website Updates
 
-Even after successful deployment via GitHub Actions, changes were not immediately visible on the live website.
+Even after successful GitHub Actions deployments, updates were not immediately visible on the public website.
 
-This was due to CloudFront caching old assets.
+This occurred because CloudFront continued serving cached assets from edge locations.
 
-**Solution:**
+### ✅ Resolution
 
-* Ensure CloudFront invalidation runs in CI/CD
-* Wait briefly for propagation
+- CloudFront invalidation was integrated into the CI/CD workflow
+- Propagation time was allowed for edge cache refresh
 
-**Lesson learned:**
+### 🧠 Lesson Learned
 
-> Deployment success does not always mean immediate visibility — caching layers must be considered.
+Successful deployment does not always guarantee immediate frontend visibility.
+
+CDN caching layers must be considered as part of deployment verification and operational troubleshooting workflows.
 
 ## 🧠 Key Takeaway
 
-This project reinforced that DevOps is not just about building systems, but also about:
+This project reinforced that DevOps engineering extends beyond deployment alone.
+
+It also involves:
 
 ```text
-debugging → recovering → understanding → improving
+debugging → recovering → validating → improving
 ```
 
-Each issue provided deeper insight into:
+The troubleshooting process provided deeper operational understanding across:
 
-* Git workflows and recovery strategies
-* Infrastructure behavior
-* Deployment and caching mechanisms
+- Git recovery workflows
+- infrastructure behavior
+- deployment troubleshooting
+- container operations
+- monitoring validation
+- caching and CDN behavior
 
 ### 🔒 Secret Management for Slack Webhooks
 
-Slack webhook URLs are treated as sensitive credentials and must never be committed to version control.
+Slack webhook URLs are treated as sensitive credentials and are intentionally excluded from version control.
 
-In this project, the webhook is stored in a gitignored local file and injected into the Alertmanager container at runtime.
+In this project:
 
-This approach prevents accidental exposure of secrets and aligns with secure configuration practices commonly used in production environments, where sensitive values are externalized and managed outside of source code.
+- the webhook is stored in a gitignored local file
+- the secret is injected into the Alertmanager container at runtime
+
+This approach helps prevent accidental credential exposure and aligns with common secure configuration management practices used in production environments.
 
 ### 🌐 DNS Validation vs DNS Routing
 
-DNS validation (for ACM certificates) and DNS routing (for directing traffic) serve different purposes and occur at different stages.
+DNS validation and DNS routing serve different operational purposes during custom domain integration.
 
-Understanding this distinction is essential for successfully configuring custom domains.
+| Function | Purpose |
+| --- | --- |
+| DNS Validation | Proves domain ownership for ACM certificate issuance |
+| DNS Routing | Directs public traffic to the CloudFront distribution |
+
+Understanding this distinction is important when troubleshooting HTTPS and custom domain configuration workflows.
 
 ## 🏁 Final Outcome
 
-This project demonstrates the ability to design, deploy, and operate a production-style DevOps system:
+This project demonstrates the ability to design, automate, deploy, monitor, and operate a production-style cloud application workflow.
 
-* Build a recruiter-facing frontend and treat it as a real application workload
-* Provision AWS infrastructure using Terraform
-* Automate deployments using GitHub Actions
-* Secure delivery using CloudFront, ACM, and a custom domain
-* Collect infrastructure metrics using Prometheus and Node Exporter
-* Monitor application availability using Blackbox Exporter
-* Visualize system metrics using Grafana
-* Route alerts through Alertmanager
-* Send incident notifications to Slack
+Key capabilities demonstrated include:
 
-In summary, the project evolved from a simple static website into a complete DevOps workflow covering:
+- Building a recruiter-facing frontend workload
+- Provisioning AWS infrastructure with Terraform
+- Automating deployments using GitHub Actions
+- Delivering content securely through CloudFront and ACM
+- Integrating a real custom domain through DNS configuration
+- Collecting infrastructure metrics with Prometheus and Node Exporter
+- Monitoring external application availability using Blackbox Exporter
+- Visualizing operational metrics through Grafana dashboards
+- Routing alerts with Alertmanager
+- Sending real-time incident notifications through Slack
+- Validating monitoring workflows through controlled failure testing
+
+In summary, the project evolved from a simple static website into a production-style DevOps workflow covering:
 
 ```text
-**build → deploy → secure → observe → alert → respond**
+build → automate → deploy → secure → observe → alert → validate
 ```
 
 ## 👤 Author
 
 ### **Philip Oludolamu**
+
+DevOps and Cloud Engineer focused on infrastructure automation, CI/CD workflows, observability, and production-style cloud operations.
 
 * 🌐 Portfolio: https://philipoludolamu.com
 * 💻 GitHub: https://github.com/holuphilix
@@ -1121,4 +1421,6 @@ In summary, the project evolved from a simple static website into a complete Dev
 
 This project is licensed under the **MIT License**.
 
-You are free to use, modify, and share the code with attribution. See the [LICENSE](LICENSE) file for full details.
+You are free to use, modify, and distribute the code with attribution.
+
+See the [LICENSE](LICENSE) file for full license details.
