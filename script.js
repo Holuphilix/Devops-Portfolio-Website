@@ -2,8 +2,7 @@ const themeToggle = document.getElementById("themeToggle");
 const themeToggleLabel = document.querySelector(".theme-toggle-label");
 const themeColorMeta = document.querySelector('meta[name="theme-color"]');
 const savedTheme = localStorage.getItem("theme");
-const preferredTheme = window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark";
-const activeTheme = savedTheme || preferredTheme;
+const activeTheme = savedTheme || "dark";
 
 document.body.setAttribute("data-theme", activeTheme);
 
@@ -48,34 +47,6 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             });
         }
     });
-});
-
-
-// ==============================
-// PAGE FADE-IN
-// ==============================
-window.addEventListener("load", () => {
-    document.body.classList.add("loaded");
-});
-
-
-// ==============================
-// SCROLL REVEAL (Optimized)
-// ==============================
-const observer = new IntersectionObserver((entries, observer) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.classList.add("show");
-            observer.unobserve(entry.target); // improves performance
-        }
-    });
-}, {
-    threshold: 0.15
-});
-
-document.querySelectorAll("section:not(#projects), .next-step-card").forEach(el => {
-    el.classList.add("hidden");
-    observer.observe(el);
 });
 
 
@@ -134,7 +105,6 @@ modal.onclick = (e) => {
     }
 };
 
-// 🔥 NEW: CLICK IMAGE TO CLOSE
 modalImg.onclick = () => {
     modal.style.display = "none";
 };
