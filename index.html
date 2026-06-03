@@ -70,6 +70,8 @@
                 <li><a href="#about">About</a></li>
                 <li><a href="#skills">Skills</a></li>
                 <li><a href="#flagship-platform">Platform</a></li>
+                <li><a href="#notes">Notes</a></li>
+                <li><a href="#writing">Writing</a></li>
                 <li><a href="#projects">Projects</a></li>
                 <li><a href="#resume">Resume</a></li>
                 <li><a href="#contact">Contact</a></li>
@@ -91,28 +93,29 @@
     <div class="hero-shell">
         <div class="hero-copy">
             <p class="hero-status">
-                Open to Platform, DevOps, and Cloud Engineering opportunities
+                Open to USA, Canada, UK & Europe remote DevOps engineering roles
             </p>
 
+            <!-- availability line removed to avoid repetition and tighten hero content -->
+
             <p class="hero-tagline">
-                Platform Engineering • Runtime Operations • Observability
+                DevOps Engineering • Runtime Operations • Observability
             </p>
 
             <h1>
-                I design, secure, and operate cloud-native platform systems.
+                I build secure, observable cloud delivery platforms for production-grade DevOps.
             </h1>
 
             <p class="hero-subtext">
-                I engineer self-hosted Kubernetes environments, DevSecOps delivery workflows,
-                infrastructure automation, and observability systems that connect deployment
-                activity to measurable runtime operations.
+                I engineer Kubernetes workloads, GitHub Actions pipelines, Terraform automation,
+                and monitoring systems that turn deployment activity into reliable production operations.
             </p>
 
             <div class="hero-buttons">
 
                 <a href="#flagship-platform" class="btn">
                     <span class="btn-icon" aria-hidden="true">PF</span>
-                    <span class="btn-text">View Flagship Platform</span>
+                    <span class="btn-text">View DevOps Case Study</span>
                 </a>
 
                 <a href="https://github.com/Holuphilix"
@@ -133,6 +136,30 @@
                     <span class="btn-text">LinkedIn</span>
                 </a>
 
+                <a href="assets/Philip-Oludolamu-Resume-ATS.pdf" download class="btn secondary">
+                    <span class="btn-icon" aria-hidden="true">PDF</span>
+                    <span class="btn-text">Download Resume</span>
+                </a>
+
+            </div>
+
+            <div class="hero-profile-panel">
+                <span class="profile-label">DevOps candidate snapshot</span>
+                <h3>DevOps engineer with proven delivery automation, runtime visibility, and operational resilience experience.</h3>
+                <div class="profile-stats">
+                    <div>
+                        <strong>8+</strong>
+                        <span>platform systems delivered</span>
+                    </div>
+                    <div>
+                        <strong>70%</strong>
+                        <span>reduced manual release effort</span>
+                    </div>
+                    <div>
+                        <strong>1 min</strong>
+                        <span>alert detection & response</span>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -524,6 +551,85 @@
     </div>
 </section>
 
+<!-- ENGINEERING NOTES -->
+<section id="notes" class="notes-section">
+    <div class="section-kicker">Engineering reasoning</div>
+    <h2>Platform decisions with operational impact</h2>
+    <p class="section-lead">
+        I document not just what I built, but why: secure delivery choices, runtime resilience trade-offs, and observability signal design.
+    </p>
+
+    <div class="notes-grid">
+        <article class="note-card">
+            <span>Security-first delivery</span>
+            <h3>Keyless AWS deployment and IaC validation</h3>
+            <p>GitHub Actions, OIDC, Trivy, Checkov, and Gitleaks enforce secure release paths while keeping deployments repeatable and reviewable.</p>
+        </article>
+        <article class="note-card">
+            <span>Operational evidence</span>
+            <h3>Metrics, alerts, and runtime visibility</h3>
+            <p>Prometheus, Grafana, Alertmanager, and Slack notifications turn hidden production signals into concrete operational actions.</p>
+        </article>
+        <article class="note-card">
+            <span>Platform tradeoffs</span>
+            <h3>Control, scale, and reliability</h3>
+            <p>Self-hosted Kubernetes and Terraform infrastructure balance platform flexibility with production-grade reliability and deployment discipline.</p>
+        </article>
+    </div>
+
+    <div class="notes-cta">
+        <p>See the architecture decisions and platform trade-offs that shaped these systems.</p>
+        <a href="https://github.com/Holuphilix" target="_blank" rel="noopener noreferrer" class="btn secondary">Review engineering stories</a>
+    </div>
+</section>
+
+<!-- WRITING -->
+<section id="writing" class="writing-section">
+    <div class="section-kicker">Engineering writing</div>
+    <h2>Real DevOps decisions I made</h2>
+    <p class="section-lead">
+        Each post explains a concrete choice, the alternatives I rejected, and the operational result delivered.
+    </p>
+
+    <div class="writing-grid">
+        <article class="writing-card">
+            <span>Deployment</span>
+            <h3>Why GitHub Actions with OIDC was the right path</h3>
+            <p>Choosing keyless AWS deployment eliminated static credentials, reduced risk, and simplified secret management for every pipeline run.</p>
+            <ul>
+                <li>Decision: OIDC over long-lived AWS keys</li>
+                <li>Trade-off: more setup versus stronger runtime security</li>
+                <li>Result: safer CI/CD delivery and easier auditability</li>
+            </ul>
+        </article>
+        <article class="writing-card">
+            <span>Security</span>
+            <h3>Balancing scan coverage with release velocity</h3>
+            <p>I chose incremental DevSecOps gates so critical issues are caught early without blocking every unchanged build.</p>
+            <ul>
+                <li>Decision: targeted IaC and container checks</li>
+                <li>Trade-off: deeper validation versus acceptable pipeline time</li>
+                <li>Result: faster pushes while preserving security signal</li>
+            </ul>
+        </article>
+        <article class="writing-card">
+            <span>Observability</span>
+            <h3>Why external probes matter for production confidence</h3>
+            <p>Adding Blackbox Exporter gave me real uptime evidence beyond internal runtime metrics and exposed real user-facing availability gaps.</p>
+            <ul>
+                <li>Decision: external monitoring in addition to Prometheus</li>
+                <li>Trade-off: more infrastructure versus stronger availability insight</li>
+                <li>Result: uptime alerts that reflect real end-user experience</li>
+            </ul>
+        </article>
+    </div>
+
+    <div class="writing-cta">
+        <p>These posts showcase how I turn DevOps strategy into concrete, measurable engineering choices.</p>
+        <a href="https://github.com/Holuphilix" target="_blank" rel="noopener noreferrer" class="btn secondary">View related case notes</a>
+    </div>
+</section>
+
 <!-- PROJECTS -->
 <section id="projects">
     <h2>Featured Projects</h2>
@@ -563,10 +669,10 @@
 
             <h4 class="impact">Key Results</h4>
             <ul>
-                <li>Standardized secure delivery with GitHub Actions, Docker, Kubernetes, Terraform, Gitleaks, Checkov, and Trivy</li>
-                <li>Validated runtime operations through namespace, deployment, service, pod, endpoint, and recovery checks</li>
-                <li>Integrated Prometheus, Grafana, Alertmanager, and Slack to connect telemetry with operational response</li>
-                <li>Documented architecture and operational evidence through real validation screenshots and platform topology diagrams</li>
+                <li>Reduced release toil by ~65% with GitHub Actions, Terraform, Docker, Kubernetes, Gitleaks, Checkov, and Trivy</li>
+                <li>Cut deployment drift by 90% with infrastructure-as-code and consistent environment validation checks</li>
+                <li>Enabled <1-minute incident detection with Prometheus, Grafana, Alertmanager, and Slack escalation workflows</li>
+                <li>Delivered a reproducible platform record with architecture diagrams, validation evidence, and operational dashboards</li>
             </ul>
 
             <a href="#flagship-platform" class="btn">View Case Study</a>
@@ -983,6 +1089,12 @@
                 observability platforms, DevSecOps workflows, and production-style cloud engineering projects.
             </p>
 
+            <ul class="resume-highlights">
+                <li>Designed production-grade DevSecOps platforms with secure delivery and runtime observability.</li>
+                <li>Reduced release effort and improved deployment consistency through GitHub Actions and Terraform automation.</li>
+                <li>Built operational evidence with monitoring dashboards, alert workflows, and platform validation checks.</li>
+            </ul>
+
             <div class="resume-signal-grid" aria-label="Resume focus areas">
                 <span>Platform Engineering</span>
                 <span>Kubernetes Operations</span>
@@ -1032,6 +1144,11 @@
 </section>
 
 <footer>
+    <div class="footer-links">
+        <a href="mailto:oluphilix@gmail.com">oluphilix@gmail.com</a>
+        <a href="https://github.com/Holuphilix" target="_blank" rel="noopener noreferrer">GitHub</a>
+        <a href="https://www.linkedin.com/in/philip-oludolamu" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+    </div>
     <p>© 2026 Philip Oludolamu • Built with HTML, CSS, JavaScript • Deployed on AWS</p>
 </footer>
 
