@@ -630,6 +630,258 @@
     </div>
 </section>
 
+<!-- FLAGSHIP GITOPS PLATFORM -->
+<section id="flagship-gitops-platform" class="flagship-platform">
+    <div class="section-kicker">FLAGSHIP GITOPS PLATFORM CASE STUDY</div>
+    <h2>Production-Grade GitOps Platform</h2>
+
+    <p class="section-lead">
+        A production-grade GitOps platform demonstrating Kubernetes deployment automation, ArgoCD synchronization,
+        multi-environment application delivery, observability, security validation, and platform engineering practices.
+    </p>
+
+    <div class="platform-flow" aria-label="GitOps delivery and operations flow">
+        <span>Git</span>
+        <span>Build</span>
+        <span>Package</span>
+        <span>GitOps</span>
+        <span>Sync</span>
+        <span>Deploy</span>
+        <span>Observe</span>
+        <span>Validate</span>
+    </div>
+
+    <div class="flagship-hero-grid">
+        <figure class="architecture-figure architecture-figure-clean">
+            <img src="assets/production-grade-gitops-platform-architecture.png"
+                 class="preview-img"
+                 alt="Architecture diagram for the Production-Grade GitOps Platform showing deployment automation, reconciliation, and observability">
+            <figcaption>Main architecture view showing GitOps source control, build packaging, ArgoCD reconciliation, Kubernetes runtime, and observability feedback.</figcaption>
+        </figure>
+
+        <div class="platform-summary-panel">
+            <span class="panel-eyebrow">GitOps operating model</span>
+            <h3>Designed as a production-grade GitOps delivery system from source control to runtime validation.</h3>
+            <p>
+                This platform demonstrates how declarative Kubernetes manifests, Kustomize overlays, ArgoCD synchronization,
+                and observability tooling work together to deliver multi-environment applications with security checks and operational visibility.
+            </p>
+
+            <div class="platform-facts">
+                <div>
+                    <strong>Runtime Layer</strong>
+                    <span>Kubernetes workloads, namespace isolation, and environment separation for dev/staging/prod.</span>
+                </div>
+                <div>
+                    <strong>Delivery Layer</strong>
+                    <span>GitHub Actions builds and packages container images, then publishes deployment references to GitOps config.</span>
+                </div>
+                <div>
+                    <strong>GitOps Layer</strong>
+                    <span>ArgoCD continuously reconciles desired state, detects drift, and ensures cluster alignment with Git.</span>
+                </div>
+                <div>
+                    <strong>Observability Layer</strong>
+                    <span>Prometheus, Grafana, Alertmanager, and security validation keep runtime behavior visible and reliable.</span>
+                </div>
+            </div>
+
+            <a href="https://github.com/Holuphilix/Production-Grade-GitOps-Platform"
+               target="_blank"
+               rel="noopener noreferrer"
+               class="btn">
+                <span class="btn-icon" aria-hidden="true">GH</span>
+                <span class="btn-text">View Platform Repository</span>
+            </a>
+            <a href="https://github.com/Holuphilix/Gitops-Platform-Config"
+               target="_blank"
+               rel="noopener noreferrer"
+               class="btn secondary">
+                <span class="btn-icon" aria-hidden="true">CFG</span>
+                <span class="btn-text">View Config Repository</span>
+            </a>
+            <a href="https://github.com/Holuphilix/Sample-Microservice"
+               target="_blank"
+               rel="noopener noreferrer"
+               class="btn">
+                <span class="btn-icon" aria-hidden="true">APP</span>
+                <span class="btn-text">View Application Repository</span>
+            </a>
+        </div>
+    </div>
+
+    <div class="platform-capability-grid">
+        <article>
+            <span>01</span>
+            <h3>Declarative Configuration</h3>
+            <p>Kubernetes manifests, Kustomize overlays, and environment standardization for consistent delivery.</p>
+        </article>
+        <article>
+            <span>02</span>
+            <h3>GitOps Automation</h3>
+            <p>ArgoCD Applications, continuous reconciliation, and drift detection maintain desired state automatically.</p>
+        </article>
+        <article>
+            <span>03</span>
+            <h3>Multi-Environment Delivery</h3>
+            <p>Dev, staging, and production deployments use namespace isolation and reusable overlays to reduce environment drift.</p>
+        </article>
+        <article>
+            <span>04</span>
+            <h3>Observability &amp; Security</h3>
+            <p>Prometheus, Grafana, Alertmanager, and Trivy provide monitoring, alerting, and security validation across the platform.</p>
+        </article>
+    </div>
+
+    <div class="evidence-header">
+        <h3>Operational Validation Evidence</h3>
+        <p>Real platform screenshots showing GitOps delivery automation, cluster observability, monitoring validation, and alerting evidence.</p>
+    </div>
+
+    <div class="evidence-grid">
+        <figure class="evidence-card">
+            <div class="evidence-frame">
+                <img src="assets/task-04-build-test-scan-success.png" class="preview-img" alt="GitHub Actions build, test, and scan success">
+            </div>
+            <figcaption>GitHub Actions: build, test, and security scan completed successfully.</figcaption>
+        </figure>
+        <figure class="evidence-card">
+            <div class="evidence-frame">
+                <img src="assets/task-04-dockerhub-image-tags.png" class="preview-img" alt="Docker Hub image tags for published artifacts">
+            </div>
+            <figcaption>Docker Hub: published image tags verifying successful packaging and publication.</figcaption>
+        </figure>
+
+        <figure class="evidence-card">
+            <div class="evidence-frame">
+                <img src="assets/task-07-argocd-multi-environment-dashboard.png" class="preview-img" alt="ArgoCD multi-environment dashboard showing application sync state">
+            </div>
+            <figcaption>ArgoCD: multi-environment dashboard showing Healthy & Synced application state.</figcaption>
+        </figure>
+        <figure class="evidence-card">
+            <div class="evidence-frame">
+                <img src="assets/task-07-argocd-multi-environment-applications.png" class="preview-img" alt="ArgoCD applications listing across dev, staging, prod">
+            </div>
+            <figcaption>ArgoCD: application listing across dev, staging, and production environments.</figcaption>
+        </figure>
+
+        <figure class="evidence-card">
+            <div class="evidence-frame">
+                <img src="assets/task-08-grafana-cluster-overview.png" class="preview-img" alt="Grafana cluster overview dashboard showing cluster metrics">
+            </div>
+            <figcaption>Grafana: cluster overview dashboard with CPU, memory, and pod metrics.</figcaption>
+        </figure>
+        <figure class="evidence-card">
+            <div class="evidence-frame">
+                <img src="assets/task-08-prometheus-targets.png" class="preview-img" alt="Prometheus targets list showing exporters and services">
+            </div>
+            <figcaption>Prometheus: target discovery confirming exporters and monitoring endpoints.</figcaption>
+        </figure>
+
+        <figure class="evidence-card">
+            <div class="evidence-frame">
+                <img src="assets/task-09-trivy-image-scan.png" class="preview-img" alt="Trivy image scan results showing vulnerabilities">
+            </div>
+            <figcaption>Trivy: container image security scan report demonstrating vulnerability checks.</figcaption>
+        </figure>
+        <figure class="evidence-card">
+            <div class="evidence-frame">
+                <img src="assets/task-10-final-argocd-dashboard.png" class="preview-img" alt="Final ArgoCD dashboard showing end-to-end validation">
+            </div>
+            <figcaption>Final validation: ArgoCD dashboard showing the platform in a reconciled, healthy state.</figcaption>
+        </figure>
+    </div>
+
+    <section class="notes-section">
+        <div class="section-kicker">Engineering reasoning</div>
+        <h3>GitOps Design Decisions and Platform Rationale</h3>
+        <p class="section-lead">Design choices that shaped the GitOps platform: declarative configuration, reconciliation policies, and operational consistency.</p>
+
+        <div class="notes-grid">
+            <article class="note-card">
+                <span>Declarative First</span>
+                <h3>Configuration as Code</h3>
+                <p>Kubernetes manifests and Kustomize overlays are the single source of truth; versioned configuration reduces drift and enables reproducible environment builds.</p>
+            </article>
+
+            <article class="note-card">
+                <span>Reconcile &amp; Observe</span>
+                <h3>ArgoCD Reconciliation</h3>
+                <p>Continuous reconciliation enforces desired state, detects drift, and supports automated healing; alerting and dashboards surface reconciliation failures early.</p>
+            </article>
+
+            <article class="note-card">
+                <span>Environment Strategy</span>
+                <h3>Kustomize Overlays</h3>
+                <p>Overlays provide environment-specific configuration while sharing a common base, reducing duplication and accelerating safe promotions across dev → staging → prod.</p>
+            </article>
+        </div>
+
+        <div class="notes-cta">
+            <p>These choices prioritize operational consistency, secure delivery, and fast recovery. Explore the full implementation across the platform, config, and application repositories.</p>
+            <div>
+                <a href="https://github.com/Holuphilix/Production-Grade-GitOps-Platform" target="_blank" rel="noopener noreferrer" class="btn secondary">Platform Repo</a>
+                <a href="https://github.com/Holuphilix/Gitops-Platform-Config" target="_blank" rel="noopener noreferrer" class="btn secondary">Config Repo</a>
+                <a href="https://github.com/Holuphilix/Sample-Microservice" target="_blank" rel="noopener noreferrer" class="btn">App Repo</a>
+            </div>
+        </div>
+    </section>
+
+<section class="writing-section">
+    <div class="section-kicker">Engineering writing</div>
+    <h2>Real GitOps decisions I made</h2>
+    <p class="section-lead">
+        Practical GitOps decisions that separated application delivery, configuration management, and platform documentation into a reliable platform engineering workflow.
+    </p>
+
+    <div class="writing-grid">
+        <article class="writing-card">
+            <span>Repository Separation</span>
+            <h3>Three repositories for clear ownership</h3>
+            <p>
+                I separated the platform into three repositories so application code, GitOps configuration, and platform documentation each have distinct ownership,
+                deployment flows, and audit trails. This reduces coupling, makes reviews more targeted, and enables safer change management.
+            </p>
+            <ul>
+                <li>Application repo for source, image building, and runtime behavior</li>
+                <li>Config repo for declarative Kubernetes manifests and environment overlays</li>
+                <li>Platform repo for orchestration, validation, and operational evidence</li>
+            </ul>
+        </article>
+
+        <article class="writing-card">
+            <span>Declarative Design</span>
+            <h3>Kustomize overlays and environment strategy</h3>
+            <p>
+                I used Kustomize overlays to keep environment variations explicit while reusing a common base. This keeps configuration declarative and prevents drift across dev, staging, and prod.
+            </p>
+            <ul>
+                <li>Base manifests define the core workload and service structure</li>
+                <li>Overlays inject environment-specific values, namespaces, and deployment behavior</li>
+                <li>Promotes safe promotion with repeatable environment configuration</li>
+            </ul>
+        </article>
+
+        <article class="writing-card">
+            <span>Automated Operations</span>
+            <h3>ArgoCD reconciliation and observability</h3>
+            <p>
+                ArgoCD continuously reconciles cluster state to Git, making operational consistency the default. Observability and security checks ensure the platform is both healthy and compliant.
+            </p>
+            <ul>
+                <li>Automated drift detection and self-healing through ArgoCD</li>
+                <li>Multi-environment deployment design with separate namespaces and sync policies</li>
+                <li>Integrated Prometheus, Grafana, Alertmanager, and Trivy for runtime and security visibility</li>
+            </ul>
+        </article>
+    </div>
+
+    <div class="writing-cta">
+        <p>These decisions reflect senior platform engineering tradeoffs: clear ownership boundaries, immutable configuration, and observability-driven delivery.</p>
+        <a href="https://github.com/Holuphilix" target="_blank" rel="noopener noreferrer" class="btn secondary">View related case notes</a>
+    </div>
+</section>
+
 <!-- PROJECTS -->
 <section id="projects">
     <h2>Featured Projects</h2>
@@ -638,7 +890,49 @@
         Selected systems showing how infrastructure automation, runtime operations, observability, and deployment workflows connect across a broader platform engineering practice.
     </p>
 
-    <!-- 1. FLAGSHIP DEVSECOPS PLATFORM -->
+    <!-- 1. FLAGSHIP GITOPS PLATFORM -->
+    <div class="project-card project-card-featured">
+        <img src="assets/production-grade-gitops-platform-architecture.png" class="project-img preview-img" alt="Architecture diagram for the Production-Grade GitOps Platform showing deployment automation, reconciliation, and observability">
+
+        <div class="project-content">
+            <h3>Production-Grade GitOps Platform</h3>
+            <p class="project-meta">
+                <span>Last Updated · June 2026</span>
+                <span class="project-status">Completed</span>
+            </p>
+
+            <div class="tags">
+                <span>GitOps</span>
+                <span>ArgoCD</span>
+                <span>Kustomize</span>
+                <span>Kubernetes</span>
+                <span>GitHub Actions</span>
+                <span>Prometheus</span>
+                <span>Grafana</span>
+                <span>Alertmanager</span>
+                <span>Trivy</span>
+            </div>
+
+            <p>
+                Engineered a production-grade GitOps platform that automates Kubernetes delivery with ArgoCD, multi-environment configuration,
+                observability, and security validation across the full deployment lifecycle.
+            </p>
+
+            <h4 class="impact">Key Results</h4>
+            <ul>
+                <li>Delivered a GitOps-driven deployment model using ArgoCD reconciliation and drift correction</li>
+                <li>Standardized Kustomize overlays for dev, staging, and production environments with namespace isolation</li>
+                <li>Automated build, package, and GitOps configuration updates through GitHub Actions</li>
+                <li>Validated runtime behavior with Prometheus, Grafana, Alertmanager, and CI-based security scanning</li>
+            </ul>
+
+            <a href="https://github.com/Holuphilix/Production-Grade-GitOps-Platform" target="_blank" rel="noopener noreferrer" class="btn">View Platform Repository</a>
+            <a href="https://github.com/Holuphilix/Gitops-Platform-Config" target="_blank" rel="noopener noreferrer" class="btn secondary">View Config Repository</a>
+            <a href="https://github.com/Holuphilix/Sample-Microservice" target="_blank" rel="noopener noreferrer" class="btn">View Application Repository</a>
+        </div>
+    </div>
+
+    <!-- 2. FLAGSHIP DEVSECOPS PLATFORM -->
     <div class="project-card project-card-featured">
         <img src="assets/devsecops-platform-architecture-diagram.png" class="project-img preview-img" alt="GitHub Actions workflow execution history for the Production-Grade DevSecOps CI/CD Platform">
 
@@ -676,7 +970,7 @@
             </ul>
 
             <a href="#flagship-platform" class="btn">View Case Study</a>
-            <a href="https://github.com/Holuphilix/Production-Devsecops-Platform" target="_blank" rel="noopener noreferrer" class="btn secondary">View Code</a>
+            <a href="https://github.com/Holuphilix/Production-Devsecops-Platform" target="_blank" rel="noopener noreferrer" class="btn secondary">View Platform Repository</a>
         </div>
     </div>
 
@@ -716,7 +1010,7 @@
                 <li>Centralized operational visibility through PostgreSQL-backed monitoring data and Grafana dashboards for uptime, response time, and failed-check trends</li>
             </ul>
 
-            <a href="https://github.com/Holuphilix/Web-Uptime-Monitoring-Platform" target="_blank" rel="noopener noreferrer" class="btn secondary">View Code</a>
+            <a href="https://github.com/Holuphilix/Web-Uptime-Monitoring-Platform" target="_blank" rel="noopener noreferrer" class="btn secondary">View Platform Repository</a>
         </div>
     </div>
 
@@ -759,7 +1053,7 @@
             <li>Validated platform behavior through Kubernetes health checks, port-forward testing, API verification, and runtime troubleshooting workflows to strengthen deployment reliability and operational visibility</li>
         </ul>
 
-        <a href="https://github.com/Holuphilix/Local-DevOps-Production-Platform" target="_blank" rel="noopener noreferrer" class="btn secondary">View Code</a>
+        <a href="https://github.com/Holuphilix/Local-DevOps-Production-Platform" target="_blank" rel="noopener noreferrer" class="btn secondary">View Platform Repository</a>
     </div>
 </div>
 
@@ -797,7 +1091,7 @@
             </ul>
 
             <a href="https://philipoludolamu.com" target="_blank" rel="noopener noreferrer" class="btn">Live Site</a>
-            <a href="https://github.com/Holuphilix/Devops-Portfolio-Website" target="_blank" rel="noopener noreferrer" class="btn secondary">View Code</a>
+            <a href="https://github.com/Holuphilix/Devops-Portfolio-Website" target="_blank" rel="noopener noreferrer" class="btn secondary">View Platform Repository</a>
         </div>
     </div>
 
@@ -832,7 +1126,7 @@
                 <li>Deployed services on ECS Fargate without managing servers, improving scaling simplicity and operational efficiency</li>
             </ul>
 
-            <a href="https://github.com/Holuphilix/19-Terraform-ECS-WebApp" target="_blank" rel="noopener noreferrer" class="btn secondary">View Code</a>
+            <a href="https://github.com/Holuphilix/19-Terraform-ECS-WebApp" target="_blank" rel="noopener noreferrer" class="btn secondary">View Platform Repository</a>
         </div>
     </div>
 
@@ -868,7 +1162,7 @@
                 <li>Segmented networking with public and private subnets to strengthen security and operational separation</li>
             </ul>
 
-            <a href="https://github.com/Holuphilix/21-WordPress-Terraform-AWS" target="_blank" rel="noopener noreferrer" class="btn secondary">View Code</a>
+            <a href="https://github.com/Holuphilix/21-WordPress-Terraform-AWS" target="_blank" rel="noopener noreferrer" class="btn secondary">View Platform Repository</a>
         </div>
     </div>
 
@@ -902,7 +1196,7 @@
                 <li>Improved release consistency and reduced configuration drift across environments</li>
             </ul>
 
-            <a href="https://github.com/Holuphilix/29-Advanced-Kustomize-AWS" target="_blank" rel="noopener noreferrer" class="btn secondary">View Code</a>
+            <a href="https://github.com/Holuphilix/29-Advanced-Kustomize-AWS" target="_blank" rel="noopener noreferrer" class="btn secondary">View Platform Repository</a>
         </div>
     </div>
 
@@ -936,7 +1230,7 @@
                 <li>Deployed workloads to Amazon EKS through a consistent, repeatable pipeline</li>
             </ul>
 
-            <a href="https://github.com/Holuphilix/25-Helm-Jenkins-CI-CD" target="_blank" rel="noopener noreferrer" class="btn secondary">View Code</a>
+            <a href="https://github.com/Holuphilix/25-Helm-Jenkins-CI-CD" target="_blank" rel="noopener noreferrer" class="btn secondary">View Platform Repository</a>
         </div>
     </div>
 
@@ -969,7 +1263,7 @@
                 <li>Strengthened troubleshooting and administration workflows for application hosting on AWS</li>
             </ul>
 
-            <a href="https://github.com/Holuphilix/04-MarketPeak-Ecommerce" target="_blank" rel="noopener noreferrer" class="btn secondary">View Code</a>
+            <a href="https://github.com/Holuphilix/04-MarketPeak-Ecommerce" target="_blank" rel="noopener noreferrer" class="btn secondary">View Platform Repository</a>
         </div>
     </div>
 
@@ -1002,7 +1296,7 @@
                 <li>Validated container-based release workflows for local orchestration and testing</li>
             </ul>
 
-            <a href="https://github.com/Holuphilix/06-Containerization-Project" target="_blank" rel="noopener noreferrer" class="btn secondary">View Code</a>
+            <a href="https://github.com/Holuphilix/06-Containerization-Project" target="_blank" rel="noopener noreferrer" class="btn secondary">View Platform Repository</a>
         </div>
     </div>
 
@@ -1010,7 +1304,7 @@
         <p>
             Explore the broader repository history for additional infrastructure automation, delivery engineering, and cloud operations work.
         </p>
-        <a href="https://github.com/Holuphilix" target="_blank" rel="noopener noreferrer" class="btn secondary">View More on GitHub</a>
+        <a href="https://github.com/Holuphilix" target="_blank" rel="noopener noreferrer" class="btn secondary">View More Platform Repository on GitHub</a>
     </div>
 
 </section>

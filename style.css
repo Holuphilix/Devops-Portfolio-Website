@@ -48,6 +48,8 @@ body[data-theme="light"] {
 html {
     font-size: 85%;
     background: var(--bg);
+    scroll-margin-top: 70px;
+    scroll-padding-top: 70px;
 }
 
 /* BODY */
@@ -935,6 +937,11 @@ section h2 {
     border-radius: 12px;
     background: var(--surface);
     box-shadow: 0 16px 34px color-mix(in srgb, var(--shadow-card) 18%, transparent);
+}
+
+.architecture-figure.architecture-figure-clean {
+    background: transparent;
+    border-color: transparent;
 }
 
 .architecture-figure img,
@@ -1971,3 +1978,4 @@ footer p {
     font-size: 1rem;
     line-height: 1.72;
 }
+

@@ -33,6 +33,14 @@ jobs:
             --exclude "terraform/*" \
             --exclude "README.md"
 
+      - name: Check CloudFront distribution ID
+        run: |
+          if [ -z "$CLOUDFRONT_DISTRIBUTION_ID" ]; then
+            echo "WARNING: CLOUDFRONT_DISTRIBUTION_ID is not configured. Cache invalidation will be skipped."
+          else
+            echo "CloudFront distribution ID: $CLOUDFRONT_DISTRIBUTION_ID"
+          fi
+
       - name: Invalidate CloudFront cache
         if: ${{ env.CLOUDFRONT_DISTRIBUTION_ID != '' }}
         run: |

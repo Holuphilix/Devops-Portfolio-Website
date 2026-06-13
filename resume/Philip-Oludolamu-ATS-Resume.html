@@ -195,12 +195,14 @@
     <section class="section">
       <h2 class="section-title">Technical Skills</h2>
       <div class="skills-grid">
-        <p class="skill-line"><b>AWS:</b> EC2, ECS, ECR, S3, IAM, VPC, CloudFront, CloudWatch, ACM</p>
-        <p class="skill-line"><b>Infrastructure as Code:</b> Terraform, modular architecture, remote state</p>
-        <p class="skill-line"><b>CI/CD & DevSecOps:</b> GitHub Actions, Jenkins, Trivy</p>
-        <p class="skill-line"><b>Containers & Orchestration:</b> Docker, Kubernetes, Amazon ECS, Helm, Kustomize</p>
-        <p class="skill-line"><b>Monitoring & Observability:</b> Prometheus, Grafana, Alertmanager, Node Exporter, Blackbox Exporter, Slack Alerts</p>
-        <p class="skill-line"><b>Systems & Scripting:</b> Linux, Bash, Git, GitHub, Python (Basic)</p>
+        <p class="skill-line"><b>Cloud & Platform:</b> AWS (EC2, ECS, ECR, S3, IAM, VPC, CloudFront, ACM), CDN</p>
+        <p class="skill-line"><b>Infrastructure as Code:</b> Terraform (modules, remote state), reusable module design</p>
+        <p class="skill-line"><b>CI/CD & DevSecOps:</b> GitHub Actions, Jenkins, GitHub Workflows, Trivy, Gitleaks, Checkov</p>
+        <p class="skill-line"><b>GitOps & Delivery:</b> ArgoCD, Kustomize overlays, GitOps repository separation, release promotion</p>
+        <p class="skill-line"><b>Containers & Orchestration:</b> Docker, Kubernetes, Helm, Amazon ECS, Kind</p>
+        <p class="skill-line"><b>Monitoring & Observability:</b> Prometheus, Grafana, Alertmanager, Node Exporter, Blackbox Exporter, dashboarding</p>
+        <p class="skill-line"><b>Security & Validation:</b> Image scanning, IaC scanning, runtime checks, policy-driven delivery</p>
+        <p class="skill-line"><b>Systems & Scripting:</b> Linux, Bash, Python, Git, GitHub, CI automation</p>
       </div>
     </section>
 
@@ -249,6 +251,34 @@
     <section class="section">
       <h2 class="section-title">Selected DevOps Projects</h2>
       <div class="project-list">
+        <div class="project-item">
+          <h3>Production-Grade GitOps Platform</h3>
+          <p>GitOps · ArgoCD · Kustomize · GitHub Actions · Prometheus · Grafana · Trivy</p>
+          <ul>
+            <li>Built a GitOps-first delivery platform with separate platform, config, and application repositories to enforce ownership and safe promotion.</li>
+            <li>Used ArgoCD for continuous reconciliation and Kustomize overlays for environment separation across dev → staging → prod.</li>
+            <li>Integrated observability and security (Prometheus, Grafana, Alertmanager, Trivy) to validate deployments and detect drift.</li>
+          </ul>
+        </div>
+
+        <div class="project-item">
+          <h3>Production-Grade DevSecOps CI/CD Platform</h3>
+          <p>CI/CD · GitHub Actions · Terraform · Kubernetes · Trivy · Checkov</p>
+          <ul>
+            <li>Engineered secure CI/CD pipelines that run build, IaC scans, container image scanning, and automated releases with rollback strategies.</li>
+            <li>Combined Terraform-managed infrastructure with pipeline-driven deployments to reduce drift and automate environment provisioning.</li>
+          </ul>
+        </div>
+
+        <div class="project-item">
+          <h3>Production-Grade Observability & Uptime Monitoring Platform</h3>
+          <p>Prometheus · Grafana · Alertmanager · PostgreSQL · Docker Compose</p>
+          <ul>
+            <li>Delivered a monitoring stack with uptime checks, persistent metrics storage, and dashboard-driven alerting to detect issues within ~1 minute.</li>
+            <li>Containerized the monitoring stack for repeatable deployment and simplified onboarding for new targets.</li>
+          </ul>
+        </div>
+
         <div class="project-item">
           <h3>Production-Ready DevOps Portfolio Website</h3>
           <p>AWS | Terraform | GitHub Actions | CloudFront | Prometheus | Grafana</p>

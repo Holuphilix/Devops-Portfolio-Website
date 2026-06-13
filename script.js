@@ -28,27 +28,27 @@ themeToggle.addEventListener("click", () => {
 });
 
 // ==============================
-// SMOOTH SCROLL (with offset fix)
+// SMOOTH SCROLL
 // ==============================
+
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-
         const targetId = this.getAttribute('href');
+
+        if (targetId === "#") return;
+
         const target = document.querySelector(targetId);
 
-        if (target) {
-            const offset = 80; // adjust for sticky header
-            const targetPosition = target.offsetTop - offset;
+        if (!target) return;
 
-            window.scrollTo({
-                top: targetPosition,
-                behavior: 'smooth'
-            });
-        }
+        e.preventDefault();
+
+        target.scrollIntoView({
+            behavior: "smooth",
+            block: "start"
+        });
     });
 });
-
 
 // ==============================
 // ACTIVE NAV LINK (Improved)

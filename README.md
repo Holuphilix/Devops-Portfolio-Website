@@ -71,8 +71,9 @@ This repository demonstrates practical implementation across multiple areas of D
 | ------------------------------------------------------------------------ | ---------------------------- |
 | `https://philipoludolamu.com`                                            | Primary live portfolio URL   |
 | `https://www.philipoludolamu.com`                                        | Secondary live portfolio URL |
-| `https://d22hq7kuctu23g.cloudfront.net`                                  | CloudFront distribution URL  |
 | `http://philipdev-portfolio-website.s3-website-us-east-1.amazonaws.com/` | Direct S3 website endpoint   |
+
+> Note: the CloudFront domain is managed by AWS and may change after distribution updates. Use the custom domain above for the latest site version.
 
 ## 🖥️ Local Observability Endpoints
 
