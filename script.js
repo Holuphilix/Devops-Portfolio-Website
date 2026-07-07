@@ -28,6 +28,50 @@ themeToggle.addEventListener("click", () => {
 });
 
 // ==============================
+// MOBILE NAVIGATION
+// ==============================
+const menuToggle = document.querySelector(".menu-toggle");
+const primaryNavMenu = document.getElementById("primaryNavMenu");
+const primaryNavLinks = primaryNavMenu ? primaryNavMenu.querySelectorAll("a") : [];
+const mobileNavQuery = window.matchMedia("(max-width: 768px)");
+
+const setMobileNavState = (isOpen) => {
+    if (!menuToggle || !primaryNavMenu) return;
+
+    document.body.classList.toggle("nav-open", isOpen);
+    menuToggle.setAttribute("aria-expanded", String(isOpen));
+    menuToggle.setAttribute("aria-label", isOpen ? "Close primary navigation" : "Open primary navigation");
+
+    primaryNavLinks.forEach(link => {
+        if (mobileNavQuery.matches && !isOpen) {
+            link.setAttribute("tabindex", "-1");
+        } else {
+            link.removeAttribute("tabindex");
+        }
+    });
+};
+
+if (menuToggle && primaryNavMenu) {
+    setMobileNavState(false);
+
+    menuToggle.addEventListener("click", () => {
+        setMobileNavState(!document.body.classList.contains("nav-open"));
+    });
+
+    primaryNavLinks.forEach(link => {
+        link.addEventListener("click", () => setMobileNavState(false));
+    });
+
+    document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") {
+            setMobileNavState(false);
+        }
+    });
+
+    mobileNavQuery.addEventListener("change", () => setMobileNavState(false));
+}
+
+// ==============================
 // SMOOTH SCROLL
 // ==============================
 

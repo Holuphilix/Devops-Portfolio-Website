@@ -64,6 +64,11 @@ body {
     transition: background-color 0.35s ease, color 0.35s ease;
 }
 
+img {
+    max-width: 100%;
+    height: auto;
+}
+
 .skip-link {
     position: absolute;
     left: 16px;
@@ -123,6 +128,48 @@ nav {
     display: flex;
     align-items: center;
     gap: 18px;
+}
+
+.menu-toggle {
+    display: none;
+    width: 44px;
+    height: 40px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: var(--surface);
+    color: var(--text);
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 5px;
+    transition: background-color 0.25s ease, border-color 0.25s ease;
+}
+
+.menu-toggle:hover,
+.menu-toggle:focus-visible {
+    border-color: color-mix(in srgb, var(--accent-bright) 68%, var(--border));
+}
+
+.menu-toggle span {
+    display: block;
+    width: 20px;
+    height: 2px;
+    border-radius: 999px;
+    background: var(--text);
+    transition: transform 0.25s ease, opacity 0.25s ease;
+}
+
+body.nav-open .menu-toggle span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+}
+
+body.nav-open .menu-toggle span:nth-child(2) {
+    opacity: 0;
+}
+
+body.nav-open .menu-toggle span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
 }
 
 nav ul {
@@ -520,7 +567,7 @@ body[data-theme="light"] .theme-toggle-thumb {
 }
 
 .hero h1 {
-    font-size: 3.45rem;
+    font-size: clamp(1.95rem, 5vw, 3.45rem);
     line-height: 1.12;
     margin: 0 0 14px;
     max-width: 800px;
@@ -710,7 +757,7 @@ section h2 {
     border-left: 4px solid var(--accent);
     padding-left: 12px;
     margin-bottom: 18px;
-    font-size: 1.92rem;
+    font-size: clamp(1.45rem, 3vw, 1.92rem);
 }
 
 .section-lead {
@@ -1560,74 +1607,155 @@ footer p {
 }
 
 /* RESPONSIVE */
+@media (max-width: 1024px) {
+    header {
+        padding-left: 24px;
+        padding-right: 24px;
+    }
+
+    section,
+    .hero,
+    .notes-section,
+    .writing-section,
+    .flagship-platform,
+    #about,
+    #projects {
+        max-width: 100%;
+    }
+
+    .hero-shell {
+        grid-template-columns: minmax(0, 1.35fr) minmax(220px, 0.65fr);
+        gap: 24px;
+    }
+
+    .platform-flow {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    .platform-flow span:nth-child(4)::after {
+        display: none;
+    }
+
+    .platform-capability-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .notes-grid,
+    .writing-grid,
+    .roadmap-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
 @media (max-width: 768px) {
     html {
         font-size: 95%;
+        scroll-padding-top: 64px;
+    }
+
+    body.nav-open {
+        overflow-x: hidden;
     }
 
     header {
-        padding: 15px 20px;
+        padding: 10px 18px;
     }
 
     nav {
-        flex-direction: column;
-        align-items: stretch;
-        gap: 12px;
-    }
-
-    .nav-right {
-        width: 100%;
-        justify-content: space-between;
-        flex-wrap: wrap;
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto auto;
+        align-items: center;
         gap: 10px;
     }
 
+    .brand {
+        min-width: 0;
+        font-size: 1.08rem;
+        overflow-wrap: anywhere;
+    }
+
+    .menu-toggle {
+        display: inline-flex;
+        grid-column: 2;
+        grid-row: 1;
+    }
+
+    .nav-right {
+        display: contents;
+    }
+
+    .theme-toggle {
+        grid-column: 3;
+        grid-row: 1;
+        padding: 5px 10px 5px 7px;
+    }
+
+    .theme-toggle-track {
+        width: 40px;
+        height: 22px;
+    }
+
+    .theme-toggle-thumb {
+        width: 16px;
+        height: 16px;
+    }
+
+    body[data-theme="light"] .theme-toggle-thumb {
+        transform: translateX(18px);
+    }
+
     nav ul {
+        grid-column: 1 / -1;
         display: flex;
-        flex-wrap: wrap;
-        gap: 12px;
+        flex-direction: column;
+        width: 100%;
+        max-height: 0;
+        overflow: hidden;
+        gap: 0;
+        padding: 0;
+        border: 0 solid transparent;
+        border-radius: 10px;
+        background: color-mix(in srgb, var(--surface) 96%, transparent);
+        transition: max-height 0.28s ease, padding 0.28s ease, border-color 0.28s ease;
+    }
+
+    body.nav-open nav ul {
+        max-height: 520px;
+        padding: 8px;
+        border-width: 1px;
+        border-color: var(--border);
     }
 
     nav li {
         margin-left: 0;
     }
 
-    .theme-toggle {
-        margin-left: auto;
-        padding-right: 10px;
-    }
-
-    .project-card {
-        flex-direction: column;
-    }
-
-    .project-card-featured .project-img,
-    .project-card-featured .project-content {
+    nav ul a {
+        display: block;
         width: 100%;
+        padding: 11px 10px;
+        border-radius: 8px;
     }
 
-    .projects-cta {
-        flex-direction: column;
-        align-items: flex-start;
+    nav ul a:hover,
+    nav ul a:focus-visible,
+    nav ul a.active {
+        background: color-mix(in srgb, var(--accent-bright) 10%, transparent);
     }
 
-    .project-img,
-    .project-content {
+    section {
         width: 100%;
+        padding: 42px 18px;
+        overflow-x: clip;
     }
 
-    .resume-cta-card {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-
-    .resume-actions {
-        width: 100%;
-        justify-content: flex-start;
+    section::before {
+        left: 18px;
+        right: 18px;
     }
 
     .hero {
-        padding: 18px 18px 28px;
+        padding: 24px 18px 32px;
         text-align: left;
     }
 
@@ -1646,8 +1774,35 @@ footer p {
     }
 
     .hero-image {
-        width: min(155px, 48vw);
+        width: min(155px, 42vw);
         margin: 0;
+    }
+
+    .hero-status {
+        max-width: 100%;
+        white-space: normal;
+        text-align: left;
+    }
+
+    .hero-subtext,
+    .section-lead,
+    #about p,
+    .project-card p,
+    .contact-text {
+        font-size: 1rem;
+        line-height: 1.75;
+    }
+
+    .hero-buttons,
+    .contact-buttons,
+    .resume-actions {
+        width: 100%;
+    }
+
+    .hero-buttons .btn,
+    .contact-buttons .btn,
+    .resume-actions .btn {
+        width: 100%;
     }
 
     .hero-profile-panel {
@@ -1658,25 +1813,17 @@ footer p {
         grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
-    .hero h1 {
-        font-size: 2.05rem;
-    }
-
-    .hero-subtext {
-        font-size: 0.9rem;
-    }
-
-    .hero-highlights {
-        grid-template-columns: 1fr;
-    }
-
+    .hero-highlights,
     .what-i-do,
     .skills-grid,
     .about-layout,
     .flagship-hero-grid,
     .platform-capability-grid,
     .evidence-grid,
-    .roadmap-grid {
+    .roadmap-grid,
+    .notes-grid,
+    .writing-grid,
+    .difference-container {
         grid-template-columns: 1fr;
     }
 
@@ -1684,12 +1831,28 @@ footer p {
         position: static;
     }
 
-    .platform-flow {
-        grid-template-columns: repeat(4, minmax(0, 1fr));
+    .project-card,
+    .projects-cta,
+    .notes-cta,
+    .writing-cta,
+    .resume-cta-card {
+        flex-direction: column;
+        align-items: flex-start;
     }
 
-    .platform-flow span:nth-child(4)::after {
-        display: none;
+    .project-card-featured .project-img,
+    .project-card-featured .project-content,
+    .project-img,
+    .project-content {
+        width: 100%;
+    }
+
+    .project-img {
+        max-height: none;
+    }
+
+    .resume-actions {
+        justify-content: flex-start;
     }
 
     .evidence-header {
@@ -1698,145 +1861,11 @@ footer p {
     }
 
     .evidence-frame {
-        height: 220px;
+        min-height: 0;
     }
 
     .architecture-figure img {
-        min-height: 260px;
-    }
-
-}
-
-@media (max-width: 520px) {
-    html,
-    body,
-    main {
-        width: 100vw;
-        max-width: 100vw;
-        overflow-x: hidden;
-    }
-
-    header {
-        padding: 15px 18px;
-    }
-
-    section {
-        width: 100vw;
-        max-width: 100vw;
-        margin-left: 0;
-        margin-right: 0;
-        padding-left: 18px;
-        padding-right: 18px;
-        overflow-x: hidden;
-    }
-
-    section > h2,
-    section > .section-kicker,
-    section > .section-lead,
-    section > p,
-    section > div,
-    section > ul {
-        width: min(100%, 330px);
-        max-width: 330px;
-    }
-
-    .nav-right {
-        align-items: flex-start;
-        flex-direction: column;
-    }
-
-    nav ul {
-        width: 100%;
-        gap: 10px 14px;
-    }
-
-    .theme-toggle {
-        margin-left: 0;
-    }
-
-    .hero-side {
-        grid-template-columns: 1fr;
-    }
-
-    .hero,
-    .hero-shell,
-    .hero-copy,
-    .hero-side {
-        width: 100%;
-        max-width: 100%;
-    }
-
-    .hero-shell,
-    .hero-copy,
-    .hero-side,
-    .hero-metrics,
-    .hero-highlights {
-        max-width: 320px;
-        margin-left: 0;
-        margin-right: 0;
-    }
-
-    .hero-status {
-        display: inline-flex;
-        max-width: 320px;
-        white-space: normal;
-        text-align: left;
-    }
-
-    .hero h1 {
-        font-size: 1.92rem;
-        overflow-wrap: anywhere;
-        word-break: break-word;
-        max-width: 100%;
-    }
-
-    .what-i-do,
-    .skills-grid,
-    .about-layout,
-    .flagship-hero-grid,
-    .platform-capability-grid,
-    .evidence-grid,
-    .roadmap-grid,
-    .difference-container {
-        width: calc(100vw - 36px);
-        max-width: 330px;
-        grid-template-columns: minmax(0, 1fr);
-    }
-
-    .hero-status,
-    .hero-subtext,
-    .hero-platform-card,
-    .metric,
-    .highlight-card,
-    .what-i-do li,
-    .skill-card,
-    .platform-summary-panel,
-    .platform-capability-grid article,
-    .project-card,
-    .resume-cta-card,
-    .projects-cta,
-    .difference-card {
-        width: 100%;
-        min-width: 0;
-        max-width: 100%;
-        overflow-wrap: break-word;
-    }
-
-    .capability-list strong,
-    .capability-list span,
-    .about-copy p,
-    .section-lead,
-    .platform-summary-panel p,
-    .platform-facts span,
-    .platform-capability-grid p,
-    .roadmap-card p,
-    .difference-card p,
-    .resume-copy p,
-    .project-card p,
-    .project-card li,
-    .contact-text {
-        width: 100%;
-        max-width: calc(100vw - 72px);
+        min-height: 0;
     }
 
     .hero-status,
@@ -1859,45 +1888,124 @@ footer p {
     .project-card li {
         overflow-wrap: anywhere;
     }
+}
+
+@media (max-width: 480px) {
+    header {
+        padding: 9px 14px;
+    }
+
+    nav {
+        grid-template-columns: minmax(0, 1fr) auto auto;
+        gap: 8px;
+    }
+
+    .theme-toggle {
+        gap: 7px;
+        padding-right: 8px;
+    }
+
+    .theme-toggle-label {
+        font-size: 0.86rem;
+    }
+
+    section {
+        padding: 34px 14px;
+    }
+
+    section::before {
+        left: 14px;
+        right: 14px;
+    }
+
+    section h2 {
+        margin-bottom: 14px;
+    }
+
+    .hero {
+        padding: 20px 14px 28px;
+    }
+
+    .hero-side {
+        grid-template-columns: 1fr;
+    }
+
+    .hero-image {
+        width: min(180px, 62vw);
+    }
+
+    .hero-status {
+        padding: 9px 14px;
+        font-size: 0.9rem;
+    }
+
+    .hero h1 {
+        line-height: 1.16;
+        overflow-wrap: anywhere;
+    }
 
     .hero-buttons,
     .contact-buttons,
     .resume-actions {
-        width: 100%;
-        max-width: 320px;
+        gap: 10px;
     }
 
     .btn {
-        width: 100%;
+        min-height: 48px;
+        padding: 11px 18px;
     }
 
+    .hero-metrics,
+    .profile-stats,
     .platform-flow {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
+        grid-template-columns: 1fr;
     }
 
+    .hero-metrics {
+        display: grid;
+    }
+
+    .metric {
+        min-width: 0;
+    }
+
+    .platform-flow span::after,
+    .platform-flow span:nth-child(4)::after,
     .platform-flow span:nth-child(2n)::after {
         display: none;
     }
 
-    .notes-grid {
-        grid-template-columns: 1fr;
+    .project-card,
+    .project-card-featured,
+    .resume-cta-card,
+    .platform-summary-panel,
+    .note-card,
+    .writing-card,
+    .roadmap-card,
+    .difference-card,
+    .highlight-card,
+    .what-i-do li {
+        padding: 16px;
     }
 
-    .notes-cta {
-        flex-direction: column;
-        align-items: flex-start;
+    .evidence-frame,
+    .project-img {
+        padding: 8px;
     }
 
-    .hero-profile-panel {
-        width: 100%;
+    .close {
+        right: 20px;
     }
+}
 
-    .profile-stats {
-        grid-template-columns: 1fr;
-    }
-
-    .evidence-frame {
-        height: 190px;
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        scroll-behavior: auto;
+        transition-duration: 0.01ms;
+        animation-duration: 0.01ms;
+        animation-iteration-count: 1;
     }
 }
 
@@ -1978,4 +2086,3 @@ footer p {
     font-size: 1rem;
     line-height: 1.72;
 }
-
